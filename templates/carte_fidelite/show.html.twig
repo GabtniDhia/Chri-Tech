@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CarteFidelite{% endblock %}
+
+{% block body %}
+    <h1>CarteFidelite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ carte_fidelite.id }}</td>
+            </tr>
+            <tr>
+                <th>NbPoints</th>
+                <td>{{ carte_fidelite.NbPoints }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ carte_fidelite.DateCreation ? carte_fidelite.DateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateExpiration</th>
+                <td>{{ carte_fidelite.DateExpiration ? carte_fidelite.DateExpiration|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>IdUser</th>
+                <td>{{ carte_fidelite.IdUser }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('carte_fidelite_index') }}">back to list</a>
+
+    <a href="{{ path('carte_fidelite_edit', {'id': carte_fidelite.id}) }}">edit</a>
+
+    {{ include('carte_fidelite/_delete_form.html.twig') }}
+{% endblock %}
