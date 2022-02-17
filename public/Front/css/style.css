@@ -171,7 +171,32 @@ a:focus {
   background-color: #f3c93e;
   border-radius: 0 5px 5px 0;
 }
+.avv{
+  background-image: url('../images/avis-conso.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 
+  background-size: 1600px ;
+  height: 460px ;
+}
+.rend{
+  background-image: url('../images/signup-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  background-size: 1820px ;
+  height: 460px ;
+
+}
+.ktiba{
+
+  vertical-align: middle;
+
+  high: 50%;
+  width: 50%;
+}
 .user_option_box {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -538,7 +563,15 @@ a:focus {
   background-color: #3a4468;
   color: #ffffff;
 }
+.about_section {
+  background-image: url('../images/img.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 1100px ;
+  height: 1100px ;
+  color: #ffffff;
 
+}
 .about_section .row {
   -webkit-box-align: center;
       -ms-flex-align: center;

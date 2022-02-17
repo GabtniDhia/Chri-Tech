@@ -1,0 +1,26 @@
+{{ form_start(form) }}
+<table id="avis">
+    <tr>
+    <tr>
+        <td>{{form_label(form.Etat_Service,"Etat: ")  }}</td>
+        <td>{{ form_widget(form.Etat_Service)}}</td>
+        <td id='info'>{{ form_errors(form.Etat_Service)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.Recommendation,"recommandation: " )  }}</td>
+        <td>{{ form_widget(form.Recommendation)}}</td>
+        <td id='info'>{{ form_errors(form.Recommendation)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.DescriptionService,"Descriptions: ")  }}</td>
+        <td>{{ form_widget(form.DescriptionService)}}</td>
+        <td id='info'>{{ form_errors(form.DescriptionService)}}</td>
+    </tr>
+
+    </tr>
+</table>
+
+    {{ form_widget(form) }}
+<br>
+<button class="btn btn-warning " > {{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

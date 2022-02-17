@@ -1,0 +1,42 @@
+{{ form_start(form) }}
+
+<table id="rendezvous">
+    <tr>
+    <tr>
+        <td>{{form_label(form.Service,"Services: ")  }}</td>
+        <td>{{ form_widget(form.Service)}}</td>
+        <td id='info'>{{ form_errors(form.Service)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.date_Rendezvous,"Date Rendez-Vous: " )  }}</td>
+        <td>{{ form_widget(form.date_Rendezvous)}}</td>
+        <td id='info'>{{ form_errors(form.date_Rendezvous)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.Description_Rendezvous,"Descriptions: ")  }}</td>
+        <td>{{ form_widget(form.Description_Rendezvous)}}</td>
+        <td id='info'>{{ form_errors(form.Description_Rendezvous)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.telephonenum,"Tèl: ")  }}</td>
+        <td>{{ form_widget(form.telephonenum)}}</td>
+        <td id='info'>{{ form_errors(form.telephonenum)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.adresserend,"Adresse: ")  }}</td>
+        <td>{{ form_widget(form.adresserend)}}</td>
+        <td id='info'>{{ form_errors(form.adresserend)}}</td>
+    </tr>
+    </tr>
+</table>
+
+
+
+    {{ form_widget(form) }}
+<br>
+    <button class="btn btn-warning " > {{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}
+
+
+

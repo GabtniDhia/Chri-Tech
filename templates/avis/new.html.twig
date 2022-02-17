@@ -1,0 +1,38 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}New Rendez Vous{% endblock %}
+
+{% block content %}
+
+    <div class="avv" align="right">
+        <section class="signup">
+
+            <div class="container" align="center">
+                <div class="signup-content">
+                    <form method="POST" id="signup-form" class="signup-form">
+                        <br>
+                        <br>
+                        <br>
+
+                        <h2 class="form-title">Donner Un avis </h2>
+                        <br>
+                        <div class="form-group">
+
+                            {{ include('avis/_form.html.twig') }}
+
+
+                            <a href="{{ path('rendezvous_index') }}" style="color:#f3c93e ">Retourner </a>
+                        </div>
+                    </form>
+                    <p class="loginhere">
+
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+{% endblock %}

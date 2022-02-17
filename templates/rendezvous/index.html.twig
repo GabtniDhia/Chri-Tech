@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rendez Vous index{% endblock %}
+
+{% block content %}
+
+
+<div align="center">
+        <div class="container-fluid  " >
+            <div class="row"   >
+
+                <div class="col-md-5  about_section "  >
+
+
+                    <div class="detail-box   " align="center" >
+                        <div class="ktiba">
+                            <div class="heading_container heading_center " >
+
+                            <h2 >
+                                Rendez-Vous !
+                            </h2>
+                        </div>
+                        <p align="center">
+                            Vous pouvez choisir de prendre rendez-vous avec l'un de nos techniciens et après vous pouvez le modifier ou même l'effacer.
+                            à droite vous avez la liste de tout vos rendez vous.
+
+                        </p>
+
+
+                            <a href="{{ path('rendezvous_new') }}" >
+                                Ajouter Nouveau
+                            </a>
+
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-6  align-items-center" align="right">
+
+              <table class="table" >
+
+                        <thead>
+                        <tr>
+
+                            <th>Service</th>
+                            <th>Date_Rendezvous</th>
+                            <th>Description_Rendezvous</th>
+                            <th>Tèl</th>
+                            <th>Adresse</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for rendezvou in rendezvouses %}
+                            <tr>
+
+                                <td>{{ rendezvou.Service }}</td>
+                                <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
+                                <td>{{ rendezvou.DescriptionRendezvous }}</td>
+                                <td>{{ rendezvou.telephonenum }}</td>
+                                <td>{{ rendezvou.adresserend }}</td>
+                                <td align="center">
+                                    <a href="{{ path('rendezvous_edit', {'id': rendezvou.id}) }}" style="color:#f3c93e">
+                                        Modifier
+                                    </a><br>
+                                 <a href="{{ path('rendezvous_show', {'id': rendezvou.id}) }}" style="color:#f3c93e">Afficher+ </a>
+                                <a href="{{ path('avisavis') }}" >
+                                        Ajouter avis
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+
+        </div>
+</div>
+
+{% endblock %}
