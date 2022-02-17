@@ -11,9 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\UserRepository;
 
 
-    /**
-     * @Route("/admin", name="admin_")
-     */
+/**
+ * @Route("/admin", name="admin_")
+ */
 class AdminController extends AbstractController
 {
     /**
@@ -27,11 +27,33 @@ class AdminController extends AbstractController
     }
     /**
      * Affichage de la liste des Utilisateurs
-     * 
-     * @Route("/utilisateur", name="utilisateur")
+     *
+     * @Route("/admins", name="admins")
      */
-    public function usersList(UserRepository $user){
-        return $this->render("admin/user.html.twig", [
+    public function adminList(UserRepository $user){
+        return $this->render("admin/admins.html.twig", [
+            'user' => $user->findAll()
+        ]);
+    }
+
+    /**
+     * Affichage de la liste des Utilisateurs
+     *
+     * @Route("/clients", name="clients")
+     */
+    public function clientList(UserRepository $user){
+        return $this->render("admin/clients.html.twig", [
+            'user' => $user->findAll()
+        ]);
+    }
+
+    /**
+     * Affichage de la liste des Utilisateurs
+     *
+     * @Route("/specialistes", name="specialistes")
+     */
+    public function specList(UserRepository $user){
+        return $this->render("admin/specialistes.html.twig", [
             'user' => $user->findAll()
         ]);
     }
@@ -50,7 +72,7 @@ class AdminController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('message' , 'Utilisateur Modifier Avec Succes');
-            return $this->redirectToRoute('admin_utilisateur');
+            return $this->redirectToRoute('edituser.html.twig');
         }
 
         return $this->render('admin/edituser.html.twig' , [
@@ -62,11 +84,17 @@ class AdminController extends AbstractController
      * Supprimer un Utilisateur
      * @Route("/utilisateur/supprimer/{id}", name="supprimer_utilisateur")
      */
-    public function suppUser($id, UserRepository $repository){
+    public function suppUser($id, UserRepository $repository, Request $request){
         $utilisateur=$repository->find($id);
         $entityManager=$this->getDoctrine()->getManager();
-        $entityManager->remove($utilisateur);
-        $entityManager->flush();
-        return $this->redirectToRoute('admin_utilisateur');
+        #$entityManager->remove($utilisateur);
+        #$entityManager->flush();
+        $currentRoute = $request->attributes->get('_route');
+        if($currentRoute == '/admin/clients' ){
+            return $this->redirectToRoute('admin/admins');
+        }else{
+            return $this->redirectToRoute('admin_specialistes');
+        }
+
     }
 }
