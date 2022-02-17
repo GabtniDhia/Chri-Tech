@@ -1,30 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Avis index{% endblock %}
+{% block title %} Les Avis {% endblock %}
 
 {% block content %}
     <h1>Avis index</h1>
 
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Etat_Service</th>
-                <th>recommandation</th>
-                <th>DescriptionService</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+
         {% for avi in avis %}
             <tr>
-                <td>{{ avi.id }}</td>
-                <td>{{ avi.EtatService }}</td>
-                <td>{{ avi.Recommendation }}</td>
-                <td>{{ avi.DescriptionService }}</td>
-                <td>
-                 <a href="{{ path('avis_show', {'id_avis': avi.id}) }}">show</a>
-                    <a href="{{ path('avis_edit', {'id_avis': avi.id}) }}">edit</a>
+<td>
+                <a>Je trouve ce service
+                <b>{{ avi.EtatService }}</b> <br>
+                Si je le Recommande ! <b>{{ avi.Recommendation }}</b> <br>
+                    et voici pourquoi : <b>
+                {{ avi.DescriptionService }}</b></a><br>
+                <a href="{{ path('avis_show', {'id_avis': avi.id}) }}">show</a>
+                <a href="{{ path('avis_edit', {'id_avis': avi.id}) }}">edit</a>
+
+
                 </td>
             </tr>
         {% else %}
@@ -32,8 +26,6 @@
                 <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
     </table>
 
-    <a href="{{ path('avis_new') }}">Create new</a>
 {% endblock %}

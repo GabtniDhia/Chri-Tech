@@ -40,6 +40,12 @@ class Rendezvous
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 8,
+     *      minMessage = "le numero est invalide verifer la longeur",
+     *      maxMessage = "le numero est invalide verifer la longeur"
+     * )
      */
     private $telephonenum;
 
