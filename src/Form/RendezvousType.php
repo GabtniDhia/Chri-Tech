@@ -13,18 +13,18 @@ class RendezvousType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
-            ->add('Service', ChoiceType::class, array(
+            ->add('titre')
+            ->add('service', ChoiceType::class, array(
                 'choices'=> array(
                     'Reparation'=> 'Reparation',
                     'Installation' => 'Installation',
                 ),
             ))
-            ->add('date_Rendezvous')
-            ->add('Description_Rendezvous')
-            ->add('telephonenum')
-            ->add('adresserend')
+            ->add('date_rendezvous')
+            ->add('description_rendezvous')
+            ->add('adressrend')
 
+            ->add('telephonenum')
         ;
     }
 

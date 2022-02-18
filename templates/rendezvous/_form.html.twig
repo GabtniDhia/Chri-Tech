@@ -1,21 +1,26 @@
 {{ form_start(form) }}
 
 <table id="rendezvous">
+
     <tr>
-    <tr>
-        <td>{{form_label(form.Service,"Services: ")  }}</td>
-        <td>{{ form_widget(form.Service)}}</td>
-        <td id='info'>{{ form_errors(form.Service)}}</td>
+        <td>{{form_label(form.titre,"Titre: ")  }}</td>
+        <td>{{ form_widget(form.titre)}}</td>
+        <td id='info'>{{ form_errors(form.titre)}}</td>
     </tr>
     <tr>
-        <td>{{form_label(form.date_Rendezvous,"Date Rendez-Vous: " )  }}</td>
-        <td>{{ form_widget(form.date_Rendezvous)}}</td>
-        <td id='info'>{{ form_errors(form.date_Rendezvous)}}</td>
+        <td>{{form_label(form.service,"Services: ")  }}</td>
+        <td>{{ form_widget(form.service)}}</td>
+        <td id='info'>{{ form_errors(form.service)}}</td>
     </tr>
     <tr>
-        <td>{{form_label(form.Description_Rendezvous,"Descriptions: ")  }}</td>
-        <td>{{ form_widget(form.Description_Rendezvous)}}</td>
-        <td id='info'>{{ form_errors(form.Description_Rendezvous)}}</td>
+        <td>{{form_label(form.date_rendezvous,"Date Rendez-Vous: " )  }}</td>
+        <td>{{ form_widget(form.date_rendezvous)}}</td>
+        <td id='info'>{{ form_errors(form.date_rendezvous)}}</td>
+    </tr>
+    <tr>
+        <td>{{form_label(form.description_rendezvous,"Descriptions: ")  }}</td>
+        <td>{{ form_widget(form.description_rendezvous)}}</td>
+        <td id='info'>{{ form_errors(form.description_rendezvous)}}</td>
     </tr>
     <tr>
         <td>{{form_label(form.telephonenum,"Tèl: ")  }}</td>
@@ -23,18 +28,17 @@
         <td id='info'>{{ form_errors(form.telephonenum)}}</td>
     </tr>
     <tr>
-        <td>{{form_label(form.adresserend,"Adresse: ")  }}</td>
-        <td>{{ form_widget(form.adresserend)}}</td>
-        <td id='info'>{{ form_errors(form.adresserend)}}</td>
+        <td>{{form_label(form.adressrend,"Adresse: ")  }}</td>
+        <td>{{ form_widget(form.adressrend)}}</td>
+        <td id='info'>{{ form_errors(form.adressrend)}}</td>
     </tr>
-    </tr>
+
 </table>
 
 
-
-    {{ form_widget(form) }}
+{{ form_widget(form) }}
 <br>
-    <button class="btn btn-warning " > {{ button_label|default('Save') }}</button>
+<button class="btn btn-warning "  > {{ button_label|default('Save') }}</button>
 
 {{ form_end(form) }}
 

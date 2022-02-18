@@ -1,40 +1,13 @@
-
-
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Rendez Vous{% endblock %}
+{% block title %}Edit Avis{% endblock %}
 
 {% block content %}
+    <h1>Edit Avis</h1>
 
-    <div class="avv" align="right">
-        <section class="signup">
+    {{ include('avis/_form.html.twig', {'button_label': 'Update'}) }}
 
-            <div class="container" align="center">
-                <div class="signup-content">
-                    <form method="POST" id="signup-form" class="signup-form">
-                        <br>
-                        <br>
-                        <br>
+    <a href="{{ path('avis_index') }}">back to list</a>
 
-                        <h2 class="form-title">Modifier Un avis </h2>
-                        <br>
-                        <div class="form-group">
-
-                            {{ include('avis/_form.html.twig', {'button_label': 'Update'}) }}
-
-
-                            {{ include('avis/_delete_form.html.twig') }}
-                            <a href="{{ path('avis_index') }}" style="color:#f3c93e ">Retourner </a>
-                        </div>
-                    </form>
-                    <p class="loginhere">
-
-                    </p>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-
+    {{ include('avis/_delete_form.html.twig') }}
 {% endblock %}

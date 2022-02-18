@@ -1,36 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rendez Vous{% endblock %}
+{% block title %}Rendezvous{% endblock %}
 
 {% block content %}
     <h1>Rendezvous</h1>
 
-    <table class="table-striped">
+    <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ rendezvou.id }}</td>
             </tr>
-
             <tr>
-                <th>Service</th>
-                <td>{{ rendezvou.Service }}</td>
+                <th>Titre</th>
+                <td>{{ rendezvou.titre }}</td>
             </tr>
             <tr>
-                <th>Date_Rendezvous</th>
+                <th>Service</th>
+                <td>{{ rendezvou.service }}</td>
+            </tr>
+            <tr>
+                <th>Date_rendezvous</th>
                 <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Description_Rendezvous</th>
-                <td>{{ rendezvou.DescriptionRendezvous }}</td>
-            </tr>
-            <tr>
-                <th>Tèl</th>
-                <td>{{ rendezvou.telephonenum }}</td>
+                <th>Description_rendezvous</th>
+                <td>{{ rendezvou.descriptionRendezvous }}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
-                <td>{{ rendezvou.adresserend }}</td>
+                <td>{{ rendezvou.adressrend }}</td>
+            </tr>
+            <tr>
+                <th>Telephonenum</th>
+                <td>{{ rendezvou.telephonenum }}</td>
             </tr>
         </tbody>
     </table>

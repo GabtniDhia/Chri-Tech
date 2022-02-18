@@ -5,8 +5,6 @@ namespace App\Form;
 use App\Entity\Avis;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +13,7 @@ class AvisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Etat_Service',ChoiceType::class, array(
+            ->add('etat_service',ChoiceType::class, array(
                 'choices'=> array(
                     'Excellent'=> 'Excellent',
                     'Bien' => 'Bien',
@@ -24,14 +22,15 @@ class AvisType extends AbstractType
                     'Catastrophique' => 'Catastrophique',
                 ),
             ))
-            ->add('Recommendation',ChoiceType::class, [
+            ->add('recommendation',ChoiceType::class, [
                 'choices'  => [
                     'Oui' => 'oui',
                     'Non' => 'non',
                 ],
                 'expanded' => 'oui',
             ] )
-            ->add('DescriptionService')
+            ->add('description_service')
+            ->add('rendezvous')
         ;
     }
 

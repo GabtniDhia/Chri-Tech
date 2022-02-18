@@ -1,33 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Rendez Vous{% endblock %}
+{% block title %}New Rendezvous{% endblock %}
 
 {% block content %}
+    <h1>Create new Rendezvous</h1>
 
-    <div class="rend" align="center">
-        <section class="signup">
+    {{ include('rendezvous/_form.html.twig') }}
 
-            <div class="container">
-                <div class="signup-content">
-                    <form method="POST" id="signup-form" class="signup-form">
-                        <br>
-                        <h2 class="form-title">Prendre un rendez vous </h2>
-                        <br>
-                        <div class="form-group">
-
-
-                            {{ include('rendezvous/_form.html.twig') }}
-
-                        </div>
-                    </form>
-                    <p class="loginhere">
-                        <a href="{{ path('rendezvous_index') }}" style="color:#f3c93e ">Retourner </a>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-
+    <a href="{{ path('rendezvous_index') }}">back to list</a>
 {% endblock %}

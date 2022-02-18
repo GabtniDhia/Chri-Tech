@@ -6,6 +6,7 @@ use App\Repository\RendezvousRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=RendezvousRepository::class)
  */
@@ -18,25 +19,27 @@ class Rendezvous
      */
     private $id;
 
-
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titre;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Service;
+    private $service;
 
     /**
      * @ORM\Column(type="date")
-
      * @Assert\Type("\DateTime")
      * @Assert\GreaterThan("today")
      */
-    private $date_Rendezvous;
+    private $date_rendezvous;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Description_Rendezvous;
+    private $description_rendezvous;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -50,53 +53,64 @@ class Rendezvous
     private $telephonenum;
 
     /**
+     * @ORM\OneToOne(targetEntity=Avis::class, inversedBy="rendezvous", cascade={"persist", "remove"})
+     */
+    private $avis;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $adresserend;
-
-
+    private $adressrend;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
 
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
 
-
+        return $this;
+    }
 
     public function getService(): ?string
     {
-        return $this->Service;
+        return $this->service;
     }
 
-    public function setService(string $Service): self
+    public function setService(string $service): self
     {
-        $this->Service = $Service;
+        $this->service = $service;
 
         return $this;
     }
 
     public function getDateRendezvous(): ?\DateTimeInterface
     {
-        return $this->date_Rendezvous;
+        return $this->date_rendezvous;
     }
 
-    public function setDateRendezvous(\DateTimeInterface $date_Rendezvous): self
+    public function setDateRendezvous(\DateTimeInterface $date_rendezvous): self
     {
-        $this->date_Rendezvous = $date_Rendezvous;
+        $this->date_rendezvous = $date_rendezvous;
 
         return $this;
     }
 
     public function getDescriptionRendezvous(): ?string
     {
-        return $this->Description_Rendezvous;
+        return $this->description_rendezvous;
     }
 
-    public function setDescriptionRendezvous(string $Description_Rendezvous): self
+    public function setDescriptionRendezvous(string $description_rendezvous): self
     {
-        $this->Description_Rendezvous = $Description_Rendezvous;
+        $this->description_rendezvous = $description_rendezvous;
 
         return $this;
     }
@@ -113,17 +127,30 @@ class Rendezvous
         return $this;
     }
 
-    public function getAdresserend(): ?string
+    public function getAvis(): ?Avis
     {
-        return $this->adresserend;
+        return $this->avis;
     }
 
-    public function setAdresserend(string $adresserend): self
+    public function setAvis(Avis $avis): self
     {
-        $this->adresserend = $adresserend;
+        $this->avis = $avis;
 
         return $this;
     }
 
+    public function getAdressrend(): ?string
+    {
+        return $this->adressrend;
+    }
 
-}
+    public function setAdressrend(string $adressrend): self
+    {
+        $this->adressrend = $adressrend;
+
+        return $this;
+    }
+    public function __toString() {
+        return $this->titre;
+
+    }}

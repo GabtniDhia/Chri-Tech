@@ -49,7 +49,7 @@ class AvisController extends AbstractController
     }
 
     /**
-     * @Route("/{id_avis}", name="avis_show", methods={"GET"})
+     * @Route("/{id}", name="avis_show", methods={"GET"})
      */
     public function show(Avis $avi): Response
     {
@@ -59,7 +59,7 @@ class AvisController extends AbstractController
     }
 
     /**
-     * @Route("/{id_avis}/edit", name="avis_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="avis_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Avis $avi, EntityManagerInterface $entityManager): Response
     {
@@ -79,7 +79,7 @@ class AvisController extends AbstractController
     }
 
     /**
-     * @Route("/{id_avis}", name="avis_delete", methods={"POST"})
+     * @Route("/{id}", name="avis_delete", methods={"POST"})
      */
     public function delete(Request $request, Avis $avi, EntityManagerInterface $entityManager): Response
     {

@@ -12,23 +12,23 @@
                 <td>{{ avi.id }}</td>
             </tr>
             <tr>
-                <th>Etat_Service</th>
-                <td>{{ avi.EtatService }}</td>
+                <th>Etat_service</th>
+                <td>{{ avi.etatService }}</td>
             </tr>
             <tr>
                 <th>Recommendation</th>
-                <td>{{ avi.Recommendation }}</td>
+                <td>{{ avi.recommendation }}</td>
             </tr>
             <tr>
-                <th>DescriptionService</th>
-                <td>{{ avi.DescriptionService }}</td>
+                <th>Description_service</th>
+                <td>{{ avi.descriptionService }}</td>
             </tr>
         </tbody>
     </table>
 
     <a href="{{ path('avis_index') }}">back to list</a>
 
-    <a href="{{ path('avis_edit', {'id_avis': avi.id}) }}">edit</a>
+    <a href="{{ path('avis_edit', {'id': avi.id}) }}">edit</a>
 
     {{ include('avis/_delete_form.html.twig') }}
 {% endblock %}

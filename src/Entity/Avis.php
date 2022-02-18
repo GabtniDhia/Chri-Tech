@@ -15,68 +15,85 @@ class Avis
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id_avis;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Etat_Service;
+    private $etat_service;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Recommendation;
+    private $recommendation;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $DescriptionService;
+    private $description_service;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Rendezvous::class, mappedBy="avis", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
 
-
-
+     */
+    private $rendezvous;
 
     public function getId(): ?int
     {
-        return $this->id_avis;
+        return $this->id;
     }
 
     public function getEtatService(): ?string
     {
-        return $this->Etat_Service;
+        return $this->etat_service;
     }
 
-    public function setEtatService(string $Etat_Service): self
+    public function setEtatService(string $etat_service): self
     {
-        $this->Etat_Service = $Etat_Service;
+        $this->etat_service = $etat_service;
 
         return $this;
     }
 
     public function getRecommendation(): ?string
     {
-        return $this->Recommendation;
+        return $this->recommendation;
     }
 
-    public function setRecommendation(string $Recommendation): self
+    public function setRecommendation(string $recommendation): self
     {
-        $this->Recommendation = $Recommendation;
+        $this->recommendation = $recommendation;
 
         return $this;
     }
 
     public function getDescriptionService(): ?string
     {
-        return $this->DescriptionService;
+        return $this->description_service;
     }
 
-    public function setDescriptionService(string $DescriptionService): self
+    public function setDescriptionService(string $description_service): self
     {
-        $this->DescriptionService = $DescriptionService;
+        $this->description_service = $description_service;
 
         return $this;
     }
 
+    public function getRendezvous(): ?Rendezvous
+    {
+        return $this->rendezvous;
+    }
 
+    public function setRendezvous(Rendezvous $rendezvous): self
+    {
+        // set the owning side of the relation if necessary
+        if ($rendezvous->getAvis() !== $this) {
+            $rendezvous->setAvis($this);
+        }
 
+        $this->rendezvous = $rendezvous;
+
+        return $this;
+    }
 }

@@ -7,7 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Avis|null find($id_avis, $lockMode = null, $lockVersion = null)
+ * @method Avis|null find($id, $lockMode = null, $lockVersion = null)
  * @method Avis|null findOneBy(array $criteria, array $orderBy = null)
  * @method Avis[]    findAll()
  * @method Avis[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
@@ -28,7 +28,7 @@ class AvisRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('a.id_avis', 'ASC')
+            ->orderBy('a.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
