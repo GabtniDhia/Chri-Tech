@@ -90,8 +90,8 @@ class AdminController extends AbstractController
         #$entityManager->remove($utilisateur);
         #$entityManager->flush();
         $currentRoute = $request->attributes->get('_route');
-        if($currentRoute == '/admin/clients' ){
-            return $this->redirectToRoute('admin/admins');
+        if($currentRoute == 'admin_clients' ){
+            return $this->redirectToRoute('admin_admins');
         }else{
             return $this->redirectToRoute('admin_specialistes');
         }

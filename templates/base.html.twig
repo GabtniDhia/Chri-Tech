@@ -1,267 +1,269 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+    <!-- title -->
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <link rel="icon" href="{{ asset('front/images/fevicon.png') }}" type="image/gif" />
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+
     {% block stylesheets %}
-        <!-- bootstrap core css -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.css') }}" />
 
-        <link href="{{ asset('https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap') }}" rel="stylesheet"> <!-- range slider -->
-                                                                                  <!-- font awesome style -->
-        <link href="{{ asset('front/css/font-awesome.min.css') }}" rel="stylesheet" />
+        <style>
+            .hero-bg {
+                background-image: url({% block bg %}{% endblock %});
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+        </style>
 
-        <!-- Custom styles for this template -->
-        <link href="{{ asset('front/css/style.css') }}" rel="stylesheet" />
-        <!-- responsive style -->
-        <link href="{{ asset('front/css/responsive.css') }}" rel="stylesheet" />
-        <link href="{{ asset('front/css/form.scss') }}" rel="stylesheet" />
-
+        <!-- favicon -->
+        <link rel="shortcut icon" type="image/png" href="{{ asset('front/assets/img/favicon.png') }}">
+        <!-- google font -->
+        <link href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700') }}" rel="stylesheet">
+        <link href="{{ asset('https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap') }}" rel="stylesheet">
+        <!-- fontawesome -->
+        <link rel="stylesheet" href="{{ asset('front/assets/css/all.min.css') }}">
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="{{ asset('front/assets/bootstrap/css/bootstrap.min.css') }}">
+        <!-- owl carousel -->
+        <link rel="stylesheet" href="{{ asset('front/assets/css/owl.carousel.css') }}">
+        <!-- magnific popup -->
+        <link rel="stylesheet" href="{{ asset('front/assets/css/magnific-popup.css') }}">
+        <!-- animate css -->
+        <link rel="stylesheet" href="{{ asset('front/assets/css/animate.css') }}">
+        <!-- mean menu css -->
+        <link rel="stylesheet" href="{{ asset('front/assets/css/meanmenu.min.css') }}">
+        <!-- main style -->
+        <link rel="stylesheet" href="{{ asset('front/assets/css/main.css') }}">
+        <!-- responsive -->
+        <link rel="stylesheet" href="{{ asset('front/assets/css/responsive.css') }}">
     {% endblock %}
-
     {% block javascripts %}
-        <!-- jQery -->
-        <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
-        <!-- bootstrap js -->
-        <script src="{{ asset('js/bootstrap.j') }}s"></script>
-        <!-- custom js -->
-        <script src="{{ asset('js/custom.js') }}"></script>
-
+        <!-- jquery -->
+        <script src="{{ asset('front/assets/js/jquery-1.11.3.min.js') }}"></script>
+        <!-- bootstrap -->
+        <script src="{{ asset('front/assets/bootstrap/js/bootstrap.min.js') }}"></script>
+        <!-- count down -->
+        <script src="{{ asset('front/assets/js/jquery.countdown.js') }}"></script>
+        <!-- isotope -->
+        <script src="{{ asset('front/assets/js/jquery.isotope-3.0.6.min.js') }}"></script>
+        <!-- waypoints -->
+        <script src="{{ asset('front/assets/js/waypoints.js') }}"></script>
+        <!-- owl carousel -->
+        <script src="{{ asset('front/assets/js/owl.carousel.min.js') }}"></script>
+        <!-- magnific popup -->
+        <script src="{{ asset('front/assets/js/jquery.magnific-popup.min.js') }}"></script>
+        <!-- mean menu -->
+        <script src="{{ asset('front/assets/js/jquery.meanmenu.min.js') }}"></script>
+        <!-- sticker js -->
+        <script src="{{ asset('front/assets/js/sticker.js') }}"></script>
+        <!-- main js -->
+        <script src="{{ asset('front/assets/js/main.js') }}"></script>
     {% endblock %}
 </head>
-<body class="sub_page">
+<body>
 {% block body %}
 
+    <!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
 
-    <div class="hero_area">
-        <!-- header section strats -->
-        <header class="header_section">
-            <div class="header_top">
-                <div class="container-fluid">
-                    <div class="top_nav_container">
-                        <div class="contact_nav">
-                            <a href="{{ asset('front/') }}">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                <span>
-                  Call : +01 123455678990
-                </span>
-                            </a>
-                            <a href="{{ asset('front/') }}">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <span>
-                  Email : demo@gmail.com
-                </span>
+    <!-- header -->
+    <div class="top-header-area" id="sticker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a href="index.html">
+                                <img src="{{ asset('front/assets/img/logo.png') }}" alt="">
                             </a>
                         </div>
-                        <from class="search_form">
-                            <label>
-                                <input type="text" class="form-control" placeholder="Rechercher...">
-                            </label>
-                            <button class="" type="submit">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </from>
-                        <div class="user_option_box">
-                            <a href="" class="account-link">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                <span>
-                  Profil
-                </span>
-                            </a>
-                            <a href="{{ asset('front/') }}" class="cart-link">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span>
-                  Panier
-                </span>
-                            </a>
+                        <!-- logo -->
+
+                        <!-- menu start -->
+                        {% block navigation %}
+                            <nav class="main-menu">
+                                <ul>
+                                    <li><a href="about.html">Acceuil</a></li>
+                                    <li><a href="about.html">Produits</a></li>
+                                    <li><a href="about.html">Maintenace</a></li>
+                                    <li><a href="news.html">Blog</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="news.html">Articles</a></li>
+                                            <li><a href="single-news.html">Nsit Table lokhra mteek ya Tass</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="contact.html">Nous Contacter</a></li>
+                                    <li><a href="about.html">A Propos</a></li>
+                                    <li>
+                                        <div class="header-icons">
+                                            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                                            <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                            <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-user"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </nav>
+                            <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                            <div class="mobile-menu"></div>
+                        {% endblock %}
+                        <!-- menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+
+    <!-- search area -->
+    <div class="search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                    <div class="search-bar">
+                        <div class="search-bar-tablecell">
+                            <h3>Search For:</h3>
+                            <input type="text" placeholder="Keywords">
+                            <button type="submit">Search <i class="fas fa-search"></i></button>
                         </div>
                     </div>
-
                 </div>
             </div>
-            <div class="header_bottom">
-                <div class="container-fluid">
-
-                    {% block navigation %}
-
-                    <nav class="navbar navbar-expand-lg custom_nav-container ">
-                        <a class="navbar-brand" href="{{ asset('index.html') }}">
-              <span>
-                Chri-Tech
-              </span>
-                        </a>
-
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class=""> </span>
-                        </button>
-
-
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="{{ asset('index.html') }}">HomAcceuil <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ asset('about.html') }}"> Nos Produits</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ asset('product.html') }}">Reservation</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('maintenance') }}">Maintenance</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ asset('why.html') }}">A Propos</a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ asset('testimonial.html') }}">Specialiste</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-
-                    {% endblock %}
-
-                </div>
-            </div>
-        </header>
-        <!-- end header section -->
+        </div>
     </div>
+    <!-- end search area -->
 
-
-
+    <!-- hero area -->
+    <div class="hero-area hero-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 offset-lg-2 text-center">
+                    <div class="hero-text">
+                        <div class="hero-text-tablecell">
+                            <p class="subtitle">{% block titre1 %} {% endblock %}</p>
+                            <h1>{% block titre2 %} {% endblock %}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end hero area -->
 
     {% block content %}
 
     {% endblock %}
+    <!-- end latest news -->
 
-
-    <!-- info section -->
-    <section class="info_section ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="info_contact">
-                        <h5>
-                            <a href="{{ asset('') }}" class="navbar-brand">
-                <span>
-                  Chri-Tech
-                </span>
-                            </a>
-                        </h5>
-                        <p>
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            Address
-                        </p>
-                        <p>
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            +01 1234567890
-                        </p>
-                        <p>
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            demo@gmail.com
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info_info">
-                        <h5>
-                            Informations
-                        </h5>
-                        <p>
-                            Eligendi sunt, provident, debitis nemo, facilis cupiditate velit libero dolorum aperiam enim nulla iste maxime corrupti ad illo libero minus.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info_links">
-                        <h5>
-                            Liens Utiles
-                        </h5>
-                        <ul>
-                            <li>
-                                <a href="{{ asset('index.html') }}">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ asset('about.html') }}">
-                                    About
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ asset('product.html') }}">
-                                    Products
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ asset('why.html') }}">
-                                    Why Us
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ asset('testimonial.html') }}">
-                                    Testimonial
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info_form ">
-                        <h5>
-                            Souscription Journal
-                        </h5>
-                        <form action="">
-                            <label>
-                                <input type="email" placeholder="Mettez votre Email">
-                            </label>
-                            <button>
-                                Subscribe
-                            </button>
-                        </form>
-                        <div class="social_box">
-                            <a href="{{ asset('front/') }}">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="{{ asset('front/') }}">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            <a href="{{ asset('front/') }}">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                            <a href="{{ asset('front/') }}">
-                                <i class="fa fa-youtube" aria-hidden="true"></i>
-                            </a>
+    <!-- logo carousel -->
+    <!--	<div class="logo-carousel-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo-carousel-inner">
+                            <div class="single-logo-item">
+                                <img src="assets/img/company-logos/1.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="assets/img/company-logos/2.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="assets/img/company-logos/3.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="assets/img/company-logos/4.png" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="assets/img/company-logos/5.png" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </div>-->
+    <!-- end logo carousel -->
 
-    <!-- end info_section -->
-
-
-    <!-- footer section -->
-    <footer class="footer_section">
+    <!-- footer -->
+    <div class="footer-area">
         <div class="container">
-            <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-            </p>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box about-widget">
+                        <h2 class="widget-title">Qui Somme Nous?</h2>
+                        <p>Nahna Wled ndhaf thebbou troudouna Mjarrrrrrrma ?</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box get-in-touch">
+                        <h2 class="widget-title">Get in Touch</h2>
+                        <ul>
+                            <li>34/8, East Hukupara, Gifirtok, Sadan.</li>
+                            <li>support@fruitkha.com</li>
+                            <li>+00 111 222 3333</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box pages">
+                        <h2 class="widget-title">Nos Pages</h2>
+                        <ul>
+                            <li><a href="index.html">Acceuil</a></li>
+                            <li><a href="about.html">Produits</a></li>
+                            <li><a href="services.html">Maintenance</a></li>
+                            <li><a href="news.html">Blog</a></li>
+                            <li><a href="contact.html">Nous Contacter</a></li>
+                            <li><a href="contact.html">A Propos</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-box subscribe">
+                        <h2 class="widget-title">Insciption au Journal</h2>
+                        <p>Ti ija menna thouk el BENNA</p>
+                        <form action="index.html">
+                            <input type="email" placeholder="Email">
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
-    <!-- footer section -->
+    </div>
+    <!-- end footer -->
+
+    <!-- copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <p>                                                                                                     </p>
+                </div>
+                <div class="col-lg-6 text-right col-md-12">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                            <li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end copyright -->
 
 
 
