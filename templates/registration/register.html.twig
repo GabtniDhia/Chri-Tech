@@ -4,7 +4,7 @@
 {% block title %}Register{% endblock %}
 {% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
 {% block titre1 %}Register{% endblock %}
-{% block titre2 %}NESI W AHBEI{% endblock %}
+{% block titre2 %}Vous Etes Le Bienvenue{% endblock %}
 {% block content %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
@@ -19,26 +19,25 @@
                     </div>
                     <div id="form_status"></div>
                     <div class="contact-form">
-                        <form>
+                    <div class="form">
                             {{ form_start(registrationForm) }}
                             <p>
 
-                                {{ form_widget(registrationForm.nom, {label_attr: {class: 'form1'} }) }}
+                                {{ form_widget(registrationForm.nom) }}
                                 {{ form_widget(registrationForm.prenom, {label_attr: {class: 'form1'} }) }}
                             </p>
                             <p>
                                 {{ form_widget(registrationForm.email, {label_attr: {class: 'form1'} }) }}
-                                {{ form_widget(registrationForm.plainPassword, {
-                                    class: 'form1',
+                                {{ form_widget(registrationForm.plainPassword, {label: {
                                     label: 'Password'
-                                }) }}
+                                } }) }}
                             </p>
                             <p><textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea></p>
-                            {{ form_row(registrationForm.datecreation) }}
+                            {{ form_widget(registrationForm.datecreation) }}
                             {{ form_row(registrationForm.agreeTerms) }}
                             <p><input style="text-align: center" type="submit" value="Submit" ></p>
                             {{ form_end(registrationForm) }}
-                        </form>
+                    </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
