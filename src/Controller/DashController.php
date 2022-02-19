@@ -9,12 +9,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashController extends AbstractController
 {
     /**
-     * @Route("/dash", name="dash")
+     * @Route("/", name="home")
      */
     public function index(): Response
     {
-        return $this->render('ena.html.twig', [
-            'controller_name' => 'DashController',
-        ]);
+        return $this->render('index.html.twig');
+    }
+
+    /**
+     * @Route("/verif", name="verif")
+     */
+    public function verif(): Response
+    {
+        return $this->render('registration/verif.html.twig');
+    }
+
+    /**
+     * @Route("/profil", name="profil")
+     */
+    public function profil(): Response
+    {
+        return $this->render('profil.html.twig');
     }
 }

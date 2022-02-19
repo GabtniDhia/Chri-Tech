@@ -32,11 +32,7 @@ class RegistrationFormType extends AbstractType
                     'class' => 'input2'
                 ]
             ])
-            ->add('datecreation' , DateType::class, [
-                'attr' => [
-                    'style' => 'size: 30%'
-                ]
-            ])
+
             ->add('email', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Votre E-Mail',

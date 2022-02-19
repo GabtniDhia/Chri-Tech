@@ -72,7 +72,7 @@ class AdminController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('message' , 'Utilisateur Modifier Avec Succes');
-            return $this->redirectToRoute('edituser.html.twig');
+            return $this->redirectToRoute('admin_clients');
         }
 
         return $this->render('admin/edituser.html.twig' , [
@@ -82,18 +82,19 @@ class AdminController extends AbstractController
 
     /**
      * Supprimer un Utilisateur
-     * @Route("/utilisateur/supprimer/{id}", name="supprimer_utilisateur")
+     * @Route("/utilisateur/supprimer/{id}/{route}", name="supprimer_utilisateur")
      */
-    public function suppUser($id, UserRepository $repository, Request $request){
+    public function suppUser($route , $id, UserRepository $repository, Request $request){
         $utilisateur=$repository->find($id);
         $entityManager=$this->getDoctrine()->getManager();
-        #$entityManager->remove($utilisateur);
-        #$entityManager->flush();
-        $currentRoute = $request->attributes->get('_route');
-        if($currentRoute == 'admin_clients' ){
-            return $this->redirectToRoute('admin_admins');
-        }else{
+        $entityManager->remove($utilisateur);
+        $entityManager->flush();
+        if($route == 'admin_clients' ){
+            return $this->redirectToRoute('admin_clients');
+        }elseif ($route == 'admin_specialistes' ){
             return $this->redirectToRoute('admin_specialistes');
+        }else{
+            return $this->redirectToRoute('admin_admins');
         }
 
     }
