@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LivraisonRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LivraisonRepository::class)
@@ -19,21 +20,32 @@ class Livraison
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank(message="Entrez votre adresse exacte")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Entrez votre code postal")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 4,
+     *      minMessage = "Numéro saisi invalide",
+     *      maxMessage = "Numéro saisi invalide"
+     * )
      */
     private $codepostal;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank(message="Entrez votre ville")
      */
     private $ville;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Type("\DateTime")
+     * @Assert\GreaterThan("today")
      */
     private $datelivraison;
 

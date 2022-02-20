@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -19,16 +20,27 @@ class Commande
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank(message="Entrez votre nom")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Entrez votre numéro de téléphone")
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 8,
+     *      minMessage = "Numéro saisi invalide",
+     *      maxMessage = "Numéro saisi invalide"
+     * )
      */
     private $numtel;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Entrez votre adresse e-mail")
+     * @Assert\Email(message = "L'adresse '{{ value }}' est invalide.")
+     *
      */
     private $email;
 
