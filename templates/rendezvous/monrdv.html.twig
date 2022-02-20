@@ -1,0 +1,41 @@
+
+{% block content %}
+    <h1 align="center">Mon rendez-vous</h1>
+<br>
+    <table class="table" align="center" ">
+        <tbody>
+
+        <tr>
+            <th>Titre  :  </th>
+            <td>{{ rendezvou.titre }}</td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <th>Services demandé : </th>
+            <td>{{ rendezvou.service }}</td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <th>Date du rendez-vous : </th>
+            <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <th>Description : </th>
+            <td>{{ rendezvou.descriptionRendezvous }}</td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <th>Adresse : </th>
+            <td>{{ rendezvou.adressrend }}</td>
+        </tr>
+        <tr><td></td></tr>
+        <tr>
+            <th>Numéro de téléphone :  </th>
+            <td>{{ rendezvou.telephonenum }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

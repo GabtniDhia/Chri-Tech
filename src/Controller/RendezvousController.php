@@ -11,6 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+// Include Dompdf required namespaces
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 /**
  * @Route("/rendezvous")
  */
@@ -55,6 +60,35 @@ class RendezvousController extends AbstractController
     {
         return $this->render('rendezvous/show.html.twig', [
             'rendezvou' => $rendezvou,
+        ]);
+    }
+    /**
+     * @Route("/{id}/show1", name="monrendezvous_show1", methods={"GET"})
+     */
+    public function show1(Rendezvous $rendezvou): Response
+    {$pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('rendezvous/monrdv.html.twig', [
+            'rendezvou' => $rendezvou,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A6', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
         ]);
     }
 
