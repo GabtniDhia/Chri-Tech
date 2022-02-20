@@ -1,12 +1,13 @@
 {{ form_start(form) }}
 
-<table id="rendezvous">
+<table id="rendezvous" width="450px">
 
     <tr>
         <td>{{form_label(form.titre,"Titre: ")  }}</td>
         <td>{{ form_widget(form.titre)}}</td>
         <td id='info'>{{ form_errors(form.titre)}}</td>
     </tr>
+
     <tr>
         <td>{{form_label(form.service,"Services: ")  }}</td>
         <td>{{ form_widget(form.service)}}</td>
@@ -38,7 +39,7 @@
 
 {{ form_widget(form) }}
 <br>
-<button class="btn btn-warning "  > {{ button_label|default('Save') }}</button>
+<button class="btn btn-warning "  > {{ button_label|default('Enregistrer') }}</button>
 
 {{ form_end(form) }}
 

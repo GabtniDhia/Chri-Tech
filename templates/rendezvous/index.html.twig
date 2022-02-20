@@ -1,49 +1,62 @@
 {% extends 'base.html.twig' %}
 {% block title %} Chritech {% endblock %}
 {% block bg%} {{ asset('front/assets/img/rdvbg.png') }}  {% endblock %}
-{% block titre1 %}Rendez-Vous{% endblock %}
-{% block titre2 %} Gerez Vos Rendez-Vous Facilement {% endblock %}
+{% block titre1 %}Services{% endblock %}
+{% block titre2 %} <a href="{{ path('rendezvous_new') }}  " style="color: antiquewhite">Rendez-vous <h6 style="color: floralwhite" ><small>Pour prendre un Rendez-vous Cliquer ici</small></h6></a>
+
+{% endblock %}
 
 
 {% block content %}
-    <h1>Rendezvous index</h1>
+<div class="rdv2">
+    <section class="why_us_section layout_padding" >
+        <div class="container" align="center">
+            <div class="row" align="center">
+                    <div class="box " align="center" >
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Service</th>
-                <th>Date_rendezvous</th>
-                <th>Description_rendezvous</th>
-                <th>Telephonenum</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for rendezvou in rendezvouses %}
-            <tr>
-                <td>{{ rendezvou.id }}</td>
-                <td>{{ rendezvou.titre }}</td>
-                <td>{{ rendezvou.service }}</td>
-                <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
-                <td>{{ rendezvou.descriptionRendezvous }}</td>
-                <td>{{ rendezvou.telephonenum }}</td>
-                <td>
-                    <a href="{{ path('rendezvous_show', {'id': rendezvou.id}) }}">show</a>
-                    <a href="{{ path('rendezvous_edit', {'id': rendezvou.id}) }}">edit</a>
-                    {% if rendezvou.avis is not null %}
-                    <a href="{{ path('avis_edit', {'id': rendezvou.avis.id}) }}">edit</a>
-{% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('rendezvous_new') }}">Create new</a>
+                        <table class="table" align="center">
+                            <thead>
+                            <tr>
+
+                                <th>Titre</th>
+                                <th>Service</th>
+                                <th>Date_rendezvous</th>
+                                <th>Description_rendezvous</th>
+                                <th>Telephonenum</th>
+                                <th>actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for rendezvou in rendezvouses %}
+                                <tr>
+
+                                    <td>{{ rendezvou.titre }}</td>
+                                    <td>{{ rendezvou.service }}</td>
+                                    <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
+                                    <td>{{ rendezvou.descriptionRendezvous }}</td>
+                                    <td>{{ rendezvou.telephonenum }}</td>
+                                    <td>
+                                        <a href="{{ path('rendezvous_show', {'id': rendezvou.id}) }}">Afficher+</a>
+                                        <a href="{{ path('rendezvous_edit', {'id': rendezvou.id}) }}">Mofifier Rdv</a>
+                                        {% if rendezvou.avis is not null %}
+                                            <a href="{{ path('avis_edit', {'id': rendezvou.avis.id}) }}">Modifier Avis</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+            </div>
+        </div>
+    </section>
+    </div>
+
 {% endblock %}

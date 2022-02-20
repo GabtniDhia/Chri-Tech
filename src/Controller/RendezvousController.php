@@ -11,11 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * @Route("/rendezvous")
+ */
 class RendezvousController extends AbstractController
 {
     /**
-     * @Route("/rendezvous", name="rendezvous_index", methods={"GET"})
+     * @Route("/", name="rendezvous_index", methods={"GET"})
      */
     public function index(RendezvousRepository $rendezvousRepository): Response
     {
