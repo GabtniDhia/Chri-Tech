@@ -109,6 +109,75 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, `datecreation`, `is_verified`) VALUES
 (5, 'admin@gmail.com', '[\"ROLE_ADMIN\",\"ROLE_CLIENT\",\"ROLE_SPECIALISTE\"]', '$argon2id$v=19$m=65536,t=4,p=1$bkt1eWhYc05JaG5sa3RNRA$peEcYw9WwQ4HGI4hPyzjC8DSr6VtMesNLF/hMZKK2GI', 'S9onslii', 'admin', '2017-01-01', 0);
 COMMIT;
+--
+-- Structure de la table `avis`
+--
+
+DROP TABLE IF EXISTS `avis`;
+CREATE TABLE IF NOT EXISTS `avis` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `rendezvous_id` int(11) NOT NULL,
+    `etat_service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `recommendation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `description_service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `UNIQ_8F91ABF03345E0A3` (`rendezvous_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `avis`
+--
+
+INSERT INTO `avis` (`id`, `rendezvous_id`, `etat_service`, `recommendation`, `description_service`) VALUES
+    (1, 1, 'Bien', 'oui', 'rapide et organisé');
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `avis`
+--
+ALTER TABLE `avis`
+    ADD CONSTRAINT `FK_8F91ABF03345E0A3` FOREIGN KEY (`rendezvous_id`) REFERENCES `rendezvous` (`id`);
+COMMIT;
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rendezvous`
+--
+
+DROP TABLE IF EXISTS `rendezvous`;
+CREATE TABLE IF NOT EXISTS `rendezvous` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `avis_id` int(11) DEFAULT NULL,
+    `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `date_rendezvous` date NOT NULL,
+    `description_rendezvous` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `telephonenum` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `adressrend` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `UNIQ_C09A9BA8197E709F` (`avis_id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `rendezvous`
+--
+
+INSERT INTO `rendezvous` (`id`, `avis_id`, `titre`, `service`, `date_rendezvous`, `description_rendezvous`, `telephonenum`, `adressrend`) VALUES
+    (1, 1, 'television', 'Installation', '2022-03-03', 'j\'ai acheter une télé LG 7X56RT et je voudrais l\'installer', '50000000', 'av Habib bourgiba Residdence les jasmin Bloc A appart 5');
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `rendezvous`
+--
+ALTER TABLE `rendezvous`
+    ADD CONSTRAINT `FK_C09A9BA8197E709F` FOREIGN KEY (`avis_id`) REFERENCES `avis` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
