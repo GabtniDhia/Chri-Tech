@@ -1,11 +1,30 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}New Commande{% endblock %}
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/commande.jpg') }}  {% endblock %}
+{% block titre2 %} <a  style="color:antiquewhite">Commande <h6 style="color: antiquewhite" >Veuillez remplir le formulaire ci-dessous </h6></a>
 
+{% endblock %}
 {% block content %}
-    <h1>Veuillez remplir le formulaire ci-dessous</h1>
+    <div class="rdv1">
+        <section class="why_us_section layout_padding" >
 
-    {{ include('commande/_form.html.twig') }}
+            <div class="container" align="center">
+                <div class="row" align="center">
+                    <div class="box " align="center" >
 
-    <a href="{{ path('commande_index') }}">Page précédente</a>
+
+                        {{ include('commande/_form.html.twig') }}
+
+                        <a href="{{ path('commande_index') }}">Page précédente</a>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+
 {% endblock %}
