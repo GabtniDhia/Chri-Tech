@@ -7,10 +7,7 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ rendezvou.id }}</td>
-            </tr>
+
             <tr>
                 <th>Titre</th>
                 <td>{{ rendezvou.titre }}</td>
@@ -41,6 +38,6 @@
     <a href="{{ path('rendezvous_index') }}">back to list</a>
 
     <a href="{{ path('rendezvous_edit', {'id': rendezvou.id}) }}">edit</a>
-
+    <a href="{{ path('monrendezvous_show1', {'id': rendezvou.id}) }}">imprimer</a>
     {{ include('rendezvous/_delete_form.html.twig') }}
 {% endblock %}
