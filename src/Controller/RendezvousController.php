@@ -22,6 +22,7 @@ class RendezvousController extends AbstractController
     /**
      * @Route("/rendezvous", name="rendezvous_index", methods={"GET"})
      */
+
     public function index(RendezvousRepository $rendezvousRepository): Response
     {
         return $this->render('rendezvous/index.html.twig', [

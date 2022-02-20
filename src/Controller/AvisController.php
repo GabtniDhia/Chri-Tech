@@ -11,9 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/avis")
- */
+
 class AvisController extends AbstractController
 {
     /**
@@ -27,7 +25,7 @@ class AvisController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="avis_new", methods={"GET", "POST"})
+     * @Route("/avis/new", name="avis_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -49,7 +47,7 @@ class AvisController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="avis_show", methods={"GET"})
+     * @Route("/avis/{id}", name="avis_show", methods={"GET"})
      */
     public function show(Avis $avi): Response
     {
@@ -59,7 +57,7 @@ class AvisController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="avis_edit", methods={"GET", "POST"})
+     * @Route("/avis/{id}/edit", name="avis_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Avis $avi, EntityManagerInterface $entityManager): Response
     {
@@ -79,7 +77,7 @@ class AvisController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="avis_delete", methods={"POST"})
+     * @Route("/avis/{id}", name="avis_delete", methods={"POST"})
      */
     public function delete(Request $request, Avis $avi, EntityManagerInterface $entityManager): Response
     {
