@@ -3,11 +3,11 @@
 {% block title %}Edit Livraison{% endblock %}
 
 {% block content %}
-    <h1>Edit Livraison</h1>
+    <h1>Modifier la livraison</h1>
 
-    {{ include('livraison/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('livraison/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('livraison_index') }}">back to list</a>
+    <a href="{{ path('livraison_index') }}">Page précédente</a>
 
     {{ include('livraison/_delete_form.html.twig') }}
 {% endblock %}
