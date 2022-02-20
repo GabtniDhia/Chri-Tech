@@ -55,8 +55,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
- {#
+                    <form method="post" action="{{ path('app_login')}}">
+                        {% if error is defined and error%}
                         {% if error %}
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
@@ -65,11 +65,10 @@
                             <div class="mb-3">
                                 You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                             </div>
-                        {% endif %}#}
-                        {#
-                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                        See https://symfony.com/doc/current/security/remember_me.html
-                        #}
+                        {% endif %}
+                        {% endif %}
+                        {#Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                        See https://symfony.com/doc/current/security/remember_me.html#}
                         <div class="form_wrapper">
                             <div class="form_container">
                                 <div class="title_container">
@@ -77,7 +76,7 @@
                                 </div>
                                 <div class="row clearfix">
                                     <div class="container">
-                                        <form>
+
                                             <div class="row clearfix">
                                                 <div class="col_half">
                                                     <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
@@ -102,12 +101,11 @@
                                             <button class="btn btn-lg btn-primary" type="submit" >
                                                 Connecter
                                             </button>
-                                        </form>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
                     </form>
                 </div>
                 <div class="modal-footer">
