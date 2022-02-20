@@ -8,7 +8,7 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>Identifiant</th>
                 <td>{{ livraison.id }}</td>
             </tr>
             <tr>
@@ -24,15 +24,15 @@
                 <td>{{ livraison.ville }}</td>
             </tr>
             <tr>
-                <th>Datelivraison</th>
+                <th>Date de livraison</th>
                 <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('livraison_index') }}">back to list</a>
+    <a href="{{ path('livraison_index') }}">Page précedente</a>
 
-    <a href="{{ path('livraison_edit', {'id': livraison.id}) }}">edit</a>
+    <a href="{{ path('livraison_edit', {'id': livraison.id}) }}">Modifier la livraison</a>
 
     {{ include('livraison/_delete_form.html.twig') }}
 {% endblock %}

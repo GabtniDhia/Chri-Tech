@@ -3,16 +3,16 @@
 {% block title %}Commande index{% endblock %}
 
 {% block content %}
-    <h1>Commande index</h1>
+    <h1>Gestion de commandes</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Numtel</th>
-                <th>Email</th>
-                <th>actions</th>
+                <th>Identifiant</th>
+                <th>Client</th>
+                <th>Numéro de telephone</th>
+                <th>Adresse e-mail</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,18 +23,20 @@
                 <td>{{ commande.numtel }}</td>
                 <td>{{ commande.email }}</td>
                 <td>
-                    <a href="{{ path('commande_show', {'id': commande.id}) }}">show</a>
-                    <a href="{{ path('commande_edit', {'id': commande.id}) }}">edit</a>
+                    <a href="{{ path('commande_show', {'id': commande.id}) }}">Afficher/</a>
+                    <a href="{{ path('commande_edit', {'id': commande.id}) }}">Modifier la commande/</a>
+                    <a href="{{ path('livraison_new') }}">Effectuer une livraison</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Pas de commandes enregistrées.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('commande_new') }}">Create new</a>
+    <a href="{{ path('commande_new') }}">Passer une nouvelle commande/</a>
+
 
 {% endblock %}

@@ -25,8 +25,8 @@
                 <td>{{ livraison.ville }}</td>
                 <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('livraison_show', {'id': livraison.id}) }}">show</a>
-                    <a href="{{ path('livraison_edit', {'id': livraison.id}) }}">edit</a>
+                    <a href="{{ path('livraison_show', {'id': livraison.id}) }}">Afficher/</a>
+                    <a href="{{ path('livraison_edit', {'id': livraison.id}) }}">Modifier la livraison</a>
                 </td>
             </tr>
         {% else %}
