@@ -16,13 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-/**
- * @Route("/rendezvous")
- */
+
 class RendezvousController extends AbstractController
 {
     /**
-     * @Route("/", name="rendezvous_index", methods={"GET"})
+     * @Route("/rendezvous", name="rendezvous_index", methods={"GET"})
      */
     public function index(RendezvousRepository $rendezvousRepository): Response
     {
@@ -32,7 +30,7 @@ class RendezvousController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="rendezvous_new", methods={"GET", "POST"})
+     * @Route("/rendezvous/new", name="rendezvous_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -54,7 +52,7 @@ class RendezvousController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="rendezvous_show", methods={"GET"})
+     * @Route("/rendezvous/{id}", name="rendezvous_show", methods={"GET"})
      */
     public function show(Rendezvous $rendezvou): Response
     {
@@ -63,7 +61,7 @@ class RendezvousController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{id}/show1", name="monrendezvous_show1", methods={"GET"})
+     * @Route("/rendezvous/{id}/show1", name="monrendezvous_show1", methods={"GET"})
      */
     public function show1(Rendezvous $rendezvou): Response
     {$pdfOptions = new Options();
@@ -93,7 +91,7 @@ class RendezvousController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="rendezvous_edit", methods={"GET", "POST"})
+     * @Route("/rendezvous/{id}/edit", name="rendezvous_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Rendezvous $rendezvou, EntityManagerInterface $entityManager): Response
     {
@@ -113,7 +111,7 @@ class RendezvousController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="rendezvous_delete", methods={"POST"})
+     * @Route("/rendezvous/{id}", name="rendezvous_delete", methods={"POST"})
      */
     public function delete(Request $request, Rendezvous $rendezvou, EntityManagerInterface $entityManager): Response
     {
