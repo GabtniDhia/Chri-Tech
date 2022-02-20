@@ -5,9 +5,118 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
-
     <!-- title -->
     <title>{% block title %}Welcome!{% endblock %}</title>
+
+
+
+    <!-- Modal Pop Up Profil-->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Profil De </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                        <div class="card p-4">
+                            <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" /></button> <span class="name mt-3">Eleanor Pena</span> <span class="idd">@eleanorpena</span>
+                                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
+                                <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">1069 <span class="follow">Followers</span></span> </div>
+                                <div class=" d-flex mt-2"> <button class="btn1 btn-dark">Edit Profile</button> </div>
+                                <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night. </span> </div>
+                                <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
+                                <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal Pop Up Login-->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Connexion </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+ {#
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="mb-3">
+                                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                            </div>
+                        {% endif %}#}
+                        {#
+                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                        See https://symfony.com/doc/current/security/remember_me.html
+                        #}
+                        <div class="form_wrapper">
+                            <div class="form_container">
+                                <div class="title_container">
+                                    <h2>Me Connecter</h2>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="container">
+                                        <form>
+                                            <div class="row clearfix">
+                                                <div class="col_half">
+                                                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                                                        <label for="inputEmail">Email</label>
+                                                        <input type="email" value="" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                                    </div>
+                                                </div>
+                                                <div class="col_half">
+                                                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                                                        <label for="inputPassword">Password</label>
+                                                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                                                        <input type="hidden" name="_csrf_token"
+                                                               value="{{ csrf_token('authenticate') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="checkbox mb-3">
+                                                <label>
+                                                    <input type="checkbox" name="_remember_me"> Remember me
+                                                </label>
+                                            </div>
+                                            <button class="btn btn-lg btn-primary" type="submit" >
+                                                Connecter
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% block stylesheets %}
 
@@ -40,7 +149,9 @@
         <!-- main style -->
         <link rel="stylesheet" href="{{ asset('front/assets/css/main.css') }}">
         <!-- responsive -->
+        <link rel="stylesheet" href="{{ asset('front/assets/css/custom.css') }}">
         <link rel="stylesheet" href="{{ asset('front/assets/css/responsive.css') }}">
+
     {% endblock %}
     {% block javascripts %}
         <!-- jquery -->
@@ -110,13 +221,22 @@
                                         <div class="header-icons">
                                             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
                                             <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-                                            <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-user"></i></a>
+                                            <a  type="button" data-toggle="modal" data-target="#exampleModalCenter">
+                                                <i class="fas fa-user">
+                                                </i>
+                                            </a>
+                                            <a  type="button" data-toggle="modal" data-target="#login">
+                                                <i class="fas fa-user">
+                                                </i>
+                                            </a>
                                         </div>
                                     </li>
                                 </ul>
                             </nav>
                             <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                             <div class="mobile-menu"></div>
+
+
                         {% endblock %}
                         <!-- menu end -->
                     </div>

@@ -1,6 +1,7 @@
 {% extends 'baseback.html.twig' %}
 {% block title %} Espace Admin {% endblock %}
 {% block titre1 %} Control des Utilisatuers {% endblock %}
+{% set route = app.request.attributes.get('_route') %}
 {% block content %}
     <h1>Liste des Specialistes</h1>
     <table class="table">
@@ -10,6 +11,8 @@
         <th>ROLES</th>
         <th>Nom</th>
         <th>Prenom</th>
+        <th>Date De Creation</th>
+        <th>Verifié</th>
         <th>ACTIONS</th>
         </thead>
         <tbody>
@@ -31,8 +34,16 @@
                     </td>
                     <td>{{ user.nom }}</td>
                     <td>{{ user.prenom }}</td>
+                    <td>{{ user.datecreation|date("d/m/Y") }}</td>
+                    <td>
+                        {% if user.isverified == "1" %}
+                            Oui
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
                     <td><a href="{{ path('admin_modifier_utilisateur' , { 'id': user.id }) }}">Modifier</a></td>
-                    <td><a href="{{ path('admin_supprimer_utilisateur' , { 'id': user.id }) }}">Supprimer</a></td>
+                    <td><a href="{{ path('admin_supprimer_utilisateur' , { 'id': user.id , 'route': route  }) }}">Supprimer</a></td>
                 {% endif %}
             </tr>
         {% else %}

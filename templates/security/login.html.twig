@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
-
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+{% block titre1 %}Connexion{% endblock %}
+{% block titre2 %}Tfathel Marhbe{% endblock %}
 {% block content %}
     <form method="post">
         {% if error %}
@@ -13,28 +15,17 @@
                 You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
             </div>
         {% endif %}
-
-
-
-
-
         {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
         #}
-
-
-
-
-
-
         <div class="form_wrapper">
             <div class="form_container">
                 <div class="title_container">
                     <h2>Me Connecter</h2>
                 </div>
                 <div class="row clearfix">
-                    <div class="">
+                    <div class="container">
                         <form>
                             <div class="row clearfix">
                                 <div class="col_half">
@@ -47,10 +38,8 @@
                                     <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
                                         <label for="inputPassword">Password</label>
                                         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
                                         <input type="hidden" name="_csrf_token"
-                                               value="{{ csrf_token('authenticate') }}"
-                                        >
+                                               value="{{ csrf_token('authenticate') }}">
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +51,6 @@
                             <button class="btn btn-lg btn-primary" type="submit" >
                                 Connecter
                             </button>
-
                         </form>
                     </div>
                 </div>

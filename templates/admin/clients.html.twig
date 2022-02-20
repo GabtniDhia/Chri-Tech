@@ -2,6 +2,9 @@
 {% block title %} Espace Admin {% endblock %}
 {% block titre1 %} Control des Utilisatuers {% endblock %}
 {% block content %}
+    {% set route = app.request.attributes.get('_route') %}
+
+    <?php echo ?>
     <h1>Liste des Clients</h1>
     <table class="table">
         <thead>
@@ -10,12 +13,14 @@
         <th>ROLES</th>
         <th>Nom</th>
         <th>Prenom</th>
+        <th>Date De Creation</th>
+        <th>Verifié</th>
         <th>ACTIONS</th>
         </thead>
         <tbody>
-        {% for user in user%}
+        {% for user in user %}
             <tr>
-                {% if "ROLE_CLIENT" in user.roles   %}
+                {% if "ROLE_CLIENT" in user.roles %}
                     <td>{{ user.ID }}</td>
                     <td>{{ user.email }}</td>
                     <td>
@@ -31,8 +36,17 @@
                     </td>
                     <td>{{ user.nom }}</td>
                     <td>{{ user.prenom }}</td>
+                    <td>{{ user.datecreation|date("d/m/Y") }}</td>
+                    <td>
+                        {% if user.isverified == "1" %}
+                            Oui
+                        {% else %}
+                            Non
+                        {% endif %}
+                    </td>
                     <td><a href="{{ path('admin_modifier_utilisateur' , { 'id': user.id }) }}">Modifier</a></td>
-                    <td><a href="{{ path('admin_supprimer_utilisateur' , { 'id': user.id }) }}">Supprimer</a></td>
+                    <td><a href="{{ path('admin_supprimer_utilisateur' , { 'id': user.id , 'route': route  }) }}">Supprimer</a>
+                    </td>
                 {% endif %}
             </tr>
         {% else %}
