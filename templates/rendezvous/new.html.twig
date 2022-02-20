@@ -1,11 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Rendezvous{% endblock %}
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/rdvbg.png') }}  {% endblock %}
+{% block titre1 %}Services{% endblock %}
+{% block titre2 %} <a  style="color: antiquewhite">Rendez-vous <h6 style="color: floralwhite" ><small>Merci de remplir le formulaire en-dessous </small></h6></a>
 
+{% endblock %}
 {% block content %}
-    <h1>Create new Rendezvous</h1>
+    <div class="rdv1">
+    <section class="why_us_section layout_padding" >
 
-    {{ include('rendezvous/_form.html.twig') }}
+        <div class="container" align="center">
+            <div class="row" align="center">
+                <div class="box " align="center" >
 
-    <a href="{{ path('rendezvous_index') }}">back to list</a>
+
+                    {{ include('rendezvous/_form.html.twig') }}
+
+                    <a href="{{ path('rendezvous_index') }}">Revenir</a>
+
+                </div>
+
+            </div>
+            </div>
+    </section>
+    </div>
+
+
 {% endblock %}

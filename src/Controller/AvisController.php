@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AvisController extends AbstractController
 {
     /**
-     * @Route("/", name="avis_index", methods={"GET"})
+     * @Route("/avis", name="avis_index", methods={"GET"})
      */
     public function index(AvisRepository $avisRepository): Response
     {
