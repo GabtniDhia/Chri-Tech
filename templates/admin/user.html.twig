@@ -30,8 +30,8 @@
                     </td>
                     <td>{{ user.nom }}</td>
                     <td>{{ user.prenom }}</td>
-                    <td><a href="{{ path('admin_modifier_utilisateur' , { 'id': user.id }) }}">Modifier</a></td>
-                    <td><a href="{{ path('admin_supprimer_utilisateur' , { 'id': user.id }) }}">Supprimer</a></td>
+                    <td><a href="{{ path('admin_modifier_utilisateur' , { 'id': user.id , 'route': route  }) }}">Modifier</a></td>
+                    <td><a href="{{ path('admin_supprimer_utilisateur' , { 'id': user.id , 'route': route  }) }}">Supprimer</a></td>
                 </tr>
             {% else %}
                   <tr>

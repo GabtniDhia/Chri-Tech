@@ -9,6 +9,7 @@ use App\Security\UserAuthentificatorAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
@@ -36,6 +37,17 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $user->getImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move(
+                  $this->getParameter('images_directory'),
+                    $fileName
+                );
+            } catch (FileException $e){
+
+            }
+            $user->setImage($fileName);
             // encode the plain password
             $user->setPassword(
             $userPasswordEncoder->encodePassword(

@@ -24,8 +24,8 @@
                 <div class="modal-body">
                     <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
                         <div class="card p-4">
-                            <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" /></button> <h4><span class="name mt-3">{{ app.user.nom | upper }} {{ app.user.prenom | upper }}</span> </h4><span class="idd">@eleanorpena</span>
-                                <div class=" d-flex mt-2"> <button class="btn1 btn-dark">Modifer Profil</button> </div>
+                            <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="{{ asset('uploads/images/' ~ app.user.image) }}" height="100" width="100" /></button> <h4><span class="name mt-3">{{ app.user.nom | upper }} {{ app.user.prenom | upper }}</span> </h4><span class="idd">@eleanorpena</span>
+                                <div class=" d-flex mt-2"> <a href="{{ path('user_profil_modifier') }}" class="btn1 btn-dark">Modifer Profil</a> </div>
                                 <div class="text mt-3"> <span> Votre Email: {{ app.user.email }}</span> </div>
                                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
                                 <div class=" px-2 rounded mt-4 date "> <span class="join">Membre Depuis {{ app.user.datecreation|date("d/m/Y") }}</span> </div>
@@ -74,7 +74,7 @@
                             {#Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
 						See https://symfony.com/doc/current/security/remember_me.html#}
                             <div class="md-form mb-5">
-                                <input type="email" {% if is_granted('ROLE_CLIENT') %}value="{{ last_username }}"{% endif%} name="email" id="Form-email5" class="form-control" autocomplete="email" required autofocus>
+                                <input type="email" name="email" id="Form-email5" class="form-control" autocomplete="email" required autofocus>
                                 <label data-error="wrong" data-success="right" for="Form-email5">Your email</label>
                             </div>
 

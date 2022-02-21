@@ -1,8 +1,8 @@
-{% extends 'baseback.html.twig' %}
+{% extends 'base.html.twig' %}
+{% form_theme userForm 'bootstrap_4_layout.html.twig' %}
 {% block title %}Modifier Un Utilisatuers {% endblock %}
 
 {% block content %}
     <h1>Modifier Un Utilisatuers</h1>
     {{ form(userForm) }}
-    {{ form_row(userForm.image) }}
 {% endblock %}
