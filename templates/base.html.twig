@@ -9,10 +9,45 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
 
 
+    <!-- Modal Pop Up Message-->
+    {% if is_granted('ROLE_CLIENT') %}
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="float-defer-page: last" >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Messages De {{ app.user.prenom }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <section class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <h1>Messagerie</h1>
+                                    <p>Resumer de la messagerie</p>
+                                    <p>Recus: {{ app.user.received | length }}</p>
+                                    <p>Envoyes: {{ app.user.sent | length }}</p>
+                                    <a  class="btn btn-primary" href="{{ path("messages") }}">
+                                        ->Ma Messagerie
+                                    </a>
+                                    <a href="{{ path("send") }}" class="btn btn-primary">Envoyer Un Message</a>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
     <!-- Modal Pop Up Profil-->
     {% if is_granted('ROLE_CLIENT') %}
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="float-defer-page: last" >
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -43,7 +78,7 @@
 
 
     <!-- Modal Pop Up Login-->
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="float-defer-page: last">
         <div class="modal-dialog form-dark" role="document">
             <!--Content-->
             <div class="modal-content card card-image" style="background-image: url('{{ asset('front/assets/img/lock2.jpg') }}'); height: 600px; width: 430px" >
@@ -127,6 +162,7 @@
                 background-attachment: fixed;
             }
         </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
         <!-- favicon -->
         <link rel="shortcut icon" type="image/png" href="{{ asset('front/assets/img/favicon.png') }}">
@@ -153,6 +189,8 @@
 
     {% endblock %}
     {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
+
         <!-- jquery -->
         <script src="{{ asset('front/assets/js/jquery-1.11.3.min.js') }}"></script>
         <!-- bootstrap -->
@@ -226,13 +264,17 @@
                                             <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                                             {% if is_granted('ROLE_CLIENT') %}
                                             <a  type="button" data-toggle="modal" data-target="#exampleModalCenter">
-                                                <i class="fas fa-user-check">
+                                                <i class="fas fa-user-check" style="color: white">
                                                 </i>
                                             </a>
+                                                <a  type="button" data-toggle="modal" data-target="#exampleModalCenter">
+                                                    <i class="	fab fa-facebook-messenger" style="color: white">
+                                                    </i>
+                                                </a>
                                             {% endif %}
                                             {% if is_granted('ROLE_CLIENT') == false %}
                                             <a  type="button" data-toggle="modal" data-target="#login">
-                                                <i class="fas fa-user-slash">
+                                                <i class="fas fa-user-slash" style="color: white">
                                                 </i>
                                             </a>
                                             {% endif %}
