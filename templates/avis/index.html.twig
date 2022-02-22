@@ -1,39 +1,49 @@
 {% extends 'base.html.twig' %}
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/avbg.jpg') }}  {% endblock %}
+{% block titre1 %}Services{% endblock %}
+{% block titre2 %} <a href="{{ path('avis_new') }}  " style="color: antiquewhite">Les Avis <h6 style="color: floralwhite" ><small>Pour Donner un Avis Cliquer ici</small></h6></a>
 
-{% block title %}Avis index{% endblock %}
+{% endblock %}
+
 
 {% block content %}
-    <h1>Avis index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Etat_service</th>
-                <th>Recommendation</th>
-                <th>Description_service</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for avi in avis %}
-            <tr>
-                <td>{{ avi.id }}</td>
-                <td>{{ avi.etatService }}</td>
-                <td>{{ avi.recommendation }}</td>
-                <td>{{ avi.descriptionService }}</td>
-                <td>
-                    <a href="{{ path('avis_show', {'id': avi.id}) }}">show</a>
-                    <a href="{{ path('avis_edit', {'id': avi.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <section class="why_us_section layout_padding" >
+            <div class="container  align-self-center" >
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="box  align-self-center "  >
 
-    <a href="{{ path('avis_new') }}">Create new</a>
+
+                        <table class="table" align="center">
+                            <thead>
+                            <tr>
+                                <th>Etat_service</th>
+                                <th>Recommendation</th>
+                                <th>Description_service</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for avi in avis %}
+                                <tr>
+                                    <td>{{ avi.etatService }}</td>
+                                    <td>{{ avi.recommendation }}</td>
+                                    <td>{{ avi.descriptionService }}</td>
+
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="5">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+
 {% endblock %}

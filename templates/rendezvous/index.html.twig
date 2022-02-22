@@ -8,10 +8,9 @@
 
 
 {% block content %}
-<div class="rdv2">
     <section class="why_us_section layout_padding" >
         <div class="container" align="center">
-            <div class="row" align="center">
+            <div class="row d-flex justify-content-center text-center" >
                     <div class="box " align="center" >
 
 
@@ -37,11 +36,13 @@
                                     <td>{{ rendezvou.descriptionRendezvous }}</td>
                                     <td>{{ rendezvou.telephonenum }}</td>
                                     <td>
+                                        <p align="center">
                                         <a href="{{ path('rendezvous_show', {'id': rendezvou.id}) }}">Afficher+</a>
-                                        <a href="{{ path('rendezvous_edit', {'id': rendezvou.id}) }}">Mofifier Rdv</a>
+                                        <a href="{{ path('rendezvous_edit', {'id': rendezvou.id}) }}">Modifier Rdv</a>
                                         {% if rendezvou.avis is not null %}
-                                            <a href="{{ path('avis_edit', {'id': rendezvou.avis.id}) }}">Modifier Avis</a>
+                                            <a href="{{ path('avis_show', {'id': rendezvou.avis.id}) }}">Afficher Avis</a>
                                         {% endif %}
+                                        </p>
                                     </td>
                                 </tr>
                             {% else %}
@@ -57,6 +58,5 @@
             </div>
         </div>
     </section>
-    </div>
 
 {% endblock %}
