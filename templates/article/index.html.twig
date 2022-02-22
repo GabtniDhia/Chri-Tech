@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+{% block titre1 %}ARTICLES{% endblock %}
+{% block titre2 %}Ahla & Sahla{% endblock %}
+{% block content %}
+    <h1>Article index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Entete</th>
+                <th>Corp</th>
+                <th>Date</th>
+                <th>Redacteur</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.entete }}</td>
+                <td>{{ article.corp }}</td>
+                <td>{{ article.date ? article.date|date('Y-m-d') : '' }}</td>
+                <td>{{ article.redacteur }}</td>
+                <td>{{ article.image }}</td>
+                <td>
+                    <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('article_new') }}">Create new</a>
+{% endblock %}
