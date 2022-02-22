@@ -48,6 +48,13 @@ class Livraison
      * @Assert\GreaterThan("today")
      */
     private $datelivraison;
+    /**
+     * @ORM\OneToOne(targetEntity=Commande::class, mappedBy="livraison", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+
+     */
+    private $commande;
+
 
     public function getId(): ?int
     {
@@ -101,4 +108,23 @@ class Livraison
 
         return $this;
     }
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(Commande $commande): self
+    {
+        // set the owning side of the relation if necessary
+        if ($commande->getLivraison() !== $this) {
+            $commande->setLivraison($this);
+        }
+
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+
+
 }

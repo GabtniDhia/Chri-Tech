@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -44,6 +46,11 @@ class Commande
      */
     private $email;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Livraison::class, inversedBy="commande", cascade={"persist", "remove"})
+     */
+    private $livraison;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -84,4 +91,21 @@ class Commande
 
         return $this;
     }
+
+    public function getLivraison(): ?Livraison
+    {
+        return $this->livraison;
+    }
+
+    public function setLivraison(Livraison $livraison): self
+    {
+        $this->livraison = $livraison;
+
+        return $this;
+    }
+    public function __toString() {
+        return $this->nom;
+
+    }
+
 }

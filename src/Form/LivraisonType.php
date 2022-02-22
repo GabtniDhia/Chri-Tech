@@ -16,6 +16,7 @@ class LivraisonType extends AbstractType
             ->add('codepostal')
             ->add('ville')
             ->add('datelivraison')
+            ->add('commande')
         ;
     }
 
