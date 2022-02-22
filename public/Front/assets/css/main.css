@@ -2791,6 +2791,22 @@ table.order-details tbody td {
   -webkit-transform: translate(-50%, -50%);
 
 }
+.av{
+  width: 600px;
+
+
+  height: auto ;
+
+
+  left: 53%;
+
+  top: 64%;
+
+  transform: translate(-50%, -50%);
+
+  -webkit-transform: translate(-50%, -50%);
+
+}
 .rdv2{
   width: 600px;
 
@@ -2801,7 +2817,7 @@ table.order-details tbody td {
 
   left: 46%;
 
-  top: 40%;
+  top: 60%;
 
   transform: translate(-50%, -50%);
 

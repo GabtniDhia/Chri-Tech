@@ -1,0 +1,34 @@
+{% extends 'baseback.html.twig' %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Voir Les Rendez Vous {% endblock %}
+{% block content %}
+    <h1>Liste des Specialistes</h1>
+    <table class="table" align="center">
+        <thead>
+        <tr>
+
+            <th>Titre</th>
+            <th>Service</th>
+            <th>Date_rendezvous</th>
+            <th>Description_rendezvous</th>
+            <th>Telephonenum</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rendezvou in rendezvouses %}
+            <tr>
+
+                <td>{{ rendezvou.titre }}</td>
+                <td>{{ rendezvou.service }}</td>
+                <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
+                <td>{{ rendezvou.descriptionRendezvous }}</td>
+                <td>{{ rendezvou.telephonenum }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

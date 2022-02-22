@@ -1,13 +1,32 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Avis{% endblock %}
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/avbg.jpg') }}  {% endblock %}
+{% block titre1 %}Services{% endblock %}
+{% block titre2 %} <a  style="color: antiquewhite">Les Avis<h6 style="color: floralwhite" ><small>Le formulaire est en-dessous </small></h6></a>
 
+{% endblock %}
 {% block content %}
-    <h1>Edit Avis</h1>
+    <div class="rdv1">
+        <section class="why_us_section layout_padding" >
 
-    {{ include('avis/_form.html.twig', {'button_label': 'Update'}) }}
+            <div class="container" align="center">
+                <div class="row" align="center">
+                    <div class="box " align="center" >
 
-    <a href="{{ path('avis_index') }}">back to list</a>
 
-    {{ include('avis/_delete_form.html.twig') }}
+                        {{ include('avis/_form.html.twig', {'button_label': 'Update'}) }}
+
+                        <a href="{{ path('avis_index') }}">back to list</a>
+
+                        {{ include('avis/_delete_form.html.twig') }}
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+
 {% endblock %}

@@ -1,19 +1,18 @@
+
 {% extends 'baseback.html.twig' %}
-
-{% block title %}Commande index{% endblock %}
-
-{% block body %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de commande{% endblock %}
+{% block content %}
     <h1>Liste de commandes en cours</h1>
-
     <table class="table">
         <thead>
-            <tr>
-                <th>Identifiant</th>
-                <th>Client</th>
-                <th>Numéro de telephone</th>
-                <th>Adresse e-mail</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Identifiant</th>
+            <th>Client</th>
+            <th>Numéro de telephone</th>
+            <th>Adresse e-mail</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for commande in commandes %}
@@ -23,9 +22,9 @@
                 <td>{{ commande.numtel }}</td>
                 <td>{{ commande.email }}</td>
                 <td>
-                    <a href="{{ path('commande_show', {'id': commande.id}) }}">Afficher/</a>
-                    <a href="{{ path('commande_edit', {'id': commande.id}) }}">Modifier la commande/</a>
-                    <a href="{{ path('livraison_new') }}">Effectuer une livraison</a>
+                    <a href="{{ path('commande_show', {'id': commande.id}) }}">Affichage /</a>
+                    <a href="{{ path('commande_edit', {'id': commande.id}) }}"> Modification</a>
+
                 </td>
             </tr>
         {% else %}
@@ -35,8 +34,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('commande_new') }}">Passer une nouvelle commande/</a>
-
-
+  <!--  <a href="{{ path('commande_new') }}">Passer une nouvelle commande/</a> -->
+    <a href="{{ path('livraison_index') }}">Consulter la liste de livraisons</a>
 {% endblock %}

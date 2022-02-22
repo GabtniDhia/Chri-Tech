@@ -23,7 +23,15 @@ class AvisController extends AbstractController
             'avis' => $avisRepository->findAll(),
         ]);
     }
-
+    /**
+     * @Route("/avis/Afficheback", name="avis_back", methods={"GET"})
+     */
+    public function AfficheBack(AvisRepository $avisRepository): Response
+    {
+        return $this->render('avis/AfficheBack.html.twig', [
+            'avis' => $avisRepository->findAll(),
+        ]);
+    }
     /**
      * @Route("/avis/new", name="avis_new", methods={"GET", "POST"})
      */

@@ -29,7 +29,16 @@ class RendezvousController extends AbstractController
             'rendezvouses' => $rendezvousRepository->findAll(),
         ]);
     }
+    /**
+     * @Route("/rendezvous/Afficheback", name="rendezvous_back", methods={"GET"})
+     */
 
+    public function AfficheBack(RendezvousRepository $rendezvousRepository): Response
+    {
+        return $this->render('rendezvous/AfficheBack.html.twig', [
+            'rendezvouses' => $rendezvousRepository->findAll(),
+        ]);
+    }
     /**
      * @Route("/rendezvous/new", name="rendezvous_new", methods={"GET", "POST"})
      */
