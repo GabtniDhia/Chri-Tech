@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}404 ERROR{% endblock %}
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+{% block titre2 %}404 - Not Found{% endblock %}
+{% block content %}
+    <div class="full-height-section error-section">
+        <div class="full-height-tablecell">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="error-text">
+                            <i class="far fa-sad-cry"></i>
+                            <h1>Oops! Page NON Trouve.</h1>
+                            <a href="{{ path('home') }}" class="boxed-btn">Revenir A L'Acceuil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
