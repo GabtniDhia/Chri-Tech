@@ -15,6 +15,7 @@ class CommandeType extends AbstractType
             ->add('nom')
             ->add('numtel')
             ->add('email')
+
         ;
     }
 
