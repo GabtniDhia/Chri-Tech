@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
@@ -19,46 +20,55 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank(message="Entrez la reference du produit")
      */
     private $Ref_Prod;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank(message="Entrez le nom du produit")
      */
     private $Nom_Prod;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank(message="Entrez la description du produit")
      */
     private $Descri_Prod;
 
     /**
      * @ORM\Column(type="float")
+     *@Assert\NotBlank(message="Entrez le prix unitaire du produit")
      */
     private $PrixUnitHT_Prod;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     *@Assert\NotBlank(message="Entrez la quantité du produit")
      */
     private $QteStock_Prod;
 
     /**
      * @ORM\Column(type="blob", nullable=true)
+     *@Assert\NotBlank(message="Entrez une image du produit")
      */
     private $Image_Prod;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * *@Assert\NotBlank(message="Entrez les details du produit")
      */
     private $Detail_Prod;
 
     /**
      * @ORM\Column(type="float")
+     *@Assert\NotBlank(message="Entrez le prixTTC")
      */
     private $PrixTTC_Prod;
 
     /**
      * @ORM\Column(type="float")
+     *@Assert\NotBlank(message="Entrez le prix TVA")
      */
     private $PrixTVA_Prod;
 

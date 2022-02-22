@@ -1,11 +1,14 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}New Produit{% endblock %}
+{% extends 'baseback.html.twig' %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de produit{% endblock %}
+
 
 {% block content %}
-    <h1>Create new Produit</h1>
+    <h1>Ajout de produit</h1>
 
     {{ include('produit/_form.html.twig') }}
 
-    <a href="{{ path('produit_index') }}">back to list</a>
+    <a href="{{ path('produit_index') }}">Consulter la liste de produits</a>
 {% endblock %}
+
