@@ -12,7 +12,7 @@
 
     <!-- Modal Pop Up Profil-->
     {% if is_granted('ROLE_CLIENT') %}
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -46,12 +46,12 @@
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog form-dark" role="document">
             <!--Content-->
-            <div class="modal-content card card-image" style="background-image: url('{{ asset('front/assets/img/pc.jpg') }}');">
+            <div class="modal-content card card-image" style="background-image: url('{{ asset('front/assets/img/lock2.jpg') }}'); height: 600px; width: 430px" >
                 <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
                     <!--Header-->
                     <div class="modal-header text-center pb-4">
-                        <h3 class="modal-title w-100 white-text font-weight-bold" id="myModalLabel"><strong>SIGN</strong> <a
-                                    class="green-text font-weight-bold"><strong> UP</strong></a></h3>
+                        <h3 class="modal-title w-100 orange-text font-weight-bold" id="myModalLabel"><strong>Bien</strong><a
+                                    class="font-weight-bold" style="color: black; font-weight: bolder; font-size: x-large"><strong>Venue</strong></a></h3>
                         <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -74,14 +74,14 @@
                             {#Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
 						See https://symfony.com/doc/current/security/remember_me.html#}
                             <div class="md-form mb-5">
-                                <input type="email" name="email" id="Form-email5" class="form-control" autocomplete="email" required autofocus>
-                                <label data-error="wrong" data-success="right" for="Form-email5">Your email</label>
+                                <input type="email" name="email" id="Form-email5" class="form-control validate white-text" autocomplete="email" required autofocus>
+                                <label data-error="wrong" data-success="right" for="Form-email5">Votre Email</label>
                             </div>
 
                             <div class="md-form pb-3">
                                 <input type="password" name="password" id="Form-pass5" class="form-control" autocomplete="current-password" required>
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                <label data-error="wrong" data-success="right" for="Form-pass5">Your password</label>
+                                <label data-error="wrong" data-success="right" for="Form-pass5">Votre MotdePasse</label>
 
                             </div>
 
@@ -90,7 +90,7 @@
 
                                 <!--Grid column-->
                                 <div class="text-center mb-3 col-md-12">
-                                    <button class="btn btn-lg btn-primary" type="submit" >
+                                    <button class="btn btn-warning btn-lg" type="submit" >
                                         Connecter
                                     </button>
                                 </div>
@@ -98,15 +98,13 @@
 
                             </div>
                             <!--Grid row-->
-
+                            <br><br>
                             <!--Grid row-->
                             <div class="row">
 
                                 <!--Grid column-->
-                                <div class="col-md-12">
-                                    <p class="font-small white-text d-flex justify-content-end">Have an account? <a href="#" class="green-text ml-1 font-weight-bold">
-                                            Log in</a></p>
-                                </div>
+                                <h4 style="color: whitesmoke">   Vous N'avez pas de Compte ? <br><br> <a href="{{ path('app_register') }}">                 INSCRIVEZ VOUS</a></h4>
+
                                 <!--Grid column-->
 
                             </div>
