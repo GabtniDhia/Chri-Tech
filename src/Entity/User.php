@@ -7,9 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -17,35 +15,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class User implements UserInterface
 {
-    public function __serialize(): array
-    {
-        return [
-            'id' => $this->id,
-            'email' => $this->email,
-            'roles' => $this->roles,
-            'password' => $this->password,
-            'nom' => $this->nom,
-            'prenom' => $this->prenom,
-            'datecreation' => $this->datecreation,
-            'is_verified' => $this->isVerified(),
-            'image' => $this->image
-        ];
-    }
-
-    public function __unserialize(array $serialized): User
-    {
-        $this->id = $serialized['id'];
-        $this->email = $serialized['email'];
-        $this->roles = $serialized['roles'];
-        $this->password = $serialized['password'];
-        $this->nom = $serialized['nom'];
-        $this->prenom = $serialized['prenom'];
-        $this->datecreation = $serialized['datecreation'];
-        $this->isVerified = $serialized['is_verified'];
-        $this->image = $serialized['image'];
-
-        return $this;
-    }
 
     /**
      * @ORM\Id
