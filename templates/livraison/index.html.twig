@@ -1,20 +1,19 @@
+
 {% extends 'baseback.html.twig' %}
-
-{% block title %}Livraison index{% endblock %}
-
-{% block body %}
-    <h1>Liste de livraisons en cours</h1>
-
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de livraison{% endblock %}
+{% block content %}
+    <h1>Liste de commandes en cours</h1>
     <table class="table">
         <thead>
-            <tr>
-                <th>Identifiant</th>
-                <th>Adresse</th>
-                <th>Code postal</th>
-                <th>Ville</th>
-                <th>Date de livraison</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Identifiant</th>
+            <th>Adresse</th>
+            <th>Code postal</th>
+            <th>Ville</th>
+            <th>Date de livraison</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for livraison in livraisons %}
@@ -37,5 +36,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('livraison_new') }}">Ajouter une livraison</a>
+    <a href="{{ path('commande_index') }}">Revenir vers la liste de commandes</a>
 {% endblock %}

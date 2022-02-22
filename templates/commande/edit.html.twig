@@ -4,7 +4,8 @@
 
 {% block title %} Chritech {% endblock %}
 {% block bg%} {{ asset('front/assets/img/commande.jpg') }}  {% endblock %}
-{% block titre2 %} <a  style="color:antiquewhite">Commande <h6 style="color: antiquewhite" >Veuillez remplir le formulaire ci-dessous </h6></a>
+{% block titre1 %}commande{% endblock %}
+{% block titre2 %} <a  style="color:antiquewhite">Gérer votre commande <h6 style="color: antiquewhite" >Veuillez remplir le formulaire ci-dessous </h6></a>
 
 {% endblock %}
 {% block content %}
@@ -15,14 +16,9 @@
                 <div class="row" align="center">
                     <div class="box " align="center" >
 
-
-                        <h1></h1>
-
                         {{ include('commande/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-                        <a href="{{ path('commande_index') }}">Page précédente</a>
-
-                        {{ include('commande/_delete_form.html.twig') }}
+                        {{ include('commande/_delete_form.html.twig' , {'button_label': 'Annuler'}) }}
+                        <a href="{{ path('commande_show', {'id': commande.id}) }}">Revenir vers la page précédente</a>
 
                     </div>
 

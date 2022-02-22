@@ -1,38 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Livraison{% endblock %}
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/livraison.jpg') }}  {% endblock %}
+{% block titre1 %}livraison{% endblock %}
+{% block titre2 %} <a  style="color: antiquewhite">Consulter votre livraison</a>
 
+{% endblock %}
 {% block content %}
-    <h1>Livraison en cours</h1>
+    <h3 style="color: cadetblue" >Cliquez sur le lien ci-dessous si vous souhaitez gérer votre livraison</h3>
+    <a href="{{ path('livraison_edit', {'id': livraison.id}) }}">Cliquez ici!</a>
 
     <table class="table">
+
         <tbody>
-            <tr>
-                <th>Identifiant</th>
-                <td>{{ livraison.id }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ livraison.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Codepostal</th>
-                <td>{{ livraison.codepostal }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ livraison.ville }}</td>
-            </tr>
-            <tr>
-                <th>Date de livraison</th>
-                <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</td>
-            </tr>
+        <tr>
+            <th>Identifiant</th>
+            <td>{{ livraison.id }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ livraison.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Codepostal</th>
+            <td>{{ livraison.codepostal }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ livraison.ville }}</td>
+        </tr>
+        <tr>
+            <th>Date de livraison</th>
+            <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</td>
+        </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('livraison_index') }}">Page précedente</a>
 
-    <a href="{{ path('livraison_edit', {'id': livraison.id}) }}">Modifier la livraison</a>
-
-    {{ include('livraison/_delete_form.html.twig') }}
 {% endblock %}
