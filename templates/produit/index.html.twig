@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
+{% block title %} Liste des produits{% endblock %}
 
-{% block title %}Produit index{% endblock %}
 
 {% block content %}
-    <h1>Produit index</h1>
+    <h1>Liste des produits</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Ref_Prod</th>
-                <th>Nom_Prod</th>
-                <th>Descri_Prod</th>
-                <th>PrixUnitHT_Prod</th>
-                <th>QteStock_Prod</th>
-                <th>Image_Prod</th>
-                <th>Detail_Prod</th>
-                <th>PrixTTC_Prod</th>
-                <th>PrixTVA_Prod</th>
-                <th>actions</th>
+                <th>Reférence du produit</th>
+                <th>Produit</th>
+                <th>Description</th>
+                <th>Prix unitaire hors taxe</th>
+                <th>Quantité disponnible</th>
+                <th>Image</th>
+                <th>Details</th>
+                <th>Prix TTC</th>
+                <th>Prix TVA</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -35,17 +35,17 @@
                 <td>{{ produit.PrixTTCProd }}</td>
                 <td>{{ produit.PrixTVAProd }}</td>
                 <td>
-                    <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}">Affichage</a>
+                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">Modification</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="11">no records found</td>
+                <td colspan="11">Stock vide.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('produit_new') }}">Create new</a>
+    <a href="{{ path('produit_new') }}">Ajouter un nouveau produit</a>
 {% endblock %}

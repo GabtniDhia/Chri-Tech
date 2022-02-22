@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Produit{% endblock %}
+{% extends 'baseback.html.twig' %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de produit{% endblock %}
 
 {% block content %}
-    <h1>Edit Produit</h1>
+    <h1>Modification du produit</h1>
 
-    {{ include('produit/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('produit/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('produit/_delete_form.html.twig', {'button_label': 'Supprimer'}) }}
+    <a href="{{ path('produit_index') }}">Consulter la liste de produits</a>
 
-    <a href="{{ path('produit_index') }}">back to list</a>
 
-    {{ include('produit/_delete_form.html.twig') }}
 {% endblock %}

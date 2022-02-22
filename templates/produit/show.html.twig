@@ -7,52 +7,54 @@
 
     <table class="table">
         <tbody>
-            <tr>
+           <!-- <tr>
                 <th>Id</th>
                 <td>{{ produit.id }}</td>
-            </tr>
+            </tr>-->
             <tr>
-                <th>Ref_Prod</th>
+                <th>Reference</th>
                 <td>{{ produit.RefProd }}</td>
             </tr>
             <tr>
-                <th>Nom_Prod</th>
+                <th>Nom Produit</th>
                 <td>{{ produit.NomProd }}</td>
             </tr>
             <tr>
-                <th>Descri_Prod</th>
+                <th>Description</th>
                 <td>{{ produit.DescriProd }}</td>
             </tr>
             <tr>
-                <th>PrixUnitHT_Prod</th>
+                <th>PrixUnitaireHT</th>
                 <td>{{ produit.PrixUnitHTProd }}</td>
             </tr>
             <tr>
-                <th>QteStock_Prod</th>
+                <th>Quantité</th>
                 <td>{{ produit.QteStockProd }}</td>
             </tr>
             <tr>
-                <th>Image_Prod</th>
+                <th>Image Produit</th>
                 <td>{{ produit.ImageProd }}</td>
             </tr>
             <tr>
-                <th>Detail_Prod</th>
+                <th>Details</th>
                 <td>{{ produit.DetailProd }}</td>
             </tr>
             <tr>
-                <th>PrixTTC_Prod</th>
+                <th>PrixTTC</th>
                 <td>{{ produit.PrixTTCProd }}</td>
             </tr>
             <tr>
-                <th>PrixTVA_Prod</th>
+                <th>PrixTVA</th>
                 <td>{{ produit.PrixTVAProd }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('produit_index') }}">back to list</a>
+    <a href="{{ path('produit_index') }}">Revenir vers la liste de produits</a>
 
-    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
+    <!--<a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>-->
 
-    {{ include('produit/_delete_form.html.twig') }}
+
+
+   <!-- {{ include('produit/_delete_form.html.twig') }}-->
 {% endblock %}
