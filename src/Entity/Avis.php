@@ -33,7 +33,7 @@ class Avis
     private $description_service;
 
     /**
-     * @ORM\OneToOne(targetEntity=Rendezvous::class, mappedBy="avis", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Rendezvous::class, mappedBy="avis")
      * @ORM\JoinColumn(nullable=false)
 
      */
