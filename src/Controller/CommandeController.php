@@ -26,7 +26,7 @@ class CommandeController extends AbstractController
         ]);
     }
     /**
-     * @Route("/mine", name="commande_index")
+     * @Route("/mine", name="commande_mine")
      */
     public function mine(CommandeRepository $commandeRepository): Response
     {
@@ -46,11 +46,10 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            echo "<script>alert('Commande Ajoutée');</script>";
             $entityManager->persist($commande);
             $entityManager->flush();
 
-            return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('commande/new.html.twig', [
@@ -81,7 +80,7 @@ class CommandeController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('commande_show', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('commande/edit.html.twig', [
@@ -100,6 +99,6 @@ class CommandeController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
     }
 }

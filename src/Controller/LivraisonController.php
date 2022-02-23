@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Livraison;
 use App\Form\LivraisonType;
+use App\Repository\CommandeRepository;
 use App\Repository\LivraisonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +26,15 @@ class LivraisonController extends AbstractController
             'livraisons' => $livraisonRepository->findAll(),
         ]);
     }
+    /**
+     * @Route("/minel", name="livraison_minel", methods={"GET"})
+     */
+    public function mine(LivraisonRepository $livraisonRepository): Response
+    {
+        return $this->render('livraison/minel.html.twig', [
+            'livraisons' => $livraisonRepository->findAll(),
+        ]);
+    }
 
     /**
      * @Route("/new", name="livraison_new", methods={"GET", "POST"})
@@ -39,7 +49,7 @@ class LivraisonController extends AbstractController
             $entityManager->persist($livraison);
             $entityManager->flush();
 
-            return $this->redirectToRoute('livraison_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('livraison_minel', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('livraison/new.html.twig', [
@@ -47,6 +57,7 @@ class LivraisonController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/{id}", name="livraison_show", methods={"GET"})
@@ -69,7 +80,7 @@ class LivraisonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('livraison_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('livraison_minel', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('livraison/edit.html.twig', [

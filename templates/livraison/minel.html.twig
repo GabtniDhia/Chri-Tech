@@ -1,7 +1,12 @@
 
-{% extends 'baseback.html.twig' %}
-{% block title %} Espace Admin {% endblock %}
-{% block titre1 %} Gestion de livraison{% endblock %}
+{% extends 'base.html.twig' %}
+
+
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/livraison.jpg') }}  {% endblock %}
+{% block titre1 %}livraison{% endblock %}
+{% block titre2 %} <a  style="color:antiquewhite">Historique de livraisons</a>
+{% endblock %}
 {% block content %}
     <h1>Liste de livraisons en cours</h1>
     <table class="table">
@@ -35,6 +40,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+    <a href="{{ path('livraison_new') }}">Passer une nouvelle livraison/</a>
     <a href="{{ path('commande_index') }}">Revenir vers la liste de commandes</a>
 {% endblock %}
