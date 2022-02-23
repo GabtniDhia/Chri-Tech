@@ -47,6 +47,7 @@ class Blog
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->date_heure = new \DateTime('now');
     }
 
     public function getId(): ?int
