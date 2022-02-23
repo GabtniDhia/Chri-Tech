@@ -49,8 +49,12 @@ class Produit
     private $QteStock_Prod;
 
     /**
-     * @ORM\Column(type="blob", nullable=true)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      *@Assert\NotBlank(message="Entrez une image du produit")
+     * @Assert\File(
+     * mimeTypes = {"image/jpeg", "image/png"},
+     * mimeTypesMessage = "Only jpeg or png are allowed."
+     * )
      */
     private $Image_Prod;
 

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Blog;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,10 +13,24 @@ class BlogType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('utilisateur')
-            ->add('titre')
-            ->add('contenue')
-            ->add('date_heure')
+            ->add('utilisateur', TextType::class,[
+                'attr' => [
+                    'placeholder'=> 'Entrer votre Nom'
+                ]
+            ])
+
+            ->add('titre', TextType::class,[
+                    'attr' => [
+                        'placeholder'=> 'entrez le titre'
+                    ]
+                ])
+
+            ->add('contenue', TextType::class,[
+                    'attr' => [
+                        'placeholder'=> 'exprimez-vous'
+                    ]
+                ])
+
         ;
     }
 

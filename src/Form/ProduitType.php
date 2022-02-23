@@ -18,12 +18,7 @@ class ProduitType extends AbstractType
             ->add('Descri_Prod')
             ->add('PrixUnitHT_Prod')
             ->add('QteStock_Prod')
-            ->add('Image_Prod', FileType::class,[
-                'label' => false,
-                'multiple' => true,
-                'mapped' => false,
-                'required' => false
-            ])
+            ->add('image_Prod' , FileType::class, array('data_class' => null))
             ->add('Detail_Prod')
             ->add('PrixTTC_Prod')
             ->add('PrixTVA_Prod')

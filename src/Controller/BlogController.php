@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Blog;
 use App\Form\BlogType;
 use App\Repository\BlogRepository;
@@ -89,5 +90,13 @@ class BlogController extends AbstractController
         }
 
         return $this->redirectToRoute('blog_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    public function createAction(Request $request)
+    {
+        // en créant un object Article, le constructeur de l'entité Article initialise la date à la date du jour.
+        // Le formulaire symfony se chargera d'hydrater ton input date avec la valeur du champ date de l'entité article
+        $form = $this->createFormBuilder(new Blog()); //nul besoin de set la date grâce au constructeur
+        // ...
     }
 }

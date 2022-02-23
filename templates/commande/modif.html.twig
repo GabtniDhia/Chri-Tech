@@ -1,13 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseback.html.twig' %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de commande{% endblock %}
 
-{% block title %}New Blog{% endblock %}
-{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
-{% block titre1 %}BLOG{% endblock %}
 {% block content %}
-    {{ form_start(form) }}
-    <h1>Create new Blog</h1>
 
-    <!-- check out section -->
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
     <div class="checkout-section mt-150 mb-150">
         <div class="container">
             <div class="row">
@@ -18,7 +16,7 @@
                                 <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Detail du Blog
+                                            Modifier la commande
                                         </button>
                                     </h5>
                                 </div>
@@ -27,32 +25,33 @@
                                     <div class="card-body">
                                         <div class="billing-address-form">
 
-
-                                            <p>{{ form_widget(form.utilisateur) }}</p>
-                                            <p>{{ form_widget(form.titre) }}</p>
-                                            <p>{{ form_widget(form.contenue) }}</p>
-
-
-                                            <div style="text-align: center"> <p><input style="text-align: center" type="submit" value="Confirmer" ></p></d
+                                            <p>{{ form_errors(form.nom) }}</p>
+                                            <p>{{ form_widget(form.nom) }}</p>
+                                            <p>{{ form_errors(form.numtel) }}</p>
+                                            <p>{{ form_widget(form.numtel) }}</p>
+                                            <p>{{ form_errors(form.email) }}</p>
+                                            <p>{{ form_widget(form.email) }}</p>
+                                            {{ include('commande/_form.html.twig', {'button_label': 'Modifier'}) }}
+                                            {{ include('commande/supprimer.html.twig' , {'button_label': 'Annuler'}) }}
+                                            <a href="{{ path('commande_afficher', {'id': commande.id}) }}">Afficher la commande</a>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
 
+                        </div>
                     </div>
+
                 </div>
             </div>
+
+
         </div>
     </div>
-    <!-- end check out section -->
-
-
-
-    <a href="{{ path('blog_index') }}">back to list</a>
-
+    </div>
     {{ form_end(form) }}
 
 {% endblock %}
+

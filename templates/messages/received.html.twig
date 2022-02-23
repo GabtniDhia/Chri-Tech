@@ -3,14 +3,31 @@
 {% block title %}Messagerie{% endblock %}
 {% block bg%} {{ asset('front/assets/img/notif.png') }}  {% endblock %}
 {% block content %}
-<div style="text-align: center">
+
     <section class="container">
         <div class="row">
             <div class="col-12">
                 <h1>Messagerie</h1>
-                <p>Resumer de la messagerie</p>
-                <p>Recus: {{ app.user.received | length }}</p>
-                <p>Envoyes: {{ app.user.sent | length }}</p>
+                <h2>Boite de Reception</h2>
+                <p>Vous Aves Recus: {{ app.user.received | length }} Messages</p>
+            </div>
+                <div class="col-3">De</div>
+                <div class="col-3">Sujet</div>
+                <div class="col-3">Date</div>
+                <div class="col-3">Actions</div>
+                {% for message in app.user.received %}
+                    {% if message.isRead ==0 %}
+                        {% set bold = "fw-bold" %}
+                    {% else %}
+                        {% set bold = "" %}
+                    {% endif%}
+
+                    <div class="col-3 {{ bold }}">{{ message.sender.email }}</div>
+                    <div class="col-3 {{ bold }}"> <a href="{{ path("read" , {id: message.id}) }}">{{ message.title }}</a></div>
+                    <div class="col-3 {{ bold }}">{{ message.createdat | date }}</div>
+                    <div class="col-3 {{ bold }}"></div>
+                {% endfor %}
+                <div class="col">
                 <a  class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                     Voir mes dossiers
                 </a>
@@ -26,15 +43,14 @@
         </div>
         <div class="offcanvas-body">
             <div class="list-group">
-                <a href="{{ path('messages') }}" class="list-group-item list-group-item-action active">Accueil</a>
+                <a href="{{ path('messages') }}" class="list-group-item list-group-item-action ">Accueil</a>
             </div>
             <div class="list-group">
-                <a href="{{ path('received') }}" class="list-group-item list-group-item-action ">Boite de Reception</a>
+                <a href="{{ path('received') }}" class="list-group-item list-group-item-action active">Boite de Reception</a>
             </div>
             <div class="list-group">
                 <a href="{{ path('messages') }}" class="list-group-item list-group-item-action ">Elements Envoyes</a>
             </div>
         </div>
     </div>
-
 {% endblock %}
