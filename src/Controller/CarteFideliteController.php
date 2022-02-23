@@ -26,6 +26,26 @@ class CarteFideliteController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/test2", name="statique", methods={"GET"})
+     */
+    public function statique(CarteFideliteRepository $carteFideliteRepository): Response
+    {
+        return $this->render('cartefidelite.html.twig', [
+            'carte_fidelites' => $carteFideliteRepository->findAll(),
+        ]);
+    }
+
+     /**
+     * @Route("/cartes", name="cartes", methods={"GET"})
+     */
+    public function statique2(CarteFideliteRepository $carteFideliteRepository): Response
+    {
+        return $this->render('cartes.html.twig', [
+            'carte_fidelites' => $carteFideliteRepository->findAll(),
+        ]);
+    }
+
     /**
      * @Route("/new", name="carte_fidelite_new", methods={"GET", "POST"})
      */
@@ -35,7 +55,17 @@ class CarteFideliteController extends AbstractController
         $form = $this->createForm(CarteFideliteType::class, $carteFidelite);
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $carteFidelite->setIdUser($user->getId());
+            $carteFidelite->setDateCreation(new \DateTime());
+            $carteFidelite->setNbPoints(0);
+            $carteFidelite->setDateExpiration(new \DateTime());
+            
+            
             $entityManager->persist($carteFidelite);
             $entityManager->flush();
 

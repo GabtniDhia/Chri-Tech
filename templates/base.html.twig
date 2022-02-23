@@ -64,6 +64,8 @@
                                 <div class="text mt-3"> <span> Votre Email: {{ app.user.email }}</span> </div>
                                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
                                 <div class=" px-2 rounded mt-4 date "> <span class="join">Membre Depuis {{ app.user.datecreation|date("d/m/Y") }}</span> </div>
+                                                                <div class=" px-2 rounded mt-4 date "> <a href="{{ path('statique')}}"><span class="join">Devenez un membre exclusive</span></a> </div>
+
                             </div>
                         </div>
                     </div>

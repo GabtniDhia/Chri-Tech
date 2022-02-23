@@ -1,34 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Offre index{% endblock %}
-
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/avbg.jpg') }}  {% endblock %}
+{% block titre1 %}Services{% endblock %}
+{% block titre2 %} <a href="{{ path('offre_new') }}  " style="color: antiquewhite">Nos Offres <h6 style="color: floralwhite" ><small>Pour Donner un Avis Cliquer ici</small></h6></a>
+{% endblock %}
 {% block content %}
-    <h1>Offre index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         {% for offre in offres %}
-            <tr>
-                <td>{{ offre.description }}</td>
-                <td>{{ offre.image }}</td>
-                <td>
-                    <a href="{{ path('offre_show', {'id': offre.id}) }}">show</a>
-                    <a href="{{ path('offre_edit', {'id': offre.id}) }}">edit</a>
-                </td>
-            </tr>
+            <div class="col-lg-4 col-md-6">
+					<div class="single-latest-news">
+						<a href="single-news.html"><div class="latest-news-bg news-bg-1">{{ offre.image }}</div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">{{ offre.description }}</a></h3>
+						
+							<p class="excerpt">{{ offre.description }}</p>
+							<a href="{{ path('offre_show', {'id': offre.id}) }}" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+						</div>
+					</div>
+				</div>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </div>
+
+    
+				
+				
+
     <a href="{{ path('offre_new') }}">Create new</a>
 {% endblock %}

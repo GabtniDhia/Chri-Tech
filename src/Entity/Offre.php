@@ -6,6 +6,7 @@ use App\Repository\OffreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=OffreRepository::class)
@@ -24,8 +25,12 @@ class Offre
      */
     private $description;
 
-    /**
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\File(
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Only jpeg or png are allowed."
+     * )
      */
     private $image;
 
@@ -33,6 +38,11 @@ class Offre
      * @ORM\ManyToMany(targetEntity=Produit::class)
      */
     private $IDProd;
+
+    /**
+     * @ORM\Column(name="type", type="string", columnDefinition="enum('standard', 'silver' ,'gold')")
+     */
+    private $type;
 
     public function __construct()
     {
@@ -88,6 +98,18 @@ class Offre
     public function removeIDProd(Produit $iDProd): self
     {
         $this->IDProd->removeElement($iDProd);
+
+        return $this;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
