@@ -1,51 +1,46 @@
 {% extends 'base.html.twig' %}
 {% block title %} Liste des produits{% endblock %}
-
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+{% block titre1 %}Register{% endblock %}
+{% block titre2 %}Ahla & Sahla{% endblock %}
 
 {% block content %}
-    <h1>Liste des produits</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Reférence du produit</th>
-                <th>Produit</th>
-                <th>Description</th>
-                <th>Prix unitaire hors taxe</th>
-                <th>Quantité disponnible</th>
-                <th>Image</th>
-                <th>Details</th>
-                <th>Prix TTC</th>
-                <th>Prix TVA</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.RefProd }}</td>
-                <td>{{ produit.NomProd }}</td>
-                <td>{{ produit.DescriProd }}</td>
-                <td>{{ produit.PrixUnitHTProd }}</td>
-                <td>{{ produit.QteStockProd }}</td>
-                <td> <img src="{{ asset('uploads/images/' ~ produit.ImageProd) }}" height="100" width="100" /></td>
-                <td>{{ produit.DetailProd }}</td>
-                <td>{{ produit.PrixTTCProd }}</td>
-                <td>{{ produit.PrixTVAProd }}</td>
-                <td>
-                    <a href="{{ path('produit_show', {'id': produit.id}) }}">Affichage</a>
-                    <a href="{{ path('produit_edit', {'id': produit.id}) }}">Modification</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">Stock vide.</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('produit_new') }}">Ajouter un nouveau produit</a>
+    <div class="container mydiv">
+        <div class="row">
+            {% for produit in produits %}
+            <div class="col-md-4">
+                <!-- bbb_deals -->
+                <div class="bbb_deals">
+                    <div class="ribbon ribbon-top-right"><span><small class="cross">x </small>3</span></div>
+                    <div class="bbb_deals_title"> Titre </div>
+                    <div class="bbb_deals_slider_container">
+                        <div class=" bbb_deals_item">
+                            <div class="bbb_deals_image"><img src="{{ asset('uploads/images/' ~ produit.ImageProd) }}" alt=""
+                                                              height="360px" width="240px"></div>
+                            <div class="bbb_deals_content">
+                                <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                                    <div class="bbb_deals_item_category"><a href="#">Laptops</a></div>
+                                    <div class="bbb_deals_item_price_a ml-auto"><strike>₹30,000</strike></div>
+                                </div>
+                                <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                                    <div class="bbb_deals_item_name">Toshiba B77</div>
+                                    <div class="bbb_deals_item_price ml-auto">₹27,550</div>
+                                </div>
+                                <div class="available">
+                                    <div class="available_line d-flex flex-row justify-content-start">
+                                        <div class="available_title">Available: <span>6</span></div>
+                                        <div class="sold_stars ml-auto"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                                    </div>
+                                    <div class="available_bar"><span style="width:17%"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
