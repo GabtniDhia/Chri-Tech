@@ -38,13 +38,13 @@ class Messages
     private $is_read = 0;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="sent")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sent")
      * @ORM\JoinColumn(nullable=false)
      */
     private $sender;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="received")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="received")
      * @ORM\JoinColumn(nullable=false)
      */
     private $recipient;
