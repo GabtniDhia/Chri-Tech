@@ -52,6 +52,7 @@ class Article
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->date = new \DateTime('now');
     }
 
     public function getId(): ?int
@@ -154,4 +155,6 @@ class Article
         // TODO: Implement __toString() method.
         return $this->getEntete();
     }
+
+
 }

@@ -90,4 +90,14 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    public function createAction(Request $request)
+    {
+        // en créant un object Article, le constructeur de l'entité Article initialise la date à la date du jour.
+        // Le formulaire symfony se chargera d'hydrater ton input date avec la valeur du champ date de l'entité article
+        $form = $this->createFormBuilder(new Article()); //nul besoin de set la date grâce au constructeur
+        // ...
+    }
+
+
 }
