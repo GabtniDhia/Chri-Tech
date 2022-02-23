@@ -6,6 +6,7 @@ use App\Repository\BlogRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=BlogRepository::class)
@@ -21,16 +22,19 @@ class Blog
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ecrivez quelque chose")
      */
     private $utilisateur;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ecrivez quelque chose")
      */
     private $titre;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(message="Ecrivez quelque chose")
      */
     private $contenue;
 

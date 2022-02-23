@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Blog{% endblock %}
-{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+{% block bg%} {{ asset('front/assets/img/depositphotos_76358235-stock-photo-desk-of-blogger.jpg') }}  {% endblock %}
 {% block titre1 %}BLOG{% endblock %}
 {% block titre2 %}Ahla & Sahla{% endblock %}
 {% block content %}
-    <h1>Blog index</h1>
-
-    <table class="table">
+    <div style="background-color: darkblue">
+    <h1 style="text-align: center">Blog index</h1>
+<div class="container" style="background-color: darkblue">
+    <table class="table" style="background-color: white">
         <thead>
             <tr>
                 <th>Id</th>
@@ -38,6 +39,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
+    </div>
     <a href="{{ path('blog_new') }}">Create new</a>
 {% endblock %}
