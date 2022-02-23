@@ -17,6 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class LivraisonController extends AbstractController
 {
+
+    /**
+     * @Route("affiche/{id}", name="livraison_affiche", methods={"GET"})
+     */
+    public function affiche(Livraison $livraison): Response
+    {
+        return $this->render('livraison/affiche.html.twig', [
+            'livraison' => $livraison,
+        ]);
+    }
     /**
      * @Route("/", name="livraison_index", methods={"GET"})
      */
@@ -69,6 +79,7 @@ class LivraisonController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/{id}/edit", name="livraison_edit", methods={"GET", "POST"})
      */
@@ -88,11 +99,41 @@ class LivraisonController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/{id}/modifier", name="livraison_modifier", methods={"GET", "POST"})
+     */
+    public function modifier(Request $request, Livraison $livraison, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(LivraisonType::class, $livraison);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('livraison_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('livraison/modifier.html.twig', [
+            'livraison' => $livraison,
+            'form' => $form->createView(),
+        ]);
+    }
     /**
      * @Route("/{id}", name="livraison_delete", methods={"POST"})
      */
     public function delete(Request $request, Livraison $livraison, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$livraison->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($livraison);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('livraison_minel', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("supp/{id}", name="livraison_supp", methods={"POST"})
+     */
+    public function supp(Request $request, Livraison $livraison, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$livraison->getId(), $request->request->get('_token'))) {
             $entityManager->remove($livraison);

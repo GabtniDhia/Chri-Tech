@@ -67,6 +67,15 @@ class CommandeController extends AbstractController
             'commande' => $commande,
         ]);
     }
+    /**
+     * @Route("afficher/{id}", name="commande_afficher", methods={"GET"})
+     */
+    public function afficher(Commande $commande): Response
+    {
+        return $this->render('commande/afficher.html.twig', [
+            'commande' => $commande,
+        ]);
+    }
 
     /**
      * @Route("/{id}/edit", name="commande_edit", methods={"GET", "POST"})
@@ -88,6 +97,26 @@ class CommandeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/{id}/modif", name="commande_modif", methods={"GET", "POST"})
+     */
+    public function modif(Request $request, Commande $commande, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(CommandeType::class, $commande);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('commande/modif.html.twig', [
+            'commande' => $commande,
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("/{id}", name="commande_delete", methods={"POST"})
@@ -100,5 +129,17 @@ class CommandeController extends AbstractController
         }
 
         return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("supprimer/{id}", name="commande_supprimer", methods={"POST"})
+     */
+    public function supprimer(Request $request, Commande $commande, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$commande->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($commande);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
     }
 }
