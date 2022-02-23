@@ -1,0 +1,38 @@
+{% extends 'baseback.html.twig' %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de livraison{% endblock %}
+
+
+{% block content %}
+
+
+
+    <a href="{{ path('livraison_modifier', {'id': livraison.id}) }}">Cliquez ici!</a>
+    <table class="table">
+
+        <tbody>
+        <tr>
+            <th>Identifiant</th>
+            <td>{{ livraison.id }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ livraison.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Code postal</th>
+            <td>{{ livraison.codepostal }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ livraison.ville }}</td>
+        </tr>
+        <tr>
+            <th>Date de livraison</th>
+            <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('livraison_index') }}">Voir l'historique des livraisons</a>
+
+{% endblock %}

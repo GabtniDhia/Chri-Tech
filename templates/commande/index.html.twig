@@ -22,8 +22,8 @@
                 <td>{{ commande.numtel }}</td>
                 <td>{{ commande.email }}</td>
                 <td>
-                    <a href="{{ path('commande_show', {'id': commande.id}) }}">Affichage /</a>
-                    <a href="{{ path('commande_edit', {'id': commande.id}) }}"> Modification</a>
+                    <a href="{{ path('commande_afficher', {'id': commande.id}) }}">Affichage /</a>
+                    <a href="{{ path('commande_modif', {'id': commande.id}) }}"> Modification</a>
 
                 </td>
             </tr>

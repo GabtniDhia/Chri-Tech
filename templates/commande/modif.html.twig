@@ -1,13 +1,6 @@
-
-{% extends 'base.html.twig' %}
-
-
-{% block title %} Chritech {% endblock %}
-{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
-{% block titre1 %}commande{% endblock %}
-{% block titre2 %} <a  style="color:antiquewhite">Gérer votre commande <h6 style="color: antiquewhite" >Veuillez remplir le formulaire ci-dessous </h6></a>
-
-{% endblock %}
+{% extends 'baseback.html.twig' %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de commande{% endblock %}
 
 {% block content %}
 
@@ -39,8 +32,8 @@
                                             <p>{{ form_errors(form.email) }}</p>
                                             <p>{{ form_widget(form.email) }}</p>
                                             {{ include('commande/_form.html.twig', {'button_label': 'Modifier'}) }}
-                                            {{ include('commande/_delete_form.html.twig' , {'button_label': 'Annuler'}) }}
-                                            <a href="{{ path('commande_show', {'id': commande.id}) }}">Afficher ma commande</a>
+                                            {{ include('commande/supprimer.html.twig' , {'button_label': 'Annuler'}) }}
+                                            <a href="{{ path('commande_afficher', {'id': commande.id}) }}">Afficher la commande</a>
 
                                         </div>
                                     </div>

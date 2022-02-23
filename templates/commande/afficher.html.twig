@@ -1,0 +1,35 @@
+
+{% extends 'baseback.html.twig' %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de commande{% endblock %}
+{% block content %}
+
+
+    <a href="{{ path('commande_modif', {'id': commande.id}) }}">Gérer la commande</a>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Identifiant</th>
+            <td>{{ commande.id }}</td>
+        </tr>
+        <tr>
+            <th>Client</th>
+            <td>{{ commande.nom }}</td>
+        </tr>
+        <tr>
+            <th>Numéro de telephone</th>
+            <td>{{ commande.numtel }}</td>
+        </tr>
+        <tr>
+            <th>Adresse e-mail</th>
+            <td>{{ commande.email }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('commande_index') }}">Voir l'historique des commandes</a>
+
+
+
+
+{% endblock %}
