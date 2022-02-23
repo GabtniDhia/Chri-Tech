@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/commande")
- */
+* @Route("/commande")
+*/
 class CommandeController extends AbstractController
 {
     /**
@@ -25,6 +25,16 @@ class CommandeController extends AbstractController
             'commandes' => $commandeRepository->findAll(),
         ]);
     }
+    /**
+     * @Route("/mine", name="commande_index")
+     */
+    public function mine(CommandeRepository $commandeRepository): Response
+    {
+        return $this->render('commande/mine.html.twig', [
+            'commandes' => $commandeRepository->findAll(),
+        ]);
+    }
+
 
     /**
      * @Route("/new", name="commande_new", methods={"GET", "POST"})
@@ -71,7 +81,7 @@ class CommandeController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('commande_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('commande/edit.html.twig', [

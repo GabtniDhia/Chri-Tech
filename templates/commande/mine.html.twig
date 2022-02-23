@@ -1,0 +1,38 @@
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Liste de commandes en cours</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Identifiant</th>
+            <th>Client</th>
+            <th>Numéro de telephone</th>
+            <th>Adresse e-mail</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.numtel }}</td>
+                <td>{{ commande.email }}</td>
+                <td>
+                    <a href="{{ path('commande_show', {'id': commande.id}) }}">Affichage /</a>
+                    <a href="{{ path('commande_edit', {'id': commande.id}) }}"> Modification</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Pas de commandes enregistrées.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <!--  <a href="{{ path('commande_new') }}">Passer une nouvelle commande/</a> -->
+    <a href="{{ path('livraison_index') }}">Consulter la liste de livraisons</a>
+{% endblock %}
