@@ -8,24 +8,57 @@
 {% block titre2 %} <a  style="color:antiquewhite">Gérer votre commande <h6 style="color: antiquewhite" >Veuillez remplir le formulaire ci-dessous </h6></a>
 
 {% endblock %}
+
 {% block content %}
-    <div class="rdv1">
-        <section class="why_us_section layout_padding" >
 
-            <div class="container" align="center">
-                <div class="row" align="center">
-                    <div class="box " align="center" >
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
 
-                        {{ include('commande/_form.html.twig', {'button_label': 'Modifier'}) }}
-                        {{ include('commande/_delete_form.html.twig' , {'button_label': 'Annuler'}) }}
-                        <a href="{{ path('commande_show', {'id': commande.id}) }}">Revenir vers la page précédente</a>
+    <div class="checkout-section mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="checkout-accordion-wrap">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card single-accordion">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Ajouter une nouvelle commande
+                                        </button>
+                                    </h5>
+                                </div>
 
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="billing-address-form">
+
+                                            <p>{{ form_errors(form.nom) }}</p>
+                                            <p>{{ form_widget(form.nom) }}</p>
+                                            <p>{{ form_errors(form.numtel) }}</p>
+                                            <p>{{ form_widget(form.numtel) }}</p>
+                                            <p>{{ form_errors(form.email) }}</p>
+                                            <p>{{ form_widget(form.email) }}</p>
+                                            {{ include('commande/_form.html.twig', {'button_label': 'Modifier'}) }}
+                                            {{ include('commande/_delete_form.html.twig' , {'button_label': 'Annuler'}) }}
+                                            <a href="{{ path('commande_show', {'id': commande.id}) }}">Revenir vers la page précédente</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
 
                 </div>
             </div>
-        </section>
-    </div>
 
+
+        </div>
+    </div>
+    </div>
+    {{ form_end(form) }}
 
 {% endblock %}
+

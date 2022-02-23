@@ -36,7 +36,7 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            echo "<script>alert('wajdi');</script>";
+            echo "<script>alert('Commande Ajoutée');</script>";
             $entityManager->persist($commande);
             $entityManager->flush();
 
@@ -68,6 +68,7 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->flush();
 
             return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
