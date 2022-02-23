@@ -36,6 +36,7 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            echo "<script>alert('wajdi');</script>";
             $entityManager->persist($commande);
             $entityManager->flush();
 
