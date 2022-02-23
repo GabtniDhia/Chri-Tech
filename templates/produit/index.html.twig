@@ -30,7 +30,7 @@
                 <td>{{ produit.DescriProd }}</td>
                 <td>{{ produit.PrixUnitHTProd }}</td>
                 <td>{{ produit.QteStockProd }}</td>
-                <td>{{ produit.ImageProd }}</td>
+                <td> <img src="{{ asset('uploads/images/' ~ produit.ImageProd) }}" height="100" width="100" /></td>
                 <td>{{ produit.DetailProd }}</td>
                 <td>{{ produit.PrixTTCProd }}</td>
                 <td>{{ produit.PrixTVAProd }}</td>
