@@ -11,7 +11,7 @@
 
     <!-- Modal Pop Up Message-->
     {% if is_granted('ROLE_CLIENT') %}
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="float-defer-page: last" >
+        <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="float-defer-page: last" >
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -47,17 +47,17 @@
 
     <!-- Modal Pop Up Profil-->
     {% if is_granted('ROLE_CLIENT') %}
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="float-defer-page: last" >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+    <div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="float-defer-page: last" >
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content" style="background-image: url('{{ asset('front/assets/img/lock2.jpg') }}'); ">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterTitle">Profil De {{ app.user.prenom }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                <div class="modal-body" >
+                    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center" >
                         <div class="card p-4">
                             <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="{{ asset('uploads/images/' ~ app.user.image) }}" height="100" width="100" /></button> <h4><span class="name mt-3">{{ app.user.nom | upper }} {{ app.user.prenom | upper }}</span> </h4><span class="idd">@eleanorpena</span>
                                 <div class=" d-flex mt-2"> <a href="{{ path('user_profil_modifier') }}" class="btn1 btn-dark">Modifer Profil</a> </div>
@@ -263,11 +263,11 @@
                                             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
                                             <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                                             {% if is_granted('ROLE_CLIENT') %}
-                                            <a  type="button" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <a  type="button" data-toggle="modal" data-target="#profil">
                                                 <i class="fas fa-user-check" style="color: white">
                                                 </i>
                                             </a>
-                                                <a  type="button" data-toggle="modal" data-target="#exampleModalCenter">
+                                                <a  type="button" data-toggle="modal" data-target="#message">
                                                     <i class="	fab fa-facebook-messenger" style="color: white">
                                                     </i>
                                                 </a>
