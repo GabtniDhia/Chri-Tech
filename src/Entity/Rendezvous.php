@@ -53,7 +53,7 @@ class Rendezvous
     private $telephonenum;
 
     /**
-     * @ORM\OneToOne(targetEntity=Avis::class, inversedBy="rendezvous", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Avis::class, inversedBy="rendezvous",onDelete=”SET NULL”)
      */
     private $avis;
 

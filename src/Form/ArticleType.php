@@ -14,7 +14,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('entete')
             ->add('corp')
-            ->add('date')
+          
             ->add('redacteur')
             ->add('image')
         ;
