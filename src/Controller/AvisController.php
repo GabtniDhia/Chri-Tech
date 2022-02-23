@@ -45,6 +45,7 @@ class AvisController extends AbstractController
             $entityManager->persist($avi);
             $entityManager->flush();
 
+
             return $this->redirectToRoute('avis_index', [], Response::HTTP_SEE_OTHER);
         }
 
