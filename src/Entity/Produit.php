@@ -76,6 +76,13 @@ class Produit
      */
     private $PrixTVA_Prod;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="cle_prod")
+     */
+    private $cle_cat;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,4 +195,18 @@ class Produit
 
         return $this;
     }
+
+    public function getCleCat(): ?Categorie
+    {
+        return $this->cle_cat;
+    }
+
+    public function setCleCat(?Categorie $cle_cat): self
+    {
+        $this->cle_cat = $cle_cat;
+
+        return $this;
+    }
+
+
 }

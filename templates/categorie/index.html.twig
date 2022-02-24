@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorie index{% endblock %}
+{% block title %}Categorie{% endblock %}
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
 
 {% block content %}
     <h1>Categorie index</h1>
@@ -34,4 +35,31 @@
     </table>
 
     <a href="{{ path('categorie_new') }}">Create new</a>
+    <!-- logo carousel -->
+    	<div class="logo-carousel-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo-carousel-inner">
+                            <div class="single-logo-item">
+                                <img src="{{ asset('front/assets/img/company-logos/7.png') }}" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="{{ asset('front/assets/img/company-logos/9.png') }}" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="{{ asset('front/assets/img/company-logos/6.png') }}" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="{{ asset('front/assets/img/company-logos/4.png') }}" alt="">
+                            </div>
+                            <div class="single-logo-item">
+                                <img src="{{ asset('front/assets/img/company-logos/5.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- end logo carousel -->
 {% endblock %}

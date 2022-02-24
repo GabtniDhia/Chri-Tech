@@ -101,4 +101,13 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('produit_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**
+     * @Route("/back", name="produit_show", methods={"GET"})
+     */
+    public function back(ProduitRepository $produit): Response
+    {
+        return $this->render('produit/indexback.html.twig', [
+            'produit' => $produit->findAll(),
+        ]);
+    }
 }

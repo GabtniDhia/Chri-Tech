@@ -1,5 +1,13 @@
 <!--{{ form_start(form) }}-->
 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
-    {{ form_widget(form) }}
+    {{ form_row(produit.RefProd) }}
+    {{ form_row(produit.NomProd) }}
+    {{ form_row(produit.DescriProd) }}
+    {{ form_row(produit.PrixUnitHTProd) }}
+    {{ form_row(produit.QteStockProd) }}
+    {{ form_row(produit.ImageProd) }}
+    {{ form_row(produit.DetailProd) }}
+    {{ form_row(produit.PrixTTCProd) }}
+    {{ form_row(produit.PrixTVAProd) }}
     <button class="btn">{{ button_label|default('Confirmer') }}</button>
 {{ form_end(form) }}

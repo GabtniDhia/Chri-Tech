@@ -1,0 +1,64 @@
+{% extends 'baseback.html.twig' %}
+{% block title %} Espace Admin {% endblock %}
+{% block titre1 %} Gestion de produit{% endblock %}
+
+{% block content %}
+
+{% for produit in produit %}
+    <table>
+    <tbody>
+
+    <tr>
+        <th>Id</th>
+        <td>{{ produit.id }}</td>
+    </tr>
+    <tr>
+        <th>Reference</th>
+        <td>{{ produit.RefProd }}</td>
+    </tr>
+    <tr>
+        <th>Corp</th>
+        <td>{{ produit.NomProd }}</td>
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td>{{ produit.DescriProd }}</td>
+    </tr>
+    <tr>
+        <th>Redacteur</th>
+        <td>{{ produit.PrixUnitHTProd }}</td>
+    </tr>
+    <tr>
+        <th>Image</th>
+        <td>{{ produit.QteStockProd }}</td>
+    </tr>
+    <tr>
+        <th>ImageProd</th>
+        <td>{{ produit.PrixUnitHTProd }}</td>
+    </tr>
+    <tr>
+        <th>detail</th>
+        <td>{{ produit.DetailProd }}</td>
+    </tr>
+    <tr>
+        <th>PrixTTc</th>
+        <td>{{ produit.PrixTTCProd }}</td>
+    </tr>
+    <tr>
+        <th>PrixTVA</th>
+        <td>{{ produit.PrixTVAProd }}</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <a href="{{ path('produit_show', {'id': produit.id}) }}">Afficher</a>
+            <a href="{{ path('produit_edit', {'id': produit.id}) }}">Modifier</a>
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="11">Stock vide.</td>
+    </tr>
+{% endfor %}
+</tbody>
+{% endblock %}
