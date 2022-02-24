@@ -23,7 +23,13 @@
                             <span class="author"><i class="fas fa-user"></i> {{ article.redacteur }}</span>
                             <span class="date"><i class="fas fa-calendar"></i>{{ article.date |date('d-m-Y') }}</span>
                         </p>
-                        <p class="excerpt">{{ article.corp }}</p>
+
+
+                            <div id="leftDesc"> {{ article.corp }}</div>
+                            <div id="rightDesc">1000</div>
+
+
+
                         <a href="{{ path('article_show' , { 'id': article.id}) }}" class="read-more-btn">lire plus <i class="fas fa-angle-right"></i></a>
                     </div>
                 </div>

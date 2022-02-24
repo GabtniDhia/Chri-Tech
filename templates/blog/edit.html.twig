@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Blog{% endblock %}
+{% block bg%} {{ asset('front/assets/img/depositphotos_76358235-stock-photo-desk-of-blogger.jpg') }}  {% endblock %}
+{% block titre1 %}BLOG{% endblock %}
+{% block titre2 %}Bienvenue dans notre espace de modification Blog{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Edit Blog</h1>
 
     {{ include('blog/_form.html.twig', {'button_label': 'Update'}) }}

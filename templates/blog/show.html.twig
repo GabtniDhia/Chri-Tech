@@ -4,12 +4,40 @@
 
 {% block bg%} {{ asset('front/assets/img/depositphotos_76358235-stock-photo-desk-of-blogger.jpg') }}  {% endblock %}
 {% block titre1 %}BLOG{% endblock %}
-{% block titre2 %}Ahla & Sahla{% endblock %}
+{% block titre2 %}Bienvenue{% endblock %}
 
 {% block content %}
     <h1>Blog</h1>
 
-    <table class="table">
+
+
+
+<div class="testimonail-section mt-80 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 text-center">
+
+
+                        <div class="client-avater">
+                            <img src="assets/img/avaters/avatar1.png" alt="">
+                        </div>
+                        <div class="client-meta">
+                            <h3>{{ blog.utilisateur }}<span>{{ blog.titre }}</span></h3>
+                            <p class="testimonial-body">
+                                {{ blog.contenue }}
+                            </p>
+                            <div class="last-icon">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    {#<table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -32,7 +60,7 @@
                 <td>{{ blog.dateHeure ? blog.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
-    </table>
+    </table>#}
 
     <a href="{{ path('blog_index') }}">back to list</a>
 
@@ -44,7 +72,7 @@
     <br>
 
 
-    <table class="table" style="background-color: white" margin-bottom="100" >
+    {#<table class="table" style="background-color: white" margin-bottom="100" >
         <thead>
         <tr>
             <th>Utilisateur</th>
@@ -66,8 +94,18 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table>#}
 
+
+    {% for commentaire in blog.commentaires %}
+    <div class="comment-user-avater">
+        <img src="assets/img/avaters/avatar1.png" alt="">
+    </div>
+    <div class="comment-text-body">
+        <h4>{{ commentaire.utilisateur }} <span class="comment-date">Aprl 26, 2020</span> <a href="#">reply</a></h4>
+        <p>{{ commentaire.contenue }}</p>
+    </div>
+    {% endfor %}
 
 
 {% endblock %}
