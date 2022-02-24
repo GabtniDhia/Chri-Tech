@@ -25,7 +25,7 @@
                 <td>{{ blog.id }}</td>
                 <td>{{ blog.utilisateur }}</td>
                 <td>{{ blog.titre }}</td>
-                <td>{{ blog.contenue }}</td>
+                <td >{{ blog.contenue }}</td>
                 <td>{{ blog.dateHeure ? blog.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('blog_show', {'id': blog.id}) }}">show</a>
