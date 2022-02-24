@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New CarteFidelite{% endblock %}
+{% block bg%} {{ asset('front/assets/img/avbg.jpg') }}  {% endblock %}
 
-{% block body %}
-    <h1>Create new CarteFidelite</h1>
-
+{% block titre1 %}Appliquer pour une carte de fidelité{% endblock %}
+{% block titre2 %} 
     {{ include('carte_fidelite/_form.html.twig') }}
 
     <a href="{{ path('carte_fidelite_index') }}">back to list</a>

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/bgg.png') }}  {% endblock %}
+{% block titre1 %}Appliquer pour une carte de fidelité{% endblock %}
+{% block titre2 %} 
+
+ <div class="row">
+ <div class="col-md-3">
+					<div class="single-latest-news">
+						<a href="{{path('carte_fidelite_new')}}"><div class="latest-news-bg"><img src="{{ asset('front/assets/img/3.png')}}"></img></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">Standard</a></h3>
+						
+							<p class="excerpt">Déverouiller</p>
+						</div>
+					</div>
+				</div>
+<div class="col-md-3">
+					<div class="single-latest-news">
+						<a><div  class="latest-news-bg"> <img src="{{ asset('front/assets/img/4.png')}}"></img></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">Silver</a></h3>
+						
+							<p class="excerpt">Locked</p>
+						</div>
+					</div>
+				</div>
+<div class="col-md-3">
+					<div class="single-latest-news">
+						<a><div  class="latest-news-bg"> <img src="{{ asset('front/assets/img/5.png')}}"></img></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">Gold</a></h3>
+						
+							<p class="excerpt">Locked</p>
+						</div>
+					</div>
+				</div>
+<div class="col-md-3">
+					<div class="single-latest-news">
+						<a><div  class="latest-news-bg" ><img src="{{ asset('front/assets/img/6.png')}}"></img></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">Platinium</a></h3>
+						
+							<p class="excerpt">Locked</p>
+						</div>
+					</div>
+				</div>
+</div>
+
+<style>
+ #a2 { background-image: url('{{ asset('front/assets/img/2.png') }}'); }
+ #a3 { background-image: url('{{ asset('front/assets/img/3.png') }}'); }
+ #a4 { background-image: url('{{ asset('front/assets/img/4.png') }}'); }
+</style>
+{% endblock %}
