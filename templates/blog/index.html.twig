@@ -3,9 +3,9 @@
 {% block title %}Blog{% endblock %}
 {% block bg%} {{ asset('front/assets/img/depositphotos_76358235-stock-photo-desk-of-blogger.jpg') }}  {% endblock %}
 {% block titre1 %}BLOG{% endblock %}
-{% block titre2 %}Ahla & Sahla{% endblock %}
+{% block titre2 %}Bienvenue dans notre espace Blog{% endblock %}
 {% block content %}
-    <div style="background-color: darkblue">
+    <div style="background-color: grey">
     <h1 style="text-align: center">Blog index</h1>
 <div class="container" style="background-color: darkblue">
     <table class="table" style="background-color: white">
@@ -25,7 +25,7 @@
                 <td>{{ blog.id }}</td>
                 <td>{{ blog.utilisateur }}</td>
                 <td>{{ blog.titre }}</td>
-                <td>{{ blog.contenue }}</td>
+                <td >{{ blog.contenue }}</td>
                 <td>{{ blog.dateHeure ? blog.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('blog_show', {'id': blog.id}) }}">show</a>

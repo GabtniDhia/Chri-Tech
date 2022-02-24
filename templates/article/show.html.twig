@@ -1,42 +1,65 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Article{% endblock %}
+{% block bg%} {{ asset('front/assets/img/newspaper-le-monde-background-old.jpg') }}  {% endblock %}
+{% block titre1 %}latest news{% endblock %}
+{% block titre2 %}nouveaux articles{% endblock %}
+{% block content %}
+{#    <h1>Article</h1>#}
 
-{% block body %}
-    <h1>Article</h1>
+{#    <table class="table">#}
+{#        <tbody>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <td>{{ article.id }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Entete</th>#}
+{#                <td>{{ article.entete }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Corp</th>#}
+{#                <td>{{ article.corp }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Date</th>#}
+{#                <td>{{ article.date ? article.date|date('Y-m-d') : '' }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Redacteur</th>#}
+{#                <td>{{ article.redacteur }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Image</th>#}
+{#                <td>{{ article.image }}</td>#}
+{#            </tr>#}
+{#        </tbody>#}
+{#    </table>#}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Entete</th>
-                <td>{{ article.entete }}</td>
-            </tr>
-            <tr>
-                <th>Corp</th>
-                <td>{{ article.corp }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ article.date ? article.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Redacteur</th>
-                <td>{{ article.redacteur }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ article.image }}</td>
-            </tr>
-        </tbody>
-    </table>
 
+<!-- single article section -->
+<div class="mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="single-article-section">
+                    <div class="single-article-text">
+                        <div class="single-artcile-bg"><img src="{{ asset('uploads/images/' ~ article.image) }}" height="450" width="690" ></div>
+                        <br>
+                        <p class="blog-meta">
+                            <span class="author"><i class="fas fa-user"></i> {{ article.redacteur }}</span>
+                            <span class="date"><i class="fas fa-calendar"></i> {{ article.date ? article.date|date('Y-m-d') : '' }}</span>
+                        </p>
+                        <h2>{{ article.entete }}</h2>
+                        <p>{{ article.corp }}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <a href="{{ path('article_index') }}">back to list</a>
 
-    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
 
-    {{ include('article/_delete_form.html.twig') }}
 {% endblock %}
