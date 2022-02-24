@@ -22,6 +22,8 @@ class Offre
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     *
      */
     private $description;
 
@@ -36,6 +38,7 @@ class Offre
 
     /**
      * @ORM\ManyToMany(targetEntity=Produit::class)
+     * @Assert\NotBlank
      */
     private $IDProd;
 
@@ -66,12 +69,12 @@ class Offre
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage( $image)
     {
         $this->image = $image;
 
