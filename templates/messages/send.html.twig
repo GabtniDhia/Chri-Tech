@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Messagerie{% endblock %}
+{% block bg%} {{ asset('front/assets/img/notif.png') }}  {% endblock %}
+
 
 {% block content %}
 
@@ -8,12 +10,14 @@
         <div class="row">
             <div class="col">
                 <h1>Envoyer un Message</h1>
-                {{ form(messForm) }}
-                <a href="{{ path('send') }}" class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                {{ form_start(messForm) }}
+                {{ form_row(messForm.title) }}
+                {{ form_row(messForm.message) }}
+                {{ form_row(messForm.recipient) }}
+                {{ form_end(messForm) }}
+                <a href="{{ path("send") }}" class="btn btn-primary btn-lg btn-block" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                     Voir mes dossiers
-                </a>
-                <a class="btn btn-primary">Envoyer Un Message</a>
-            </div>
+                </a></div>
         </div>
     </section>
 
@@ -27,7 +31,7 @@
                 <a href="{{ path('messages') }}" class="list-group-item list-group-item-action active">Accueil</a>
             </div>
             <div class="list-group">
-                <a href="{{ path('messages') }}" class="list-group-item list-group-item-action ">Boite de Reception</a>
+                <a href="{{ path('received') }}" class="list-group-item list-group-item-action ">Boite de Reception</a>
             </div>
             <div class="list-group">
                 <a href="{{ path('messages') }}" class="list-group-item list-group-item-action ">Elements Envoyes</a>

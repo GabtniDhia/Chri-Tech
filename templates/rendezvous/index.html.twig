@@ -23,6 +23,8 @@
                                 <th>Date_rendezvous</th>
                                 <th>Description_rendezvous</th>
                                 <th>Telephonenum</th>
+                                <th>Adresse</th>
+
                                 <th>actions</th>
                             </tr>
                             </thead>
@@ -35,6 +37,8 @@
                                     <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
                                     <td>{{ rendezvou.descriptionRendezvous }}</td>
                                     <td>{{ rendezvou.telephonenum }}</td>
+                                    <td>{{ rendezvou.adressrend }}</td>
+
                                     <td>
                                         <p align="center">
                                         <a href="{{ path('rendezvous_show', {'id': rendezvou.id}) }}">Afficher+</a>
