@@ -10,7 +10,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -27,6 +26,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "L' email '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -38,16 +41,29 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Votre Mot De Passe Doit Contenir Au Moin {{ limit }} characters ",
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Votre Nom De Passe Doit Contenir Au Moin {{ limit }} characters ",
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Votre Prenom De Passe Doit Contenir Au Moin {{ limit }} characters ",
+     * )
      */
     private $prenom;
 
@@ -65,7 +81,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\File(
      *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Only jpeg or png are allowed."
+     *     mimeTypesMessage = "Veuillez Choisir Un Fichier Png ou Jpeg"
      * )
      */
     private $image;
