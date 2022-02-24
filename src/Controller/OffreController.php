@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Offre;
 use App\Form\Offre1Type;
+use App\Form\OffreType;
 use App\Repository\OffreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,13 +37,19 @@ class OffreController extends AbstractController
         $form = $this->createForm(Offre1Type::class, $offre);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            $offre->setDescription($request->get('desc'));
-            $offre->setType($request->get('type'));
-            $fich = $request->files->get('photo');
-            $new_name = rand() . '.' . $fich->getClientOriginalExtension();
-            $fich->move($this->getParameter('images_directory'), $new_name);
-            $offre->setPhoto($new_name); 
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $fich = $offre->getImage();
+            $fileName = md5(uniqid()).'.'.$fich->guessExtension();
+            try {
+                $fich->move(
+                    $this->getParameter('images_directory'),
+                    $fileName
+                );
+            } catch (FileException $e){
+
+            }
+            $offre->setImage($fileName);
 
             $entityManager->persist($offre);
             $entityManager->flush();

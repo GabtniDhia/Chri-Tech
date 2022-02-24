@@ -12,7 +12,11 @@ class Offre1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        
+        $builder
+        ->add('description')
+        ->add('image')
+            ->add('type')
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
