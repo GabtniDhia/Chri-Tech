@@ -4,13 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Rendezvous;
 use App\Form\RendezvousType;
+use App\Repository\AvisRepository;
 use App\Repository\RendezvousRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 
 // Include Dompdf required namespaces
 use Dompdf\Dompdf;
@@ -19,6 +21,88 @@ use Dompdf\Options;
 
 class RendezvousController extends AbstractController
 {
+    /**
+    * @Route("/rendezvous/Afficheback", name="rendezvous_back", methods={"GET"})
+    */
+
+    public function AfficheBack(RendezvousRepository $rendezvousRepository): Response
+    {
+
+
+        return $this->render('rendezvous/AfficheBack.html.twig', [
+            'rendezvous' => $rendezvousRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/rendezvous/stats", name="statRendezvous")
+     */
+    public function stat()
+    {
+        $repository = $this->getDoctrine()->getRepository(Rendezvous::class);
+        $rendezvous = $repository->findAll();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $r1=0;
+        $r2=0;
+
+        foreach ($rendezvous as $rendezvou)
+        {
+            if ( $rendezvou->getService()=="Reparation")  :
+
+                $r1+=1;
+            else:
+
+                $r2+=1;
+
+
+            endif;
+
+        }
+
+        $pieChart = new PieChart();
+        $pieChart->getData()->setArrayToDataTable(
+            [['Service', 'nombre'],
+                ['Reparation', $r1],
+                ['Installation', $r2],
+            ]
+        );
+        $pieChart->getOptions()->setTitle('Services Le plus demandé ');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+        return $this->render('rendezvous/stat.html.twig', array('piechart' => $pieChart));
+    }
+
+    /**
+     * @Route("/rendezvous/tri", name="trimaisonhote")
+     */
+    public function Tri(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+
+        $query = $em->createQuery(
+            'SELECT n FROM App\Entity\Rendezvous n
+            ORDER BY n.service '
+        );
+
+        $rendezvous = $query->getResult();
+
+
+
+        return $this->render('rendezvous/AfficheBack.html.twig',
+            array('rendezvous' => $rendezvous));
+
+    }
+
+
+
     /**
      * @Route("/rendezvous", name="rendezvous_index", methods={"GET"})
      */
@@ -29,16 +113,32 @@ class RendezvousController extends AbstractController
             'rendezvouses' => $rendezvousRepository->findAll(),
         ]);
     }
-    /**
-     * @Route("/rendezvous/Afficheback", name="rendezvous_back", methods={"GET"})
-     */
 
-    public function AfficheBack(RendezvousRepository $rendezvousRepository): Response
+    /**
+    * @Route("/rendezvous/calendar", name="rendezvous_calendar")
+    */
+    public function rendezvous(RendezvousRepository $rendezvousRepository)
     {
-        return $this->render('rendezvous/AfficheBack.html.twig', [
-            'rendezvouses' => $rendezvousRepository->findAll(),
-        ]);
+        $rendezvous=$rendezvousRepository->findAll();
+        $rdvs = [];
+
+        foreach($rendezvous as $rendezvou){
+            $rdvs[] = [
+                'id' => $rendezvou->getId(),
+                'titre' => $rendezvou->getTitre(),
+                'service' => $rendezvou->getService(),
+                'date_rendezvous' => $rendezvou->getDateRendezvous()->format('Y-m-d '),
+                'description_rendezvous' => $rendezvou->getDescriptionRendezvous(),
+                'adressrend' => $rendezvou->getAdressrend(),
+                'telephonenum' => $rendezvou->getTelephonenum(),
+            ];
+        }
+
+        $data = json_encode($rdvs);
+
+        return $this->render('rendezvous/calendar.html.twig', compact('data'));
     }
+
     /**
      * @Route("/rendezvous/new", name="rendezvous_new", methods={"GET", "POST"})
      */
@@ -53,6 +153,7 @@ class RendezvousController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('rendezvous_index', [], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->render('rendezvous/new.html.twig', [
@@ -132,4 +233,8 @@ class RendezvousController extends AbstractController
 
         return $this->redirectToRoute('rendezvous_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
 }

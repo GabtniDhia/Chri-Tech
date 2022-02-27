@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for rendezvou in rendezvouses %}
+        {% for rendezvou in rendezvous %}
             <tr>
 
                 <td>{{ rendezvou.titre }}</td>
@@ -35,4 +35,10 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="card-body">
+
+        <a class="btn btn-primary" href="{{path('trimaisonhote')}}">Tri par Services</a>
+
+    </div>
+    <a href="{{ path('rendezvous_calendar') }}"> Calendrier</a>
 {% endblock %}
