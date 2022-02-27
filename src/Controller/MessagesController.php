@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Messages;
 use App\Form\MessageType;
 use App\Repository\MessagesRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectManager;
 use http\Message;
 use phpDocumentor\Reflection\Types\Object_;
@@ -27,8 +28,35 @@ class MessagesController extends AbstractController
     /**
      * @Route("/send/{id}", name="msg_send")
      */
-    public function send($id,MessagesRepository $messages,Request $request): Response
+    public function send($id,MessagesRepository $messages,Request $request, UserRepository $userrepo): Response
     {
+        $message = new Messages();
+
+        $form = $this->createForm(MessageType::class, $message);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $message->setRecipient($userrepo->findOneBy(['id' => $id]));
+            $message->setSender($this->getUser());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($message);
+            $em->flush();
+
+        }
+        $me = $this->getUser();
+        return $this->render('messages/send.html.twig', [
+            'louled' => $messages->getids($me),
+            'messages' => $messages->getmsgs($me,$id),
+            'messForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/received", name="received")
+     */
+    public function received(Request $request, MessagesRepository $messages): Response
+    {
+        $me = $this->getUser();
         $message = new Messages();
         $form = $this->createForm(MessageType::class, $message);
 
@@ -39,38 +67,14 @@ class MessagesController extends AbstractController
             $em->persist($message);
             $em->flush();
 
-            $this->addFlash('message', "Message Envoye ☻");
-            $this->redirectToRoute('messages');
+            $this->redirectToRoute('msg_send' , [
+                'id' => $message->getId()
+            ]);
         }
-        $me = $this->getUser();
-        return $this->render('messages/received.html.twig', [
-            'louled' => $messages->getids($me),
-            'messages' => $messages->getmsgs($me,$id),
-            'messForm' => $form->createView()
-        ]);
-    }
-    /**
-     * @Route("/received", name="received")
-     */
-    public function received(MessagesRepository $messages): Response
-    {
-        $me = $this->getUser();
+
         return $this->render("messages/received.html.twig", [
-            'louled' => $messages->getids($me)
-        ]);
-
-
-    }
-
-    /**
-     * @Route("/{id}/read", name="msg_read")
-     */
-    public function read($id,MessagesRepository $messages): Response
-    {
-        $me = $this->getUser();
-        return $this->render("messages/read.html.twig", [
             'louled' => $messages->getids($me),
-            'messages' => $messages->getmsgs($me,$id),
+            'messForm' => $form->createView()
         ]);
     }
 }

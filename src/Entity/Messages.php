@@ -18,15 +18,7 @@ class Messages
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 8,
-     *      minMessage = "Votre Titre Doit Contenir Au Moin {{ limit }} characters ",
-     * )
-     */
-    private $title;
+
 
     /**
      * @ORM\Column(type="text")
@@ -66,17 +58,7 @@ class Messages
         return $this->id;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
 
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
 
     public function getMessage(): ?string
     {

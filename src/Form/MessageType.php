@@ -22,13 +22,18 @@ class MessageType extends AbstractType
             ->add('message', TextType::class, [
                 'attr' => [
                     'class' => 'write_msg',
-                    'placeholder' => 'Ecrir Votre Message'
+                    'placeholder' => 'Ecrir Votre Message',
+                    'autocomplete' => 'off'
                 ]
             ])
             ->add('Envoyer', SubmitType::class, [
+
+            ])
+            ->add('recipient' , EntityType::class,[
+                'class' => User::class,
+                'choice_label' => 'nom',
                 'attr' => [
-                    'class' => 'msg_send_btn',
-                    'style' => 'margin-right: 50px'
+                    'class' => 'form-control',
                 ]
             ])
 
