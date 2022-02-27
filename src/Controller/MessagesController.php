@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Messages;
 use App\Form\MessageType;
+use App\Repository\MessagesRepository;
+use Doctrine\Persistence\ObjectManager;
 use http\Message;
+use phpDocumentor\Reflection\Types\Object_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,21 +50,25 @@ class MessagesController extends AbstractController
     /**
      * @Route("/received", name="received")
      */
-    public function received(): Response
+    public function received(MessagesRepository $messages): Response
     {
-        return $this->render('messages/received.html.twig');
+        $me = $this->getUser();
+        return $this->render("messages/received.html.twig", [
+            'louled' => $messages->getids($me)
+        ]);
+
+
     }
 
     /**
-     * @Route("/read/{id}", name="read")
+     * @Route("/{id}/read", name="msg_read")
      */
-    public function read(Messages $message): Response
+    public function read($id,MessagesRepository $messages): Response
     {
-        $message->setIsRead(true);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($message);
-        $em->flush();
-
-        return $this->render('messages/read.html.twig', compact("message"));
+        $me = $this->getUser();
+        return $this->render("messages/read.html.twig", [
+            'louled' => $messages->getids($me),
+            'messages' => $messages->getmsgs($me,$id)
+        ]);
     }
 }

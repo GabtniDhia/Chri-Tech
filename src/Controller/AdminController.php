@@ -108,8 +108,8 @@ class AdminController extends AbstractController
     public function suppUser($route , $id, UserRepository $repository, Request $request){
         $utilisateur=$repository->find($id);
         $entityManager=$this->getDoctrine()->getManager();
-        #$entityManager->remove($utilisateur);
-        #$entityManager->flush();
+        $entityManager->remove($utilisateur);
+        $entityManager->flush();
         if($route == 'admin_clients' ){
             return $this->redirectToRoute('admin_clients');
         }elseif ($route == 'admin_specialistes' ){

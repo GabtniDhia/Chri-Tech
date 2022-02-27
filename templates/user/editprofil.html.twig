@@ -1,11 +1,75 @@
 {% extends 'base.html.twig' %}
-{% form_theme userForm 'bootstrap_4_layout.html.twig' %}
-{% block title %}Modifier Un Utilisatuers {% endblock %}
+
+{% block title %}Chri-Tech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
 
 {% block content %}
 
-    <div class="container">
-        <h1 style="text-align: center">Modifier Un Utilisatuers</h1>
-    {{ form(userForm) }}
+    <div class="contact-from-section mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="form-title">
+                        <h2 style="text-align: center">Modifer Votre Profil</h2>
+                    </div>
+                    <div id="form_status"></div>
+                    <div class="contact-form">
+                        <div class="form">
+                            <div class="container" style="margin-left: 120px">
+                                <p> {{ form_errors(userForm.nom) }}
+                                    {{ form_errors(userForm.prenom) }}
+                                    {{ form_errors(userForm.email) }}
+                                </p>
+                            </div>
+                            {{ form_start(userForm) }}
+                            <p>
+
+                                {{ form_widget(userForm.nom, {'attr': {'class': 'input1'}}) }}
+                                {{ form_widget(userForm.prenom, {'attr': {class: 'input2'} }) }}
+                            </p>
+                            <p>
+                                {{ form_widget(userForm.email, {'attr': {class: 'input1' , style: 'width: 695px'} }) }}
+                            </p>
+
+                            <p style="margin-top: 120px">
+                                {{ form_widget(userForm.image) }}
+                            </p>
+                            <p style="text-align: center"><input style="text-align: center" type="submit" value="Modifer" ></p>
+                            {{ form_end(userForm) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+
+
+                        <div style="width: 120%; margin-top: -50%" >
+                            <div class="modal-dialog modal-dialog-centered" role="document" >
+                                <div class="modal-content" style="background-image: url('{{ asset('front/assets/img/lock2.jpg') }}'); ">
+
+                                    <div class="modal-body" >
+                                        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center" >
+                                            <div class="card p-4">
+                                                <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="{{ asset('uploads/images/' ~ app.user.image) }}" height="100" width="100" /></button> <h4><span class="name mt-3">{{ app.user.nom | upper }} {{ app.user.prenom | upper }}</span> </h4><span class="idd">@eleanorpena</span>
+                                                    <div class=" d-flex mt-2"> <a href="{{ path('user_profil_modifier') }}" class="btn1 btn-dark">Modifer Profil</a> </div>
+                                                    <div class="text mt-3"> <span> Votre Email: {{ app.user.email }}</span> </div>
+                                                    <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
+                                                    <div class=" px-2 rounded mt-4 date "> <span class="join">Membre Depuis {{ app.user.datecreation|date("d/m/Y") }}</span> </div>
+                                                    <div class=" px-2 rounded mt-4 date "> <a href="{{ path('statique')}}"><span class="join">Devenez un membre exclusive</span></a> </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
