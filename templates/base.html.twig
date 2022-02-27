@@ -10,7 +10,7 @@
 
 
     <!-- Modal Pop Up Message-->
-    {% if is_granted('ROLE_CLIENT') %}
+    {#{% if is_granted('ROLE_CLIENT') %}
         <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="float-defer-page: last" >
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-    {% endif %}
+    {% endif %}#}
 
     <!-- Modal Pop Up Profil-->
     {% if is_granted('ROLE_CLIENT') %}

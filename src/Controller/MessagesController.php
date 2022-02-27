@@ -25,9 +25,9 @@ class MessagesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/send", name="send")
+     * @Route("/send/{id}", name="msg_send")
      */
-    public function send(Request $request): Response
+    public function send($id,MessagesRepository $messages,Request $request): Response
     {
         $message = new Messages();
         $form = $this->createForm(MessageType::class, $message);
@@ -42,8 +42,10 @@ class MessagesController extends AbstractController
             $this->addFlash('message', "Message Envoye ☻");
             $this->redirectToRoute('messages');
         }
-
-        return $this->render('messages/send.html.twig', [
+        $me = $this->getUser();
+        return $this->render('messages/received.html.twig', [
+            'louled' => $messages->getids($me),
+            'messages' => $messages->getmsgs($me,$id),
             'messForm' => $form->createView()
         ]);
     }
@@ -68,7 +70,7 @@ class MessagesController extends AbstractController
         $me = $this->getUser();
         return $this->render("messages/read.html.twig", [
             'louled' => $messages->getids($me),
-            'messages' => $messages->getmsgs($me,$id)
+            'messages' => $messages->getmsgs($me,$id),
         ]);
     }
 }

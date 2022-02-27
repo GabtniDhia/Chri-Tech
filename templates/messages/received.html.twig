@@ -79,8 +79,10 @@
                     </div>
                     <div class="type_msg">
                         <div class="input_msg_write">
-                            <input type="text" class="write_msg" placeholder="Type a message" />
-                            <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                            {{ form_start(messForm) }}
+                            {{ form_widget(messForm.message) }}
+                            <i class="fa fa-paper-plane-o" aria-hidden="true">{{ form_widget(messForm.Envoyer) }}</i>
+                            {{ form_end(messForm) }}
                         </div>
                     </div>
                 </div>
