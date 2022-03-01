@@ -83,7 +83,7 @@ class RendezvousController extends AbstractController
     }
 
     /**
-     * @Route("/rendezvous/tri", name="trimaisonhote")
+     * @Route("/rendezvous/tri", name="trirdv")
      */
     public function Tri(Request $request)
     {
