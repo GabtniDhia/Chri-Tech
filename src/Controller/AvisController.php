@@ -93,7 +93,7 @@ class AvisController extends AbstractController
         return $this->render('avis/stat.html.twig', array('piechart' => $pieChart));
     }
     /**
-     * @Route("/rendezvous/tri", name="triavis")
+     * @Route("/avis/tri", name="triavis")
      */
     public function Tri(Request $request)
     {

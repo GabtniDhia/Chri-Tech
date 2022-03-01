@@ -30,8 +30,9 @@ class Rendezvous
     private $service;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      * @Assert\Type("\DateTime")
+     * @var string A "Y-m-d H:i:s" formatted value
      * @Assert\GreaterThan("today")
      */
     private $date_rendezvous;

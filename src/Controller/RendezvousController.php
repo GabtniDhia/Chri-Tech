@@ -104,6 +104,27 @@ class RendezvousController extends AbstractController
 
     }
 
+    /**
+     * @Route("/rendezvous/tri2", name="trirdv2")
+     */
+    public function Tri2(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+
+        $query = $em->createQuery(
+            'SELECT n FROM App\Entity\Rendezvous n
+            ORDER BY n.id'
+        );
+
+        $rendezvous = $query->getResult();
+
+
+
+        return $this->render('rendezvous/AfficheBack.html.twig',
+            array('rendezvous' => $rendezvous));
+
+    }
 
 
     /**
@@ -130,7 +151,7 @@ class RendezvousController extends AbstractController
                 'id' => $rendezvou->getId(),
                 'titre' => $rendezvou->getTitre(),
                 'service' => $rendezvou->getService(),
-                'date_rendezvous' => $rendezvou->getDateRendezvous()->format('Y-m-d '),
+                'start' => $rendezvou->getDateRendezvous()->format('Y-m-d H:i:s'),
                 'description_rendezvous' => $rendezvou->getDescriptionRendezvous(),
                 'adressrend' => $rendezvou->getAdressrend(),
                 'telephonenum' => $rendezvou->getTelephonenum(),
