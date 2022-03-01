@@ -20,9 +20,9 @@
                         </div>
                         <div class="srch_bar">
                             <div class="stylish-input-group">
-                                <input type="text" class="search-bar"  placeholder="Search" >
+                                <a href="{{ path("received") }}"> Nouveau Message </a>
                                 <span class="input-group-addon">
-                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+
                 </span> </div>
                         </div>
                     </div>
@@ -32,7 +32,11 @@
                                 <a href="{{ path("msg_send" , {id: message.sender.id}) }}"> <div class="chat_people">
                                         <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                                         <div class="chat_ib">
+                                            {% if message.sender.id == app.user.id %}
+                                            <h5>{{ message.recipient.nom }} <span class="chat_date">{{ message.createdat | date }}</span></h5>
+                                                {% else %}
                                             <h5>{{ message.sender.nom }} <span class="chat_date">{{ message.createdat | date }}</span></h5>
+                                                    {% endif %}
                                             <p>{{ message.message }}</p>
                                         </div>
                                     </div></a>
@@ -69,9 +73,9 @@
                         <div class="input_msg_write">
                             {{ form_start(messForm) }}
                             {{ form_row(messForm._token) }}
-                            {{ form_widget(messForm.message) }}
+                            {{ form_widget(messForm.message, {attr: {id: 'textbox'} }) }}
                             <i class="fa fa-paper-plane-o" aria-hidden="true" style="width: 30px"></i>
-                            <button href="{{ path("msg_send" , {id:8}) }}">azeaze</button>
+                            <button id="button" class="msg_send_btn" href="{{ path("msg_send" , {id:8}) }}"><i class="	fa fa-paper-plane"></i></button>
                             {{ form_end(messForm, {'render_rest': false}) }}
                         </div>
                     </div>
@@ -81,12 +85,8 @@
 
         </div></div>
 
-
-    {% block javascript %}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        const num = 10
-    </script>
-    {% endblock %}
-
 {% endblock %}
+
+
+
+
