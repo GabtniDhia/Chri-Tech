@@ -23,8 +23,8 @@ class RendezvousType extends AbstractType
             ))
             ->add('date_rendezvous',DateTimeType::class, [
                 'placeholder' => [
-                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
-                    'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
+                    'année' => 'Année', 'mois' => 'Mois', 'jour' => 'Jour',
+                    'heure' => 'Heure', 'minute' => 'Minute', 'seconde' => 'Seconde',
                 ],
             ])
             ->add('description_rendezvous' )
