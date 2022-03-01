@@ -43,7 +43,8 @@
                                         <p align="center">
                                         <a href="{{ path('rendezvous_show', {'id': rendezvou.id}) }}">Afficher+</a>
                                         <a href="{{ path('rendezvous_edit', {'id': rendezvou.id}) }}">Modifier Rdv</a>
-                                        {% if rendezvou.avis is not null %}
+                                            <a href="{{ path('avis_new', {'rendezvous': rendezvou.id}) }}">add av</a>
+                                            {% if rendezvou.avis is not null %}
                                             <a href="{{ path('avis_show', {'id': rendezvou.avis.id}) }}">Afficher Avis</a>
                                         {% endif %}
                                         </p>

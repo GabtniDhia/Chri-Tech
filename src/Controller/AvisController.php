@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Avis;
+use App\Entity\Rendezvous;
 use App\Form\AvisType;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -33,15 +34,17 @@ class AvisController extends AbstractController
         ]);
     }
     /**
-     * @Route("/avis/new", name="avis_new", methods={"GET", "POST"})
+     * @Route("/avis/{rendezvous}/new", name="avis_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, $rendezvous): Response
     {
         $avi = new Avis();
         $form = $this->createForm(AvisType::class, $avi);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $r = $this->getDoctrine()->getRepository(Rendezvous::class)->find($rendezvous);
+            $avi->setRendezvous($r);
             $entityManager->persist($avi);
             $entityManager->flush();
 

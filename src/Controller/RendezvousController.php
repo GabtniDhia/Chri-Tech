@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Avis;
+
 use App\Entity\Rendezvous;
+use App\Form\AvisType;
 use App\Form\RendezvousType;
 use App\Repository\AvisRepository;
 use App\Repository\RendezvousRepository;
@@ -220,7 +223,6 @@ class RendezvousController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/rendezvous/{id}", name="rendezvous_delete", methods={"POST"})
      */
@@ -233,7 +235,6 @@ class RendezvousController extends AbstractController
 
         return $this->redirectToRoute('rendezvous_index', [], Response::HTTP_SEE_OTHER);
     }
-
 
 
 
