@@ -2,7 +2,7 @@
 {% block title %} Espace Admin {% endblock %}
 {% block titre1 %} Voir Les Rendez Vous {% endblock %}
 {% block content %}
-    <h1>Liste des Specialistes</h1>
+    <h1>Liste des Rendez-vous</h1>
     <table class="table" align="center">
         <thead>
         <tr>
@@ -40,8 +40,8 @@
         <a class="btn btn-primary" href="{{path('trirdv')}}">Tri par Services</a>
         <a class="btn btn-primary" href="{{path('trirdv2')}}">Tri par id</a>
 
-        <a class="btn btn-primary" href="{{path('statRendezvous')}}">Tri par Services</a>
+        <a class="btn btn-primary" href="{{path('statRendezvous')}}">Stat par type de Service</a>
+        <a class="btn btn-light" href="{{ path('rendezvous_calendar') }}"> Calendrier</a>
 
     </div>
-    <a href="{{ path('rendezvous_calendar') }}"> Calendrier</a>
 {% endblock %}
