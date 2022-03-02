@@ -41,11 +41,6 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 8,
-     *      minMessage = "Votre Mot De Passe Doit Contenir Au Moin {{ limit }} characters ",
-     * )
      */
     private $password;
 
@@ -53,7 +48,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
      *      min = 8,
-     *      minMessage = "Votre Nom De Passe Doit Contenir Au Moin {{ limit }} characters ",
+     *      minMessage = "Votre Nom  Doit Contenir Au Moin {{ limit }} characters ",
      * )
      */
     private $nom;
@@ -78,7 +73,7 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      * @Assert\File(
      *     mimeTypes = {"image/jpeg", "image/png"},
      *     mimeTypesMessage = "Veuillez Choisir Un Fichier Png ou Jpeg"
