@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Avis;
 
+use App\Entity\Recherche;
 use App\Entity\Rendezvous;
 use App\Form\AvisType;
 use App\Form\RendezvousType;
 use App\Repository\AvisRepository;
 use App\Repository\RendezvousRepository;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
-
+use Knp\Component\Pager\PaginatorInterface;
 // Include Dompdf required namespaces
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -126,15 +128,36 @@ class RendezvousController extends AbstractController
 
     }
 
-
     /**
-     * @Route("/rendezvous", name="rendezvous_index", methods={"GET"})
+     * @Route("/rendezvous", name="rendezvous_index", methods={"GET","POST"})
      */
 
-    public function index(RendezvousRepository $rendezvousRepository): Response
+    public function index(RendezvousRepository $rendezvousRepository, PaginatorInterface $paginator, Request $request): Response
+
     {
+        $rendezvous=new Recherche();
+        $form=$this->createFormBuilder($rendezvous)
+        ->add('titre',TextType::class,array('attr'=>array('class'=>'form')))
+        ->getForm();
+
+        $form->handleRequest($request);
+       if($form->isSubmitted() && $form->isValid())
+       {
+         $term=$rendezvous->getTitre();
+          $allrendezvous = $rendezvousRepository->search($term);
+       }
+       else
+       {
+        $allrendezvous = $rendezvousRepository->findAll();
+       }
+     $rendezvousRepository= $paginator->paginate(
+    $allrendezvous,
+    $request->query->getInt('page',1),
+
+     );
         return $this->render('rendezvous/index.html.twig', [
-            'rendezvouses' => $rendezvousRepository->findAll(),
+            'rendezvouses' => $rendezvousRepository,
+            'form' => $form->createView()
         ]);
     }
 
@@ -195,6 +218,8 @@ class RendezvousController extends AbstractController
             'rendezvou' => $rendezvou,
         ]);
     }
+
+
     /**
      * @Route("/rendezvous/{id}/show1", name="monrendezvous_show1", methods={"GET"})
      */
@@ -256,7 +281,6 @@ class RendezvousController extends AbstractController
 
         return $this->redirectToRoute('rendezvous_index', [], Response::HTTP_SEE_OTHER);
     }
-
 
 
 }

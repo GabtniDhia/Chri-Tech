@@ -114,8 +114,16 @@
     </head>
     <body>
 
+
     <div class="event-container">
-        {% for rendezvou in rendezvouses %}
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn">{{ button_label|default('rechercher') }}</button>
+            {{ form_end(form) }}
+
+
+                    {% for rendezvou in rendezvouses %}
 
 
             <div class="event">
@@ -139,7 +147,7 @@
 
                        <a class="event-timing"> <img src="{{ asset('front/assets/img/time.png') }}" alt=""/>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('H:i:s') : '' }}</a>
 
- <p align="center">
+            <p align="center">
                         <a class="btn btn-dark" href="{{ path('rendezvous_edit', {'id': rendezvou.id}) }}">Modifier mon Rendez-vous</a>
 
                         <a class="btn btn-dark"  href="{{ path('avis_new', {'rendezvous': rendezvou.id}) }}">Ajouter un Avis</a>
