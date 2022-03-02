@@ -12,8 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class AvisController extends AbstractController
 {
     /**
@@ -24,6 +25,57 @@ class AvisController extends AbstractController
         return $this->render('avis/index.html.twig', [
             'avis' => $avisRepository->findAll(),
         ]);
+    }
+    /**
+     * @Route("/avis/excel", name="excel", methods={"GET"})
+     */
+    public function excel()
+    {
+        $spreadsheet = new Spreadsheet();
+
+        /* @var $sheet \PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet */
+        // on définie les en têtes de nos enregistrements
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1','ID')
+            ->setCellValue('B1','Etat Services')
+            ->setCellValue('C1','Recommendation')
+            ->setCellValue('D1','Description')
+            ->setCellValue('E1','Date de publication')
+
+        ;
+        // on récupère toutes les personnes ou on fait une fonction personnalisée à la place du findAll
+        $em = $this->getdoctrine()->getManager();
+        $avis = $em->getRepository(Avis :: class)->findAll();
+        // on place le curseur dans la 2ème position pour ne pas écraser les entêtes ...<br>
+        $aux = 2;
+        foreach ($avis as $row)
+            // donc pour chaque personne trouvée dans la base de données il met les valeurs au dessous des entêtes
+        {
+            $sheet->setSheetState(0)
+                ->setCellValue('A'.$aux, $row->getId())
+                ->setCellValue('B'.$aux, $row->getEtatService())
+                ->setCellValue('C'.$aux, $row->getRecommendation())
+                ->setCellValue('D'.$aux, $row->getDescriptionService())
+                ->setCellValue('E'.$aux, $row->getDate())
+
+            ;
+            //aux au début était 2 lorsqu'on écrit on l'incrémente pour ne pas écraser à chaque fois
+            $aux++;
+        };
+        $sheet->setTitle("Les Avis Bilan");
+
+        // Create your Office 2007 Excel (XLSX Format)
+        $writer = new Xlsx($spreadsheet);
+
+        // Create a Temporary file in the system
+        $fileName = 'Candidature stage.xlsx';
+        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+
+        // Create the excel file in the tmp directory of the system
+        $writer->save($temp_file);
+
+        // Return the excel file as an attachment
+        return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
     }
     /**
      * @Route("/avis/Afficheback", name="avis_back", methods={"GET"})
