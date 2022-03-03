@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\DemandeSpec;
+use App\Form\DemandeSpecType;
 use App\Form\ModifUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -56,4 +58,28 @@ class UserController extends AbstractController
             'userForm' => $form->createView(),
         ]);
         }
+
+    /**
+     * @Route("/spec", name="specialiste")
+     */
+    public function spec(Request $request): Response
+    {
+        $demande = new DemandeSpec();
+
+        $form = $this->createForm(DemandeSpecType::class, $demande);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $demande->setDemandeur($this->getUser());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($demande);
+            $em->flush();
+
+            $this->addFlash('message', 'Profil Mis a Jour');
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('Specialiste/spec.html.twig', [
+            'formD' => $form->createView()
+        ]);
+    }
 }

@@ -23,7 +23,7 @@ class MessagesRepository extends ServiceEntityRepository
     public function getids(User $user){
         $id = $user->getId();
         $query=$this->getEntityManager()->createQuery("
-            SELECT m FROM App\Entity\Messages m WHERE m.recipient=:me GROUP BY m.sender
+            SELECT m FROM App\Entity\Messages m WHERE (m.recipient=:me OR m.sender=:me) AND m.sender <> m.recipient GROUP BY m.sender , m.recipient
         ")
             ->setParameter(':me',$id);
             return $query->getResult();

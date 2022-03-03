@@ -37,6 +37,12 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $userPasswordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
             $file = $user->getImage();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             try {
@@ -48,9 +54,8 @@ class RegistrationController extends AbstractController
 
             }
             $user->setImage($fileName);
-            // encode the plain password
             $user->setPassword(
-            $userPasswordEncoder->encodePassword(
+                $userPasswordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )

@@ -64,8 +64,16 @@
                                 <div class="text mt-3"> <span> Votre Email: {{ app.user.email }}</span> </div>
                                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
                                 <div class=" px-2 rounded mt-4 date "> <span class="join">Membre Depuis {{ app.user.datecreation|date("d/m/Y") }}</span> </div>
-                                                                <div class=" px-2 rounded mt-4 date "> <a href="{{ path('statique')}}"><span class="join">Devenez un membre exclusive</span></a> </div>
+                                        
+                                        
+                                    {% if app.user.idcarte is null %}     
+                                        
+                        <div class=" px-2 rounded mt-4 date "> <a href="{{ path('statique')}}"><span class="join">Devenez un membre exclusive</span></a> </div>
 
+                                      {% else %}
+                                <div class=" px-2 rounded mt-4 date "> <a href="{{ path('carte_fidelite_show', {'id': app.user.idcarte.id}) }}"><span class="join">Gérer mes points</span></a> </div>
+
+                                    {% endif %}
                             </div>
                         </div>
                     </div>
@@ -246,12 +254,13 @@
                                     </li>
                                     <li><a href="news.html">Forum</a>
                                         <ul class="sub-menu">
-                                            <li><a href="article">Articles</a></li>
-                                            <li><a href="blog">Blog</a></li>
+                                            <li><a href="../article">Articles</a></li>
+                                            <li><a href="../blog">Blog</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">Nous Contacter</a></li>
                                     <li><a href="about.html">A Propos</a></li>
+                                    <li><a href="about.html">Specialiste</a></li>
                                     <li>
                                         <div class="header-icons">
                                             <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
@@ -389,6 +398,7 @@
                             <li><a href="news.html">Blog</a></li>
                             <li><a href="contact.html">Nous Contacter</a></li>
                             <li><a href="contact.html">A Propos</a></li>
+                            <li><a href="contact.html">Specialiste</a></li>
                         </ul>
                     </div>
                 </div>

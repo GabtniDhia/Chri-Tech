@@ -67,8 +67,8 @@ class MessagesController extends AbstractController
             $em->persist($message);
             $em->flush();
 
-            $this->redirectToRoute('msg_send' , [
-                'id' => $message->getId()
+            return $this->redirectToRoute('msg_send' , [
+                'id' => $message->getRecipient()->getId()
             ]);
         }
 

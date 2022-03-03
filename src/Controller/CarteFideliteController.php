@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\CarteFidelite;
 use App\Form\CarteFideliteType;
 use App\Repository\CarteFideliteRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,11 +64,21 @@ class CarteFideliteController extends AbstractController
             $carteFidelite->setIdUser($user->getId());
             $carteFidelite->setDateCreation(new \DateTime());
             $carteFidelite->setNbPoints(0);
-            $carteFidelite->setDateExpiration(new \DateTime());
+            $datetime = new DateTime();
+            $datetime->modify('+1 year');
+            $carteFidelite->setDateExpiration($datetime);
             
             
             $entityManager->persist($carteFidelite);
             $entityManager->flush();
+
+
+
+    $user->setIdcarte($carteFidelite);
+    $entityManager->persist($user);
+    $entityManager->flush();
+
+
 
             return $this->redirectToRoute('carte_fidelite_index', [], Response::HTTP_SEE_OTHER);
         }

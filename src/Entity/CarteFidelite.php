@@ -37,6 +37,16 @@ class CarteFidelite
      */
     private $IdUser;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +96,30 @@ class CarteFidelite
     public function setIdUser(int $IdUser): self
     {
         $this->IdUser = $IdUser;
+
+        return $this;
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

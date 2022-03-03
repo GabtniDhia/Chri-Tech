@@ -43,9 +43,19 @@ class Offre
     private $IDProd;
 
     /**
-     * @ORM\Column(name="type", type="string", columnDefinition="enum('standard', 'silver' ,'gold')")
+     * @ORM\Column(name="type", type="string", columnDefinition="enum('standard', 'silver' ,'gold', 'premium')")
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Prix;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $points;
 
     public function __construct()
     {
@@ -113,6 +123,30 @@ class Offre
     public function setType($type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->Prix;
+    }
+
+    public function setPrix(int $Prix): self
+    {
+        $this->Prix = $Prix;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }

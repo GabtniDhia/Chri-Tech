@@ -63,6 +63,17 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Traiter les demandes des sepecialistes
+     *
+     * @Route("/demande", name="demande")
+     */
+    public function demande(UserRepository $user){
+        return $this->render("admin/specialistes.html.twig", [
+            'user' => $user->findAll()
+        ]);
+    }
+
+    /**
      * Modifier un Utilisateur
      * @Route("/utilisateur/modifier/{id}/{route}", name="modifier_utilisateur")
      */
@@ -141,4 +152,5 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 }
