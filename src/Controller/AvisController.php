@@ -68,7 +68,7 @@ class AvisController extends AbstractController
         $writer = new Xlsx($spreadsheet);
 
         // Create a Temporary file in the system
-        $fileName = 'Candidature stage.xlsx';
+        $fileName = 'Avis Bilan.xlsx';
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
 
         // Create the excel file in the tmp directory of the system
