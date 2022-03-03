@@ -22,7 +22,6 @@ class ProduitType extends AbstractType
             ->add('Detail_Prod')
             ->add('PrixTTC_Prod')
             ->add('PrixTVA_Prod')
-            ->add('cle-cat')
 
         ;
     }

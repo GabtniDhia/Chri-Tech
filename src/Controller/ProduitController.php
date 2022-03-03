@@ -68,6 +68,15 @@ class ProduitController extends AbstractController
             'produit' => $produit,
         ]);
     }
+    /**
+     * @Route("back/{id}", name="produit_showb", methods={"GET"})
+     */
+    public function showb(Produit $produit): Response
+    {
+        return $this->render('produit/showb.html.twig', [
+            'produit' => $produit,
+        ]);
+    }
 
     /**
      * @Route("/{id}/edit", name="produit_edit", methods={"GET", "POST"})
@@ -78,9 +87,20 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $produit->getImageProd();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('images_directory'),
+                    $fileName
+                );
+            } catch (FileException $e){
+
+            }
+            $produit->setImageProd($fileName);
             $entityManager->flush();
 
-            return $this->redirectToRoute('produit_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('produit_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('produit/edit.html.twig', [
@@ -108,6 +128,18 @@ class ProduitController extends AbstractController
     {
         return $this->render('produit/indexback.html.twig', [
             'produit' => $produit->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/single/{id}", name="produit_single", methods={"GET"})
+     */
+    public function single($id,ProduitRepository $produit): Response
+    {
+        return $this->render('produit/single.html.twig', [
+            'produit' => $produit->findOneBy(['id' => $id]),
+            'chkawlek' => $produit->guess()
+
         ]);
     }
 }

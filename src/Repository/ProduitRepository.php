@@ -19,6 +19,15 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+
+    public function guess(){
+        $query=$this->getEntityManager()->createQuery("
+            SELECT p FROM APP\Entity\Produit p WHERE p.id <> :id
+        ")
+            ->setParameter(':id', 6);
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Produit[] Returns an array of Produit objects
     //  */

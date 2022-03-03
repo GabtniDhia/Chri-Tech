@@ -32,10 +32,7 @@ class Categorie
      */
     private $Type_Cat;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="cle_cat")
-     */
-    private $cle_prod;
+
 
 
 
@@ -74,35 +71,14 @@ class Categorie
         return $this;
     }
 
-    /**
-     * @return Collection<int, Produit>
-     */
-    public function getCleProd(): Collection
-    {
-        return $this->cle_prod;
-    }
 
-    public function addCleProd(Produit $cleProd): self
-    {
-        if (!$this->cle_prod->contains($cleProd)) {
-            $this->cle_prod[] = $cleProd;
-            $cleProd->setCleCat($this);
-        }
 
-        return $this;
-    }
 
-    public function removeCleProd(Produit $cleProd): self
-    {
-        if ($this->cle_prod->removeElement($cleProd)) {
-            // set the owning side to null (unless already changed)
-            if ($cleProd->getCleCat() === $this) {
-                $cleProd->setCleCat(null);
-            }
-        }
 
-        return $this;
-    }
+
+
+
+
 
 
 

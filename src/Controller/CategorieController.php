@@ -25,7 +25,15 @@ class CategorieController extends AbstractController
             'categories' => $categorieRepository->findAll(),
         ]);
     }
-
+    /**
+     * @Route("/back", name="categorie_indexback", methods={"GET"})
+     */
+    public function indexback(CategorieRepository $categorieRepository): Response
+    {
+        return $this->render('categorie/indexback.html.twig', [
+            'categories' => $categorieRepository->findAll(),
+        ]);
+    }
     /**
      * @Route("/new", name="categorie_new", methods={"GET", "POST"})
      */
@@ -39,7 +47,7 @@ class CategorieController extends AbstractController
             $entityManager->persist($categorie);
             $entityManager->flush();
 
-            return $this->redirectToRoute('categorie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('categorie_indexback', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('categorie/new.html.twig', [
@@ -69,7 +77,7 @@ class CategorieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('categorie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('categorie_indexback', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('categorie/edit.html.twig', [
@@ -88,6 +96,6 @@ class CategorieController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('categorie_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('categorie_indexback', [], Response::HTTP_SEE_OTHER);
     }
 }
