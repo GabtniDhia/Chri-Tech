@@ -46,6 +46,7 @@ class CommandeController extends AbstractController
     {
         $commande = new Commande();
         $livraison = new Livraison();
+        $commande->setCommandel($livraison);
         $form = $this->createForm(CommandeType::class, $commande);
         $forma = $this->createForm(LivraisonType::class, $livraison);
         $form->handleRequest($request);

@@ -29,7 +29,6 @@ class LivraisonType extends AbstractType
                 ]
             ])
             ->add('datelivraison')
-            ->add('commande')
         ;
     }
 

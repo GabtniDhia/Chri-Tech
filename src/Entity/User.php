@@ -91,10 +91,7 @@ class User implements UserInterface
      */
     private $received;
 
-    /**
-     * @ORM\OneToOne(targetEntity=CarteFidelite::class, cascade={"persist", "remove"})
-     */
-    private $idcarte;
+
 
     public function __construct()
     {
