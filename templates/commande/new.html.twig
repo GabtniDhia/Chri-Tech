@@ -3,8 +3,8 @@
 
 {% block title %} Chritech {% endblock %}
 {% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
-{% block titre1 %}commande{% endblock %}
-{% block titre2 %} <a  style="color:antiquewhite">Passer votre commande <h6 style="color: antiquewhite" >Veuillez remplir le formulaire ci-dessous </h6></a>
+{% block titre1 %}commande & livraison{% endblock %}
+{% block titre2 %} <a  style="color:antiquewhite">Finaliser l'achat <h6 style="color: antiquewhite" >Veuillez remplir les formulaires ci-dessous </h6></a>
 
 {% endblock %}
 
@@ -22,7 +22,7 @@
                                 <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Ajouter une nouvelle commande
+                                            Passer une commande
                                         </button>
                                     </h5>
                                 </div>
@@ -37,24 +37,103 @@
                                                 <p>{{ form_widget(form.numtel) }}</p>
                                                 <p>{{ form_errors(form.email) }}</p>
                                                 <p>{{ form_widget(form.email) }}</p>
-                                               <div style="text-align: center"> <p><input style="text-align: center" type="submit" value="Confirmer" ></p></div>
+                                              <!-- <div style="text-align: center"> <p><input style="text-align: center" type="submit" value="Confirmer" ></p></div> -->
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                            <div class="card single-accordion">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                           Passer une livraison
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shipping-address-form">
+                                            <p>{{ form_errors(forma.adresse) }}</p>
+                                            <p>{{ form_widget(forma.adresse) }}</p>
+                                            <p>{{ form_errors(forma.codepostal) }}</p>
+                                            <p>{{ form_widget(forma.codepostal) }}</p>
+                                            <p>{{ form_errors(forma.ville) }}</p>
+                                            <p>{{ form_widget(forma.ville) }}</p>
+                                            <p>{{ form_errors(forma.datelivraison) }}</p>
+                                            <p>{{ form_widget(forma.datelivraison) }}</p>
+                                            <p>{{ form_widget(forma.commande) }}</p>
+                                            <p>{{ form_errors(forma.commande) }}</p>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            {{ form_end(forma) }}
 
                             </div>
                         </div>
-
                     </div>
+                <div class="col-lg-4">
+                    <div class="order-details-wrap">
+                        <table class="order-details">
+                            <thead>
+                            <tr>
+                                <th>Details du panier</th>
+                                <th>Prix</th>
+                            </tr>
+                            </thead>
+                            <tbody class="order-details-body">
+                            <tr>
+                                <td>Produit</td>
+                                <td>Total</td>
+                            </tr>
+                            <tr>
+                                <td>Pc portable ASUS</td>
+                                <td>2.500.000 DT</td>
+                            </tr>
+                            <tr>
+                                <td>Iphone 12</td>
+                                <td>2.669.000 DT</td>
+                            </tr>
+                            <tr>
+                                <td>Souris</td>
+                                <td>40.000 DT</td>
+                            </tr>
+                            </tbody>
+                            <tbody class="checkout-details">
+                            <tr>
+                                <td>Subtotal</td>
+                                <td>0 DT</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping</td>
+                                <td>8 DT</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>0 DT</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="text-align: left"> <p><input style="text-align: center; margin-top: 15px" type="submit" value="Confirmer Achat" ></p></div>
+                    </div>
+                </div>
                 </div>
 
 
             </div>
+
         </div>
+
     </div>
-    {{ form_end(form) }}
+
+
 
 {% endblock %}
+
