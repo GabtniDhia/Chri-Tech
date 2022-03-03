@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
+use App\Repository\CommentaireRepository;
 
 
 /**
@@ -53,10 +56,24 @@ class BlogController extends AbstractController
     /**
      * @Route("/{id}", name="blog_show", methods={"GET"})
      */
-    public function show(Blog $blog): Response
-    {
+    public function show(
+        Blog $blog,
+        request $request,
+        CommentaireRepository $commentaireRepository
+    ): Response{
+        $commentaire = new Commentaire();
+        $form = $this->createform(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $commentaire = $form->getData();
+            $this->manager->persist($commentaire);
+            $this->manager->flush();
+        }
+
         return $this->render('blog/show.html.twig', [
             'blog' => $blog,
+            'form' => $form->createView(),
         ]);
     }
 

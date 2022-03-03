@@ -97,6 +97,7 @@
     </table>#}
 
 
+
     {% for commentaire in blog.commentaires %}
     <div class="comment-user-avater">
         <img src="assets/img/avaters/avatar1.png" alt="">
@@ -106,6 +107,8 @@
         <p>{{ commentaire.contenue }}</p>
     </div>
     {% endfor %}
+
+    {%include "commentaire/_form.html.twig" %}
 
 
 {% endblock %}
