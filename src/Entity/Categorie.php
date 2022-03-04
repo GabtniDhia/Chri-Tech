@@ -32,6 +32,11 @@ class Categorie
      */
     private $Type_Cat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="catp")
+     */
+    private $pcat;
+
 
 
 
@@ -67,6 +72,18 @@ class Categorie
     public function setTypeCat(string $Type_Cat): self
     {
         $this->Type_Cat = $Type_Cat;
+
+        return $this;
+    }
+
+    public function getPcat(): ?Produit
+    {
+        return $this->pcat;
+    }
+
+    public function setPcat(?Produit $pcat): self
+    {
+        $this->pcat = $pcat;
 
         return $this;
     }

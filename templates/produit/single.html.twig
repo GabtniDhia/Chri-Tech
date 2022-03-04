@@ -57,8 +57,11 @@
                         </div>
                         {% for wehed in chkawlek %}
                         <h3>{{ wehed.NomProd }}</h3>
+
+                        <div class="bbb_deals_image"><img src="{{ asset('uploads/images/' ~ wehed.ImageProd) }}" alt=""
+                                                          height="360px" width="240px"></div>
+                        <p class="product-price">{{ wehed.PrixUnitHTProd }}</p>
                         {% endfor %}
-                        <p class="product-price"><span>Per Kg</span> 85$ </p>
                         <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                     </div>
                 </div>

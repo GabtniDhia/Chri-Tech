@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -75,6 +77,23 @@ class Produit
      *@Assert\NotBlank(message="Entrez le prix TVA")
      */
     private $PrixTVA_Prod;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $cat;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Categorie::class, mappedBy="pcat")
+     */
+    private $catp;
+
+    public function __construct()
+    {
+        $this->catp = new ArrayCollection();
+    }
+
+
 
 
 
@@ -190,6 +209,50 @@ class Produit
 
         return $this;
     }
+
+    public function getCat(): ?string
+    {
+        return $this->cat;
+    }
+
+    public function setCat(string $cat): self
+    {
+        $this->cat = $cat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCatp(): Collection
+    {
+        return $this->catp;
+    }
+
+    public function addCatp(Categorie $catp): self
+    {
+        if (!$this->catp->contains($catp)) {
+            $this->catp[] = $catp;
+            $catp->setPcat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCatp(Categorie $catp): self
+    {
+        if ($this->catp->removeElement($catp)) {
+            // set the owning side to null (unless already changed)
+            if ($catp->getPcat() === $this) {
+                $catp->setPcat(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 
 
 
