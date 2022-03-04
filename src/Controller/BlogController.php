@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Blog;
 use App\Form\BlogType;
 use App\Repository\BlogRepository;
+use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,23 +58,27 @@ class BlogController extends AbstractController
      * @Route("/{id}", name="blog_show", methods={"GET"})
      */
     public function show(
+
+        $id,
         Blog $blog,
         request $request,
-        CommentaireRepository $commentaireRepository
+        EntityManagerInterface $Entitymanager,
+        CommentaireRepository $cid
+
     ): Response{
         $commentaire = new Commentaire();
         $form = $this->createform(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $commentaire = $form->getData();
-            $this->manager->persist($commentaire);
-            $this->manager->flush();
+            $this->$Entitymanager->persist($commentaire);
+            $this->$Entitymanager->flush();
         }
 
         return $this->render('blog/show.html.twig', [
             'blog' => $blog,
             'form' => $form->createView(),
+            'commentaire' => $commentaire,
         ]);
     }
 
