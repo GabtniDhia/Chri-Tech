@@ -76,10 +76,12 @@ class RendezvousController extends AbstractController
         $pieChart->getOptions()->setHeight(500);
         $pieChart->getOptions()->setWidth(900);
         $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
-        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#FFFFFF');
         $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
         $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
         $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+        $pieChart->getOptions()->setBackgroundColor('#454d55');
+
 
         return $this->render('rendezvous/stat.html.twig', array('piechart' => $pieChart));
     }
@@ -153,7 +155,7 @@ class RendezvousController extends AbstractController
      $rendezvousRepository= $paginator->paginate(
     $allrendezvous,
     $request->query->getInt('page',1),
-
+50
      );
         return $this->render('rendezvous/index.html.twig', [
             'rendezvouses' => $rendezvousRepository,
@@ -246,8 +248,9 @@ class RendezvousController extends AbstractController
 
         // Output the generated PDF to Browser (inline view)
         $dompdf->stream("mypdf.pdf", [
-            "Attachment" => false
+            "Attachment" => true
         ]);
+        return $this->redirectToRoute("rendezvous_show");
     }
 
     /**
