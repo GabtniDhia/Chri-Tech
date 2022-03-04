@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Chri-Tech {% endblock %}
-{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+{% block bg%} {{ asset('uploads/images/' ~ app.user.image) }}  {% endblock %}
 
 {% block content %}
 
@@ -44,24 +44,28 @@
 
                         <div style="width: 120%; margin-top: -50%" >
                             <div class="modal-dialog modal-dialog-centered" role="document" >
-                                <div class="modal-content" style="background-image: url('{{ asset('front/assets/img/lock2.jpg') }}'); ">
-
+                                <div class="modal-content" style="background-image: url('{{ asset('front/assets/img/77.png') }}'); ">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" style="text-align: center; color: white">Profil De <h3 style="color: #fcbf01">   ‎ {{ app.user.prenom |upper }}</h3></h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                     <div class="modal-body" >
                                         <div class="container mt-4 mb-4 p-3 d-flex justify-content-center" >
-                                            <div class="card p-4">
-                                                <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="{{ asset('uploads/images/' ~ app.user.image) }}" height="100" width="100" /></button> <h4><span class="name mt-3">{{ app.user.nom | upper }} {{ app.user.prenom | upper }}</span> </h4><span class="idd">@eleanorpena</span>
-                                                    <div class=" d-flex mt-2"> <a href="{{ path('user_profil_modifier') }}" class="btn1 btn-dark">Modifer Profil</a> </div>
-                                                    <div class="text mt-3"> <span> Votre Email: {{ app.user.email }}</span> </div>
+                                            <div class="card p-4" style="background-color: transparent; border-color: white; border-radius: 8px ">
+                                                <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="{{ asset('uploads/images/' ~ app.user.image) }}" height="100" width="100" /></button> <h4  style="margin-top: 30px"><span class="name mt-3" style="color: #ffffff;">{{ app.user.nom | upper }} {{ app.user.prenom | upper }}</span> </h4><span class="idd" style="color: #ffffff;">@eleanorpena</span>
+                                                    <div class=" d-flex mt-2"> </div>
+                                                    <div class="text mt-3"> <h4 style="color: #ffffff; font-size: large">{{ app.user.email }}</h4> </div>
                                                     <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
-                                                    <div class=" px-2 rounded mt-4 date "> <span class="join">Membre Depuis {{ app.user.datecreation|date("d/m/Y") }}</span> </div>
-                                                    <div class=" px-2 rounded mt-4 date "> <a href="{{ path('statique')}}"><span class="join">Devenez un membre exclusive</span></a> </div>
-
+                                                    <div class=" px-2 rounded mt-4 date "> <h4 class="join" style="color: #ffffff;">Membre Depuis {{ app.user.datecreation|date("d/m/Y") }}</h4> </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+
+                                        <button class="btn btn-warning "> <a href="{{ path('user_profil_modifier') }}" style="text-decoration: none;" >Modifer Profil</a> </button>
                                     </div>
                                 </div>
                             </div>

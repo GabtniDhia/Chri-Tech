@@ -22,8 +22,8 @@ class DemandeSpec
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false , onDelete="NO ACTION")
      */
     private $demandeur;
 
@@ -93,12 +93,12 @@ class DemandeSpec
         return $this;
     }
 
-    public function getCerif(): ?string
+    public function getCerif()
     {
         return $this->cerif;
     }
 
-    public function setCerif(string $cerif): self
+    public function setCerif( $cerif)
     {
         $this->cerif = $cerif;
 

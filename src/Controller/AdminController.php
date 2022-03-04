@@ -6,6 +6,8 @@ use App\Entity\Article;
 use App\Entity\User;
 use App\Form\ArticleType;
 use App\Form\EditUserType;
+use App\Security\EmailVerifier;
+use App\Repository\DemandeSpecRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -13,6 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\UserRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Mime\Address;
+
+
+
 
 
     /**
@@ -20,6 +28,13 @@ use App\Repository\UserRepository;
      */
 class AdminController extends AbstractController
 {
+    private $emailVerifier;
+
+    public function __construct(EmailVerifier $emailVerifier)
+    {
+        $this->emailVerifier = $emailVerifier;
+    }
+
     /**
      * @Route("/", name="index")
      */
@@ -56,21 +71,48 @@ class AdminController extends AbstractController
      *
      * @Route("/specialistes", name="specialistes")
      */
-    public function specList(UserRepository $user){
+    public function specList(UserRepository $user, DemandeSpecRepository $demande){
         return $this->render("admin/specialistes.html.twig", [
-            'user' => $user->findAll()
+            'user' => $user->findAll(),
+            'demandes' => $demande->findAll()
         ]);
     }
 
     /**
+     *
      * Traiter les demandes des sepecialistes
      *
-     * @Route("/demande", name="demande")
+     * @Route("/{reponse}/{id}", name="demande")
      */
-    public function demande(UserRepository $user){
-        return $this->render("admin/specialistes.html.twig", [
-            'user' => $user->findAll()
-        ]);
+    public function demande($id,$reponse,DemandeSpecRepository $demandeSpecRepository,User $user){
+        $demande=$demandeSpecRepository->find($id);
+        $entityManager=$this->getDoctrine()->getManager();
+        if ($reponse == 'refuser'){
+            $entityManager->remove($demande);
+            $entityManager->flush();
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('chritechverify@gmail.com', 'Verify'))
+                    ->to($user->getEmail())
+                    ->subject('Demande Specialiste')
+                    ->htmlTemplate('Specialiste/refus.html.twig')
+            );
+            return $this->redirectToRoute('admin_specialistes');
+        }else{
+            $user = $demande->getDemandeur();
+            $user->setRoles(["ROLE_SPECIALISTE"]);
+            $entityManager->persist($user);
+            $entityManager->remove($demande);
+            $entityManager->flush();
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('chritechverify@gmail.com', 'Verify'))
+                    ->to($user->getEmail())
+                    ->subject('Demande Specialiste')
+                    ->htmlTemplate('Specialiste/admission.html.twig')
+            );
+        }
+        return $this->redirectToRoute('admin_specialistes');
     }
 
     /**

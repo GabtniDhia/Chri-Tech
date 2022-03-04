@@ -53,6 +53,47 @@
         {% endfor %}
         </tbody>
     </table>
-
-
 {% endblock %}
+
+{% block content2 %}
+    <h1>Liste des Demandes Spec</h1>
+    <table class="table">
+        <thead>
+        <th>ID</th>
+        <th>Nom & Prenom</th>
+        <th>EMAIL</th>
+        <th>Domaine</th>
+        <th>Certif</th>
+        <th>Description</th>
+        <th>Date Demande</th>
+        <th>Verifié</th>
+        <th>ACTIONS</th>
+        </thead>
+        <tbody>
+        {% for demande in demandes%}
+            <tr>
+                <td>{{ demande.demandeur.ID }}</td>
+                <td>{{ demande.demandeur.nom }} {{ demande.demandeur.prenom }}</td>
+                <td>{{ demande.demandeur.email }}</td>
+                <td>{{ demande.domaine }}</td>
+                <td>certif</td>
+                <td>{{ demande.description }}</td>
+                <td>{{ demande.date|date("d/m/Y") }}</td>
+                <td>
+                    {% if demande.demandeur.isverified == "1" %}
+                        Oui
+                    {% else %}
+                        Non
+                    {% endif %}
+                </td>
+                <td><a href="{{ path('admin_demande' , { 'id': demande.id, 'reponse' : "accepter"  }) }}">Accepter</a></td>
+                <td><a href="{{ path('admin_demande' , { 'id': demande.id , 'reponse' : "refuser"  }) }}">Refuser</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>Aucune Demande De Specialiste</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock  %}

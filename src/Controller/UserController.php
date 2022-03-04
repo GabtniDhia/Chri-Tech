@@ -70,12 +70,26 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            $file = $demande->getCerif();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('certif_directory'),
+                    $fileName
+                );
+            } catch (FileException $e){
+
+            }
+            $demande->setCerif($fileName);
             $demande->setDemandeur($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($demande);
             $em->flush();
 
-            $this->addFlash('message', 'Profil Mis a Jour');
+            $this->addFlash('succes', 'Demande Evnoyer Avec Succés');
+            return $this->redirectToRoute('home');
+        }elseif($form->isSubmitted() && !($form->isValid())){
+            $this->addFlash('echec', 'Echec De l Envoi');
             return $this->redirectToRoute('home');
         }
         return $this->render('Specialiste/spec.html.twig', [
