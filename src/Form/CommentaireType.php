@@ -15,11 +15,17 @@ class CommentaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('contenue', TextareaType::class ,[
+                'attr' => [
+                    'placeholder'=> 'Exprimez-vous...'
+                ]
+
+            ])
+
             ->add('utilisateur', TextType::class)
-            ->add('contenue', TextareaType::class)
-            ->add('date_heure')
             ->add('blog_id')
             ->add('article_id')
+
         ;
     }
 

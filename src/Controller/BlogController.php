@@ -55,24 +55,22 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="blog_show", methods={"GET"})
+     * @Route("/{id}", name="blog_show", methods={"GET", "POST"})
      */
     public function show(
-
-        $id,
         Blog $blog,
         request $request,
-        EntityManagerInterface $Entitymanager,
-        CommentaireRepository $cid
-
+        EntityManagerInterface $entitymanager
     ): Response{
+
         $commentaire = new Commentaire();
         $form = $this->createform(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $this->$Entitymanager->persist($commentaire);
-            $this->$Entitymanager->flush();
+            $commentaire->setBlogId();
+            $entitymanager->persist($commentaire);
+            $entitymanager->flush();
         }
 
         return $this->render('blog/show.html.twig', [
