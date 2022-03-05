@@ -10,7 +10,7 @@
 
 
     <!-- Modal Pop Up Message-->
-    {#{% if is_granted('ROLE_CLIENT') %}
+    {% if is_granted('ROLE_CLIENT') %}
         <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="float-defer-page: last" >
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -28,10 +28,10 @@
                                     <p>Resumer de la messagerie</p>
                                     <p>Recus: {{ app.user.received | length }}</p>
                                     <p>Envoyes: {{ app.user.sent | length }}</p>
-                                    <a  class="btn btn-primary" href="{{ path("messages") }}">
+                                    <a  class="btn btn-primary" href="">
                                         ->Ma Messagerie
                                     </a>
-                                    <a href="{{ path("send") }}" class="btn btn-primary">Envoyer Un Message</a>
+                                    <a href="" class="btn btn-primary">Envoyer Un Message</a>
                                 </div>
                             </div>
                         </section>
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-    {% endif %}#}
+    {% endif %}
 
     <!-- Modal Pop Up Profil-->
     {% if is_granted('ROLE_CLIENT') %}

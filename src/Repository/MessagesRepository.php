@@ -23,18 +23,38 @@ class MessagesRepository extends ServiceEntityRepository
     public function getids(User $user){
         $id = $user->getId();
         $query=$this->getEntityManager()->createQuery("
-            SELECT m FROM App\Entity\Messages m WHERE (m.recipient=:me OR m.sender=:me) AND m.sender <> m.recipient GROUP BY m.sender , m.recipient
+            SELECT m FROM App\Entity\Messages m WHERE m.sender=:me OR m.recipient=:me GROUP BY m.sender,m.recipient ORDER BY m.created_at DESC
         ")
             ->setParameter(':me',$id);
             return $query->getResult();
     }
+
     public function getmsgs(User $user, int $num){
         $id = $user->getId();
-        $query=$this->getEntityManager()->createQuery("
-            SELECT m FROM App\Entity\Messages m WHERE m.sender=:id AND m.recipient=:me OR  m.sender=:me AND m.recipient=:id ORDER BY m.created_at
-        ")
+        $qb=$this->createQueryBuilder('m')
+            ->select('m')
+            ->from(Messages::class , 'm')
+            ->where('m.sender=:id AND m.recipient=:me OR  m.sender=:me AND m.recipient=:id')
+            ->update(Messages::class , 'm')
+            ->set('m.is_read' , 1)
             ->setParameter(':me',$id)
             ->setParameter(':id',$num);
+            $query = $qb->getQuery()->execute();
+
+        $qb2 = $this ->createQueryBuilder('m')
+            ->where('m.sender=:id AND m.recipient=:me OR  m.sender=:me AND m.recipient=:id')
+            ->orderBy('m.created_at' , 'ASC')
+            ->setParameter(':me',$id)
+            ->setParameter(':id',$num);
+        return $qb2->getQuery()->getResult();
+    }
+
+    public function notif(User $user){
+        $id = $user->getId();
+        $query=$this->getEntityManager()->createQuery("
+            SELECT m FROM App\Entity\Messages m WHERE m.recipient=:me AND m.is_read=0
+        ")
+            ->setParameter(':me',$id);
         return $query->getResult();
     }
     // /**
