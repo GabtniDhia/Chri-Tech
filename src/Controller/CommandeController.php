@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Commande;
 use App\Entity\Livraison;
+use App\Entity\User;
 use App\Form\CommandeType;
 use App\Form\LivraisonType;
 use App\Repository\CommandeRepository;
@@ -12,12 +13,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Security\EmailVerifier;
+
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Mime\Address;
 
 /**
 * @Route("/commande")
 */
 class CommandeController extends AbstractController
 {
+    private $emailVerifier;
+
+    public function __construct(EmailVerifier $emailVerifier)
+    {
+        $this->emailVerifier = $emailVerifier;
+    }
     /**
      * @Route("/", name="commande_index", methods={"GET"})
      */
@@ -46,22 +59,24 @@ class CommandeController extends AbstractController
     {
         $commande = new Commande();
         $livraison = new Livraison();
+        $user = $this->getUser();
         $commande->setCommandel($livraison);
         $form = $this->createForm(CommandeType::class, $commande);
         $forma = $this->createForm(LivraisonType::class, $livraison);
         $form->handleRequest($request);
         $forma->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $forma->isSubmitted() && $forma->isValid()) {
             $entityManager->persist($commande);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
-        }
-        if ($forma->isSubmitted() && $forma->isValid()) {
             $entityManager->persist($livraison);
             $entityManager->flush();
-
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('chritechverify@gmail.com', 'Verify'))
+                    ->to($user->getEmail())
+                    ->subject('Chritech: Confirmation de votre achat!')
+                    ->htmlTemplate('commande/livraisonmail.html.twig')
+            );
             return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -78,8 +78,6 @@
                                             <p>{{ form_widget(form.ville) }}</p>
                                             <p>{{ form_errors(form.datelivraison) }}</p>
                                             <p>{{ form_widget(form.datelivraison) }}</p>
-                                            <p>{{ form_widget(form.commande) }}</p>
-                                            <p>{{ form_errors(form.commande) }}</p>
                                             {{ include('livraison/_form.html.twig', {'button_label': 'Modifier'}) }}
                                             {{ include('livraison/_delete_form.html.twig' , {'button_label': 'Annuler'}) }}
                                             <a href="{{ path('livraison_show', {'id': livraison.id}) }}">Voir ma livraison</a>
