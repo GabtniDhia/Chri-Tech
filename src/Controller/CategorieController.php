@@ -99,4 +99,12 @@ class CategorieController extends AbstractController
         return $this->redirectToRoute('categorie_indexback', [], Response::HTTP_SEE_OTHER);
     }
 
+    /**
+     * @Route("cat/{id}", name="categorie_specifique")
+     */
+    public function cat(Request $request, CategorieRepository $categorieRepository): Response
+    {
+
+        return $this->redirectToRoute('categorie_indexback', [], Response::HTTP_SEE_OTHER);
+    }
 }

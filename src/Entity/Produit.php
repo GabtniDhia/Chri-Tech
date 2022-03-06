@@ -80,13 +80,13 @@ class Produit
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="pcat")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="prod")
      */
-    private $catp;
+    private $cat;
 
     public function __construct()
     {
-        $this->catp = new ArrayCollection();
+        $this->cat = new ArrayCollection();
     }
 
 
@@ -211,27 +211,36 @@ class Produit
     /**
      * @return Collection<int, Categorie>
      */
-    public function getCatp(): Collection
+    public function getCat(): Collection
     {
-        return $this->catp;
+        return $this->cat;
+    }
+    /**
+     * @param mixed $prod
+     * @return Produit
+     */
+    public function setCat($cat)
+    {
+        $this->cat = $cat;
+        return $this;
     }
 
-    public function addCatp(Categorie $catp): self
+    public function addCat(Categorie $cat): self
     {
-        if (!$this->catp->contains($catp)) {
-            $this->catp[] = $catp;
-            $catp->setPcat($this);
+        if (!$this->cat->contains($cat)) {
+            $this->cat[] = $cat;
+            $cat->setPcat($this);
         }
 
         return $this;
     }
 
-    public function removeCatp(Categorie $catp): self
+    public function removeCat(Categorie $cat): self
     {
-        if ($this->catp->removeElement($catp)) {
+        if ($this->cat->removeElement($cat)) {
             // set the owning side to null (unless already changed)
-            if ($catp->getPcat() === $this) {
-                $catp->setPcat(null);
+            if ($cat->getprod() === $this) {
+                $cat->setprod(null);
             }
         }
 

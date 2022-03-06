@@ -25,7 +25,7 @@ class ProduitType extends AbstractType
             ->add('Detail_Prod')
             ->add('PrixTTC_Prod')
             ->add('PrixTVA_Prod')
-            ->add('catp',EntityType::class,[
+            ->add('cat',EntityType::class,[
                 'class'=>Categorie::class,
                 'choice_label'=>'Nom_Cat',
 

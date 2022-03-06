@@ -4,7 +4,7 @@
 {% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
 
 {% block content %}
-    <h1>Categorie index</h1>
+    <h1>Catégorie</h1>
 
     <table class="table">
         <thead>
@@ -12,7 +12,7 @@
                 <th>Id</th>
                 <th>Nom_Cat</th>
                 <th>Type_Cat</th>
-                <th>actions</th>
+
             </tr>
         </thead>
         <tbody>
@@ -22,8 +22,11 @@
                 <td>{{ categorie.NomCat }}</td>
                 <td>{{ categorie.TypeCat }}</td>
                 <td>
-                    <a href="{{ path('categorie_show', {'id': categorie.id}) }}">show</a>
-                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}">edit</a>
+                    <a href="{{ path('categorie_show', {'id': categorie.id}) }}"><button type="button" class="btn btn-success">Afficher</button></a>
+                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}"><button type="button" class="btn btn-danger">Modifier</button></a>
+
+
+
                 </td>
             </tr>
         {% else %}
@@ -34,6 +37,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('categorie_new') }}">Create new</a>
+    <a href="{{ path('categorie_new') }}"><button type="button" class="btn btn-primary">create new</button></a>
 
 {% endblock %}

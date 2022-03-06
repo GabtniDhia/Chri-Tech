@@ -3,11 +3,18 @@
 {% block titre1 %} Gestion de Categorie{% endblock %}
 
 {% block content %}
-    <h1>Edit Categorie</h1>
+    <h1>  Modifier Catégorie</h1>
 
-    {{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
+{{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('categorie_indexback') }}">back to list</a>
+    <a href="{{ path('categorie_indexback') }}"><button  class="btn btn-light">Retour</button></a>
 
-    {{ include('categorie/_delete_form.html.twig') }}
+
+
+
+
+
+
+<button class="btn btn-warning">  {{ include('categorie/_delete_form.html.twig') }}</button>
+
 {% endblock %}

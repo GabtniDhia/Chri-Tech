@@ -35,7 +35,7 @@ class Categorie
     /**
      * @ORM\OneToMany (targetEntity=Produit::class, mappedBy="cat")
      */
-    private $pcat;
+    private $prod;
 
 
 
