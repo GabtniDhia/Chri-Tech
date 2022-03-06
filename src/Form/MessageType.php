@@ -18,28 +18,25 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class,[
+
+            ->add('message', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'write_msg',
+                    'placeholder' => 'Ecrir Votre Message',
+                    'autocomplete' => 'off'
                 ]
             ])
-            ->add('message', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ]
+            ->add('Envoyer', SubmitType::class, [
+
             ])
             ->add('recipient' , EntityType::class,[
                 'class' => User::class,
                 'choice_label' => 'nom',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
                 ]
             ])
-            ->add('Envoyer', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
+
         ;
     }
 

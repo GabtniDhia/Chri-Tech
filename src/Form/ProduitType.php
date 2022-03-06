@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Categorie;
+
 
 class ProduitType extends AbstractType
 {
@@ -22,6 +25,11 @@ class ProduitType extends AbstractType
             ->add('Detail_Prod')
             ->add('PrixTTC_Prod')
             ->add('PrixTVA_Prod')
+            ->add('catp',EntityType::class,[
+                'class'=>Categorie::class,
+                'choice_label'=>'Nom_Cat',
+
+            ])
 
         ;
     }

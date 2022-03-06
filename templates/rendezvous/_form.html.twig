@@ -14,14 +14,14 @@
         <td id='info'>{{ form_errors(form.service)}}</td>
     </tr>
     <tr>
-        <td>{{form_label(form.date_rendezvous,"Date Rendez-Vous: " )  }}</td>
+        <td>{{form_label(form.date_rendezvous,"Date Rendez-Vous: "  )  }}</td>
         <td>{{ form_widget(form.date_rendezvous)}}</td>
-        <td id='info'>{{ form_errors(form.date_rendezvous)}}</td>
     </tr>
+
     <tr>
         <td>{{form_label(form.description_rendezvous,"Descriptions: ")  }}</td>
         <td>{{ form_widget(form.description_rendezvous)}}</td>
-        <td id='info'>{{ form_errors(form.description_rendezvous)}}</td>
+
     </tr>
     <tr>
         <td>{{form_label(form.telephonenum,"Tèl: ")  }}</td>
@@ -31,7 +31,6 @@
     <tr>
         <td>{{form_label(form.adressrend,"Adresse: ")  }}</td>
         <td>{{ form_widget(form.adressrend)}}</td>
-        <td id='info'>{{ form_errors(form.adressrend)}}</td>
     </tr>
 
 </table>

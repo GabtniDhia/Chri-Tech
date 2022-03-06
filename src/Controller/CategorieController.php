@@ -98,4 +98,5 @@ class CategorieController extends AbstractController
 
         return $this->redirectToRoute('categorie_indexback', [], Response::HTTP_SEE_OTHER);
     }
+
 }

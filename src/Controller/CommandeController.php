@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
+use App\Entity\Livraison;
 use App\Form\CommandeType;
+use App\Form\LivraisonType;
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +32,7 @@ class CommandeController extends AbstractController
      */
     public function mine(CommandeRepository $commandeRepository): Response
     {
+
         return $this->render('commande/mine.html.twig', [
             'commandes' => $commandeRepository->findAll(),
         ]);
@@ -42,8 +45,12 @@ class CommandeController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $commande = new Commande();
+        $livraison = new Livraison();
+        $commande->setCommandel($livraison);
         $form = $this->createForm(CommandeType::class, $commande);
+        $forma = $this->createForm(LivraisonType::class, $livraison);
         $form->handleRequest($request);
+        $forma->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($commande);
@@ -51,10 +58,19 @@ class CommandeController extends AbstractController
 
             return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
         }
+        if ($forma->isSubmitted() && $forma->isValid()) {
+            $entityManager->persist($livraison);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
+        }
 
         return $this->render('commande/new.html.twig', [
             'commande' => $commande,
+            'livraison' => $livraison,
             'form' => $form->createView(),
+            'forma' => $forma->createView(),
+
         ]);
     }
 

@@ -10,7 +10,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -27,6 +26,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "L' email '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -43,11 +46,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Votre Nom  Doit Contenir Au Moin {{ limit }} characters ",
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 8,
+     *      minMessage = "Votre Prenom De Passe Doit Contenir Au Moin {{ limit }} characters ",
+     * )
      */
     private $prenom;
 
@@ -62,10 +73,10 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      * @Assert\File(
      *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Only jpeg or png are allowed."
+     *     mimeTypesMessage = "Veuillez Choisir Un Fichier Png ou Jpeg"
      * )
      */
     private $image;
@@ -79,6 +90,8 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="recipient", orphanRemoval=true)
      */
     private $received;
+
+
 
     public function __construct()
     {
@@ -283,6 +296,18 @@ class User implements UserInterface
                 $received->setRecipient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdcarte(): ?CarteFidelite
+    {
+        return $this->idcarte;
+    }
+
+    public function setIdcarte(?CarteFidelite $idcarte): self
+    {
+        $this->idcarte = $idcarte;
 
         return $this;
     }

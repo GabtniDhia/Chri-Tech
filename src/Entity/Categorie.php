@@ -33,7 +33,7 @@ class Categorie
     private $Type_Cat;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="catp")
+     * @ORM\OneToMany (targetEntity=Produit::class, mappedBy="cat")
      */
     private $pcat;
 

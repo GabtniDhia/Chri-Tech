@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Messages;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,6 +20,23 @@ class MessagesRepository extends ServiceEntityRepository
         parent::__construct($registry, Messages::class);
     }
 
+    public function getids(User $user){
+        $id = $user->getId();
+        $query=$this->getEntityManager()->createQuery("
+            SELECT m FROM App\Entity\Messages m WHERE (m.recipient=:me OR m.sender=:me) AND m.sender <> m.recipient GROUP BY m.sender , m.recipient
+        ")
+            ->setParameter(':me',$id);
+            return $query->getResult();
+    }
+    public function getmsgs(User $user, int $num){
+        $id = $user->getId();
+        $query=$this->getEntityManager()->createQuery("
+            SELECT m FROM App\Entity\Messages m WHERE m.sender=:id AND m.recipient=:me OR  m.sender=:me AND m.recipient=:id ORDER BY m.created_at
+        ")
+            ->setParameter(':me',$id)
+            ->setParameter(':id',$num);
+        return $query->getResult();
+    }
     // /**
     //  * @return Messages[] Returns an array of Messages objects
     //  */

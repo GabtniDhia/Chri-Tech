@@ -1,37 +1,92 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Messagerie{% endblock %}
-
+{% block bg%} {{ asset('front/assets/img/notif.png') }}  {% endblock %}
+{% block head %}
+    <link href="{{ asset('//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
+    <script src="{{ asset('//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
+{% endblock %}
 {% block content %}
 
-    <section class="container">
-        <div class="row">
-            <div class="col">
-                <h1>Envoyer un Message</h1>
-                {{ form(messForm) }}
-                <a href="{{ path('send') }}" class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                    Voir mes dossiers
-                </a>
-                <a class="btn btn-primary">Envoyer Un Message</a>
-            </div>
-        </div>
-    </section>
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h2 class="offcanvas-title" id="offcanvasExampleLabel">Mes Dossiers</h2>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="list-group">
-                <a href="{{ path('messages') }}" class="list-group-item list-group-item-action active">Accueil</a>
+    <div class="container">
+        <div class="messaging">
+            <div class="inbox_msg">
+                <div class="inbox_people">
+                    <div class="headind_srch">
+                        <div class="recent_heading">
+                            <h4>Recent</h4>
+                        </div>
+                        <div class="srch_bar">
+                            <div class="stylish-input-group">
+                                <a href="{{ path("received") }}"> Nouveau Message </a>
+                                <span class="input-group-addon">
+
+                </span> </div>
+                        </div>
+                    </div>
+                    <div class="inbox_chat">
+                        {% for message in louled %}
+                            <div class="chat_list active_chat">
+                                <a href="{{ path("msg_send" , {id: message.sender.id}) }}"> <div class="chat_people">
+                                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                        <div class="chat_ib">
+                                            {% if message.sender.id == app.user.id %}
+                                            <h5>{{ message.recipient.nom }} <span class="chat_date">{{ message.createdat | date }}</span></h5>
+                                                {% else %}
+                                            <h5>{{ message.sender.nom }} <span class="chat_date">{{ message.createdat | date }}</span></h5>
+                                                    {% endif %}
+                                            <p>{{ message.message }}</p>
+                                        </div>
+                                    </div></a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+                <div class="mesgs">
+                    <div class="msg_history">
+                        {% for msg in messages %}
+                            {% if msg.sender.id != app.user.id %}
+                                <div class="incoming_msg">
+                                    <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg">
+                                            <p>{{ msg.message }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+
+                                <div class="outgoing_msg">
+                                    <div class="sent_msg" >
+                                        <p>{{ msg.message }}</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <span class="js-msg"></span>
+                    </div>
+                    <div class="type_msg">
+                        <div class="input_msg_write">
+                            {{ form_start(messForm) }}
+                            {{ form_row(messForm._token) }}
+                            {{ form_widget(messForm.message, {attr: {id: 'textbox'} }) }}
+                            <i class="fa fa-paper-plane-o" aria-hidden="true" style="width: 30px"></i>
+                            <button id="button" class="msg_send_btn" href="{{ path("msg_send" , {id:8}) }}"><i class="	fa fa-paper-plane"></i></button>
+                            {{ form_end(messForm, {'render_rest': false}) }}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="list-group">
-                <a href="{{ path('messages') }}" class="list-group-item list-group-item-action ">Boite de Reception</a>
-            </div>
-            <div class="list-group">
-                <a href="{{ path('messages') }}" class="list-group-item list-group-item-action ">Elements Envoyes</a>
-            </div>
-        </div>
-    </div>
+
+
+        </div></div>
+
 {% endblock %}
+
+
+
+

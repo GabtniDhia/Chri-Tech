@@ -2,55 +2,79 @@
 
 {% block title %}Messagerie{% endblock %}
 {% block bg%} {{ asset('front/assets/img/notif.png') }}  {% endblock %}
+{% block head %}
+    <link href="{{ asset('//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
+    <script src="{{ asset('//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js') }}"></script>
+{% endblock %}
 {% block content %}
 
-    <section class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>Messagerie</h1>
-                <h2>Boite de Reception</h2>
-                <p>Vous Aves Recus: {{ app.user.received | length }} Messages</p>
-            </div>
-                <div class="col-3">De</div>
-                <div class="col-3">Sujet</div>
-                <div class="col-3">Date</div>
-                <div class="col-3">Actions</div>
-                {% for message in app.user.received %}
-                    {% if message.isRead ==0 %}
-                        {% set bold = "fw-bold" %}
-                    {% else %}
-                        {% set bold = "" %}
-                    {% endif%}
+    <div class="container">
+        <div class="messaging">
+            <div class="inbox_msg">
+                <div class="inbox_people">
+                    <div class="headind_srch">
+                        <div class="recent_heading">
+                            <h4>Recent</h4>
+                        </div>
+                        <div class="srch_bar">
+                            <div class="stylish-input-group">
+                                <input type="text" class="search-bar"  placeholder="Search" >
+                                <span class="input-group-addon">
+                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span> </div>
+                        </div>
+                    </div>
+                    <div class="inbox_chat">
+                        {% for message in louled %}
+                            <div class="chat_list active_chat">
+                                <a href="{{ path("msg_send" , {id: message.sender.id}) }}"> <div class="chat_people">
+                                        <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                        <div class="chat_ib">
+                                            {% if message.sender.id == app.user.id %}
+                                                <h5>{{ message.recipient.nom }} <span class="chat_date">{{ message.createdat | date }}</span></h5>
+                                            {% else %}
+                                                <h5>{{ message.sender.nom }} <span class="chat_date">{{ message.createdat | date }}</span></h5>
+                                            {% endif %}
+                                            <p>{{ message.message }}</p>
+                                        </div>
+                                    </div></a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
 
-                    <div class="col-3 {{ bold }}">{{ message.sender.email }}</div>
-                    <div class="col-3 {{ bold }}"> <a href="{{ path("read" , {id: message.id}) }}">{{ message.title }}</a></div>
-                    <div class="col-3 {{ bold }}">{{ message.createdat | date }}</div>
-                    <div class="col-3 {{ bold }}"></div>
-                {% endfor %}
-                <div class="col">
-                <a  class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                    Voir mes dossiers
-                </a>
-                <a href="{{ path("send") }}" class="btn btn-primary">Envoyer Un Message</a>
-            </div>
-        </div>
-    </section>
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h2 class="offcanvas-title" id="offcanvasExampleLabel">Mes Dossiers</h2>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="list-group">
-                <a href="{{ path('messages') }}" class="list-group-item list-group-item-action ">Accueil</a>
+                <div class="mesgs">
+                    <div class="msg_history">
+                        <h3 style="text-align: center; margin-top: 100px"> Envoyer Un Nouveau Message</h3>
+
+                        <div class="type_msg" style="margin-top: 60px">
+                            {{ form_start(messForm) }}
+                            {{ form_widget(messForm.recipient, {attr: {style: 'width: 100px; margin-top: 30px'} }) }}
+                            <p style="font-size: x-small;">NB :Vous Pouvez vous choisir vous meme ent tant que recipient pour envoyer des messages dans votre espace perso</p>
+                            {{ form_widget(messForm.message, {attr: {style: 'height: 160px; margin-top: 10px'} }) }}
+                            <div style="text-align: center">
+                                {{ form_widget(messForm.Envoyer, {attr: {style: 'margin-top: 20px'} }) }}
+
+                            </div>
+                            {{ form_end(messForm) }}
+
+                        </div>
+
+                    </div>
+                    <div  style="text-align: center; margin-top: 20px">
+                        <a href="{{ path("msg_send" , {id: app.user.id}) }}">
+                            <button class="btn btn-secondary">Mon Espace Inbox</button>
+                        </a>
+                    </div>
+                </div>
+
+
             </div>
-            <div class="list-group">
-                <a href="{{ path('received') }}" class="list-group-item list-group-item-action active">Boite de Reception</a>
-            </div>
-            <div class="list-group">
-                <a href="{{ path('messages') }}" class="list-group-item list-group-item-action ">Elements Envoyes</a>
-            </div>
-        </div>
-    </div>
+
+        </div></div>
+
+
+
 {% endblock %}

@@ -4,11 +4,10 @@
 {% block titre1 %}Devenez membre et activez votre carte{% endblock %}
 {% block titre2 %} 
 <div class="flexbox">
-  <div class="header"><a href="{{ path('cartes')}}"><h4>Appliquer pour une carte de fidelité</h4></a></div>
+  <button type="button" class="btn btn-warning-s"><a href="{{ path('cartes')}}">Appliquer pour une carte de fidelité</a></div>
   <div class="main">
     <div class="flexbox-row">
-      <div class="first"><a href="{{ path('offre_index')}}"><h4>Voir les offres</a></h4></div>
-      <div class="second"><a><h4>Revenir à la page d'acceuil</a></h4></div>
+      <button type="button" class="btn btn-warning" > <a href="{{ path('offre_index')}}">Voir les offres</button>
     </div>
   </div>
 </div>
@@ -43,6 +42,21 @@
   flex: 1;
 }
 
+.btn btn-warning {
+  border-radius: 5px;
+  font-size: 20px;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding-right: 25px ;
+  padding-left: 45px;
+
+
+}
+.btn btn-warning-s {
+  border-radius: 5px;
+  font-size: 17px;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 20px 18px;
+}
 </style>
 
 {% endblock %}

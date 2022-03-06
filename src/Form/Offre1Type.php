@@ -7,12 +7,26 @@ use App\Entity\Offre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class Offre1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        
+        $builder
+        ->add('description')
+        ->add('image')
+          ->add('type', ChoiceType::class, [
+                'choices'  => [
+                    'Standard',
+                    'Silver',
+                    'Gold',
+                    'Premium',
+                ],
+            ])
+            ->add('prix')
+            ->add('points')
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

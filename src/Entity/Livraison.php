@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LivraisonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -48,12 +50,17 @@ class Livraison
      * @Assert\GreaterThan("today")
      */
     private $datelivraison;
-    /**
-     * @ORM\OneToOne(targetEntity=Commande::class, mappedBy="livraison", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
 
+    /**
+     * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="commandel" )
      */
-    private $commande;
+    private $commandes;
+
+    public function __construct()
+    {
+        $this->commandes = new ArrayCollection();
+    }
+
 
 
     public function getId(): ?int
@@ -108,22 +115,37 @@ class Livraison
 
         return $this;
     }
-    public function getCommande(): ?Commande
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
     {
-        return $this->commande;
+        return $this->commandes;
     }
 
-    public function setCommande(Commande $commande): self
+    public function addCommande(Commande $commande): self
     {
-        // set the owning side of the relation if necessary
-        if ($commande->getLivraison() !== $this) {
-            $commande->setLivraison($this);
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setCommandel($this);
         }
-
-        $this->commande = $commande;
 
         return $this;
     }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getCommandel() === $this) {
+                $commande->setCommandel(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 
 

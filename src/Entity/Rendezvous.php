@@ -38,6 +38,7 @@ class Rendezvous
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $description_rendezvous;
 
@@ -53,12 +54,14 @@ class Rendezvous
     private $telephonenum;
 
     /**
-     * @ORM\OneToOne(targetEntity=Avis::class, inversedBy="rendezvous",onDelete=”SET NULL”)
+     * @ORM\OneToOne(targetEntity=Avis::class, inversedBy="rendezvous")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $avis;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $adressrend;
 

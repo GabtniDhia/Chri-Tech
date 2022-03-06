@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,7 +18,7 @@ class ModifUserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
-            ->add('Valider' , SubmitType::class)
+            ->add('image' , FileType::class, array('data_class' => null))
         ;
     }
 

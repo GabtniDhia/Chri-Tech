@@ -27,9 +27,11 @@
                                     <div class="card-body">
                                         <div class="billing-address-form">
 
-
+                                            <p>{{ form_errors(form.utilisateur) }}</p>
                                             <p>{{ form_widget(form.utilisateur) }}</p>
+                                            <p>{{ form_errors(form.titre) }}</p>
                                             <p>{{ form_widget(form.titre) }}</p>
+                                            <p>{{ form_errors(form.contenue) }}</p>
                                             <p>{{ form_widget(form.contenue) }}</p>
 
 

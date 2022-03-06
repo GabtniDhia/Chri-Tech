@@ -78,13 +78,9 @@ class Produit
      */
     private $PrixTVA_Prod;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $cat;
 
     /**
-     * @ORM\OneToMany(targetEntity=Categorie::class, mappedBy="pcat")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="pcat")
      */
     private $catp;
 
@@ -210,17 +206,7 @@ class Produit
         return $this;
     }
 
-    public function getCat(): ?string
-    {
-        return $this->cat;
-    }
 
-    public function setCat(string $cat): self
-    {
-        $this->cat = $cat;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Categorie>

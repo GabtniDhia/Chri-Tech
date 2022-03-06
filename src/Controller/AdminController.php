@@ -63,6 +63,17 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Traiter les demandes des sepecialistes
+     *
+     * @Route("/demande", name="demande")
+     */
+    public function demande(UserRepository $user){
+        return $this->render("admin/specialistes.html.twig", [
+            'user' => $user->findAll()
+        ]);
+    }
+
+    /**
      * Modifier un Utilisateur
      * @Route("/utilisateur/modifier/{id}/{route}", name="modifier_utilisateur")
      */
@@ -108,8 +119,8 @@ class AdminController extends AbstractController
     public function suppUser($route , $id, UserRepository $repository, Request $request){
         $utilisateur=$repository->find($id);
         $entityManager=$this->getDoctrine()->getManager();
-        #$entityManager->remove($utilisateur);
-        #$entityManager->flush();
+        $entityManager->remove($utilisateur);
+        $entityManager->flush();
         if($route == 'admin_clients' ){
             return $this->redirectToRoute('admin_clients');
         }elseif ($route == 'admin_specialistes' ){
@@ -141,4 +152,5 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 }

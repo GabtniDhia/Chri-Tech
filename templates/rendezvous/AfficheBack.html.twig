@@ -12,6 +12,8 @@
             <th>Date_rendezvous</th>
             <th>Description_rendezvous</th>
             <th>Telephonenum</th>
+            <th>Adresse</th>
+
         </tr>
         </thead>
         <tbody>
@@ -23,6 +25,8 @@
                 <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
                 <td>{{ rendezvou.descriptionRendezvous }}</td>
                 <td>{{ rendezvou.telephonenum }}</td>
+                <td>{{ rendezvou.adressrend }}</td>
+
             </tr>
         {% else %}
             <tr>

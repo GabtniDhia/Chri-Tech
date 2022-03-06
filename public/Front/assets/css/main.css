@@ -2933,3 +2933,19 @@ table.order-details tbody td {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
+#screen
+{
+  width: 200px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+}
+
+#leftDesc
+{
+  overflow: hidden;
+  height: 20px;
+  color: black;
+  white-space:nowrap;
+}
+

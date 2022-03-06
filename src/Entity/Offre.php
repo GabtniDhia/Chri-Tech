@@ -22,6 +22,8 @@ class Offre
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     *
      */
     private $description;
 
@@ -36,13 +38,24 @@ class Offre
 
     /**
      * @ORM\ManyToMany(targetEntity=Produit::class)
+     * @Assert\NotBlank
      */
     private $IDProd;
 
     /**
-     * @ORM\Column(name="type", type="string", columnDefinition="enum('standard', 'silver' ,'gold')")
+     * @ORM\Column(name="type", type="string", columnDefinition="enum('standard', 'silver' ,'gold', 'premium')")
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $Prix;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $points;
 
     public function __construct()
     {
@@ -66,12 +79,12 @@ class Offre
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage( $image)
     {
         $this->image = $image;
 
@@ -110,6 +123,30 @@ class Offre
     public function setType($type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->Prix;
+    }
+
+    public function setPrix(int $Prix): self
+    {
+        $this->Prix = $Prix;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }

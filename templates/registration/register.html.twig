@@ -21,6 +21,12 @@
                     <div id="form_status"></div>
                     <div class="contact-form">
                     <div class="form">
+                        <div class="container" style="margin-left: 120px">
+                            <p> {{ form_errors(registrationForm.nom) }}
+                                {{ form_errors(registrationForm.prenom) }}
+                                {{ form_errors(registrationForm.email) }}
+                            </p>
+                        </div>
                             {{ form_start(registrationForm) }}
                             <p>
 
@@ -35,7 +41,7 @@
                             </p>
                             <p>{{ form_row(registrationForm.image) }}</p>
                             {{ form_widget(registrationForm) }}
-                            <p><input style="text-align: center" type="submit" value="Submit" ></p>
+                        <p style="text-align: center"><input style="text-align: center" type="submit" value="Modifer" ></p>
                             {{ form_end(registrationForm) }}
                     </div>
                     </div>

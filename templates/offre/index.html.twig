@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Chritech {% endblock %}
-{% block bg%} {{ asset('front/assets/img/avbg.jpg') }}  {% endblock %}
-{% block titre1 %}Services{% endblock %}
-{% block titre2 %} <a href="{{ path('offre_new') }}  " style="color: antiquewhite">Nos Offres <h6 style="color: floralwhite" ><small>Pour Donner un Avis Cliquer ici</small></h6></a>
-{% endblock %}
+{% block bg%} {{ asset('front/assets/img/yellow.jpg') }}  {% endblock %}
+{% block titre1 %}{% endblock %}
+{% block titre2 %}Les offres{% endblock %}
 {% block content %}
     <div class="row">
         {% for offre in offres %}
             <div class="col-lg-4 col-md-6">
 					<div class="single-latest-news">
-						<a href="single-news.html"><div class="latest-news-bg news-bg-1">{{ offre.image }}</div></a>
+						<a href="single-news.html"><div class=" news-bg-1"><img src="{{ asset('uploads/images/' ~ offre.image) }}"></div></a>
 						<div class="news-text-box">
 							<h3><a href="single-news.html">{{ offre.description }}</a></h3>
 						
-							<p class="excerpt">{{ offre.description }}</p>
-							<a href="{{ path('offre_show', {'id': offre.id}) }}" class="read-more-btn">read more <i class="fas fa-angle-right"></i></a>
+							<p class="excerpt">{{ offre.prix }} DT</p>
+                            <p class="excerpt">{{ offre.points }} Points</p>
+							<a href="{{ path('offre_show', {'id': offre.id}) }}" class="read-more-btn">Click here to see the offer <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -31,5 +31,5 @@
 				
 				
 
-    <a href="{{ path('offre_new') }}">Create new</a>
+    <a
 {% endblock %}

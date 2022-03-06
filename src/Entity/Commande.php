@@ -47,9 +47,10 @@ class Commande
     private $email;
 
     /**
-     * @ORM\OneToOne(targetEntity=Livraison::class, inversedBy="commande", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Livraison::class, inversedBy="commandes",cascade={"persist"})
      */
-    private $livraison;
+    private $commandel;
+
 
     public function getId(): ?int
     {
@@ -92,20 +93,22 @@ class Commande
         return $this;
     }
 
-    public function getLivraison(): ?Livraison
+    public function getCommandel(): ?Livraison
     {
-        return $this->livraison;
+        return $this->commandel;
     }
 
-    public function setLivraison(Livraison $livraison): self
+    public function setCommandel(?Livraison $commandel): self
     {
-        $this->livraison = $livraison;
+        $this->commandel = $commandel;
 
         return $this;
     }
-    public function __toString() {
-        return $this->nom;
 
+    public function __toString()
+    {
+return $this->getNom();
     }
+
 
 }
