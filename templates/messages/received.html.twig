@@ -38,7 +38,12 @@
                                             {% else %}
                                                 <h5>{{ message.sender.nom }} <span class="chat_date">{{ message.createdat | date }}</span></h5>
                                             {% endif %}
-                                            <p>{{ message.message }}</p>
+                                            {% if message.isread == 0 %}
+                                                <p style="color: black; font-weight: bolder">{{ message.message }}</p>
+                                            {% else %}
+                                                <p>{{ message.message }}</p>
+                                            {% endif %}
+
                                         </div>
                                     </div></a>
                             </div>
