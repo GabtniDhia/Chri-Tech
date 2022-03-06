@@ -155,7 +155,7 @@ class RendezvousController extends AbstractController
      $rendezvousRepository= $paginator->paginate(
     $allrendezvous,
     $request->query->getInt('page',1),
-50
+     5
      );
         return $this->render('rendezvous/index.html.twig', [
             'rendezvouses' => $rendezvousRepository,
