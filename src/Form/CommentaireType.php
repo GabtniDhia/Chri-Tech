@@ -23,8 +23,7 @@ class CommentaireType extends AbstractType
             ])
 
             ->add('utilisateur', TextType::class)
-            ->add('blog_id')
-            ->add('article_id')
+
 
         ;
     }

@@ -68,10 +68,17 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $commentaire->setBlogId();
+            $blog->getId();
+            $commentaire->setBlogId($blog);
             $entitymanager->persist($commentaire);
             $entitymanager->flush();
+            //clearing form
+            unset($commentaire);
+            unset($form);
+             $commentaire= new Commentaire();
+             $form = $this->createForm(CommentaireType::class, $commentaire);
         }
+
 
         return $this->render('blog/show.html.twig', [
             'blog' => $blog,
