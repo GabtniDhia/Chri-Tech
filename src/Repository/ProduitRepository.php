@@ -20,11 +20,11 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
 
-    public function guess(){
+    public function guess(Int $id){
         $query=$this->getEntityManager()->createQuery("
             SELECT p FROM APP\Entity\Produit p WHERE p.id <> :id
         ")
-            ->setParameter(':id', 6);
+            ->setParameter(':id', $id);
         return $query->getResult();
     }
 

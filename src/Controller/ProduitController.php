@@ -138,7 +138,7 @@ class ProduitController extends AbstractController
     {
         return $this->render('produit/single.html.twig', [
             'produit' => $produit->findOneBy(['id' => $id]),
-            'chkawlek' => $produit->guess()
+            'chkawlek' => $produit->guess($id)
 
         ]);
     }

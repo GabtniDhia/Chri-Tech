@@ -102,9 +102,11 @@ class CategorieController extends AbstractController
     /**
      * @Route("cat/{id}", name="categorie_specifique")
      */
-    public function cat(Request $request, CategorieRepository $categorieRepository): Response
+    public function cat($id,Request $request, CategorieRepository $categorieRepository): Response
     {
 
-        return $this->redirectToRoute('categorie_indexback', [], Response::HTTP_SEE_OTHER);
+        return $this->render('categorie/specifique.html.twig', [
+            'produits' => $categorieRepository->specifique($id)
+        ]);
     }
 }

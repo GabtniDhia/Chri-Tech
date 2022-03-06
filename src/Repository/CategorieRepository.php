@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Categorie;
+use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +19,15 @@ class CategorieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Categorie::class);
     }
+
+    public function specifique(int $id){
+        $query=$this->getEntityManager()->createQuery("
+            SELECT p FROM APP\Entity\Produit p WHERE p.cat = :id
+        ")
+            ->setParameter(':id', $id);
+        return $query->getResult();
+    }
+
 
     // /**
     //  * @return Categorie[] Returns an array of Categorie objects
