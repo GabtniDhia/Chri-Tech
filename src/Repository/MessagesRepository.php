@@ -34,7 +34,7 @@ class MessagesRepository extends ServiceEntityRepository
         $qb=$this->createQueryBuilder('m')
             ->select('m')
             ->from(Messages::class , 'm')
-            ->where('m.sender=:id AND m.recipient=:me OR  m.sender=:me AND m.recipient=:id')
+            ->where('m.sender=:id AND m.recipient=:me')
             ->update(Messages::class , 'm')
             ->set('m.is_read' , 1)
             ->setParameter(':me',$id)
