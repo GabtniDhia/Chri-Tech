@@ -74,7 +74,8 @@ class MessagesController extends AbstractController
 
         return $this->render("messages/received.html.twig", [
             'louled' => $messages->getids($me),
-            'messForm' => $form->createView()
+            'messForm' => $form->createView(),
+            'x' => $messages->notif($me)
         ]);
     }
 }

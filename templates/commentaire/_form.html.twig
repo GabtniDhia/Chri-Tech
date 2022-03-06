@@ -1,17 +1,23 @@
+{% block content %}
 
 
-<div class="comment-template">
-    <h4>Leave a comment</h4>
-    <p>If you have a comment dont feel hesitate to send us your opinion.</p>
-    <form action="index.html">
-        <p>
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <input type="text" placeholder="Your Name">
-            <input type="email" placeholder="Your Email">
-        </p>
-        <p><textarea name="comment" id="comment" cols="30" rows="10" placeholder="Your Message"></textarea></p>
-        <p><input type="submit" value="Submit" ></p> <button class="btn">{{ button_label|default('Save') }}</button>
-        {{ form_end(form) }}
-    </form>
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-6">
+            <div class="bg-white comment-section">
+                <div class="d-flex justify-content-between p-3 border-top"><span <p></p>Leave a comment</span>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <br>
+                    <button class="btn">{{ button_label|default('Save') }}</button>
+                    {{ form_end(form) }}
+
+                    <div class="d-flex align-items-center border-left px-3 comments"><i class="fa fa-comment"></i><span class="ml-2">6</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+{% endblock %}

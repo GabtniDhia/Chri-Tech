@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommentaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -105,5 +106,11 @@ class Commentaire
         $this->article_id = $article_id;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+        $this->date_heure = new \DateTime('now');
     }
 }
