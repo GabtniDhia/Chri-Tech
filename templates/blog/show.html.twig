@@ -4,134 +4,191 @@
 
 {% block bg%} {{ asset('front/assets/img/depositphotos_76358235-stock-photo-desk-of-blogger.jpg') }}  {% endblock %}
 {% block titre1 %}BLOG{% endblock %}
-{% block titre2 %}Bienvenue{% endblock %}
-
 {% block content %}
-    <h1>Blog</h1>
+
+    <section class="blog-posts grid-system">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="all-blog-posts">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="blog-post">
+                                    <div class="blog-thumb">
+                                        <img src="assets/images/blog-post-02.jpg" alt="">
+                                    </div>
+                                    <div class="down-content">
+                                        <span>Lifestyle</span>
+                                        <a><h4>{{ blog.titre }}</h4></a>
+                                        <ul class="post-info">
+                                            <li><a href="#">{{ blog.utilisateur }}</a></li>
+                                            <li><a href="#">{{ blog.dateHeure ? blog.dateHeure|date('Y-m-d H:i:s') : '' }}</a></li>
+                                            <li><a href="#">10 Comments</a></li>
+                                        </ul>
+                                        <p>{{ blog.contenue }}</p>
+                                        <div class="post-options">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <ul class="post-tags">
+                                                        <li><i class="fa fa-tags"></i></li>
+                                                        <li><a href="#">Best Templates</a>,</li>
+                                                        <li><a href="#">TemplateMo</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-6">
+                                                    <ul class="post-share">
+                                                        <li><i class="fa fa-share-alt"></i></li>
+                                                        <li><a href="#">Facebook</a>,</li>
+                                                        <li><a href="#"> Twitter</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ path('blog_index') }}">back to list</a>
+
+                            <a href="{{ path('blog_edit', {'id': blog.id}) }}">edit</a>
+
+                            {{ include('blog/_delete_form.html.twig') }}
+
+                            <div class="col-lg-12">
+                                <div class="sidebar-item comments">
+                                    <div class="sidebar-heading">
+                                        <h2>{{ blog.commentaires |length}} Commentaires</h2>
+                                    </div>
+                                    <div class="content">
+                                        <ul>
+                                            {% for commentaire in blog.commentaires %}
+                                            <li>
+                                                <div class="author-thumb">
+                                                    <img src="assets/images/comment-author-01.jpg" alt="">
+                                                </div>
+                                                <div class="right-content">
+                                                    <h4>{{ commentaire.utilisateur }}<span>{{ commentaire.dateHeure ? commentaire.dateHeure|date('Y-m-d H:i:s') : '' }}</span></h4>
+                                                    <p>{{ commentaire.contenue }}</p>
+                                                </div>
+                                            </li>
+                                                <li class="replied">
+                                                    <div class="author-thumb">
+                                                    </div>
+
+                                                </li>
+                                            {% endfor %}
 
 
+                                        </ul>
+                                    </div>
 
 
-<div class="testimonail-section mt-80 mb-150">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1 text-center">
+                                    {%include "commentaire/_form.html.twig" %}
 
+                                </div>
+                            </div>
 
-                        <div class="client-avater">
-                            <img src="assets/img/avaters/avatar1.png" alt="">
                         </div>
-                        <div class="client-meta">
-                            <h3>{{ blog.utilisateur }}<span>{{ blog.titre }}</span></h3>
-                            <p class="testimonial-body">
-                                {{ blog.contenue }}
-                            </p>
-                            <div class="last-icon">
-                                <i class="fas fa-quote-right"></i>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="sidebar-item search">
+                                    <form id="search_form" name="gs" method="GET" action="#">
+                                        <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="sidebar-item recent-posts">
+                                    <div class="sidebar-heading">
+                                        <h2>Recent Posts</h2>
+                                    </div>
+                                    <div class="content">
+                                        <ul>
+                                            <li><a href="post-details.html">
+                                                    <h5>Vestibulum id turpis porttitor sapien facilisis scelerisque</h5>
+                                                    <span>May 31, 2020</span>
+                                                </a></li>
+                                            <li><a href="post-details.html">
+                                                    <h5>Suspendisse et metus nec libero ultrices varius eget in risus</h5>
+                                                    <span>May 28, 2020</span>
+                                                </a></li>
+                                            <li><a href="post-details.html">
+                                                    <h5>Swag hella echo park leggings, shaman cornhole ethical coloring</h5>
+                                                    <span>May 14, 2020</span>
+                                                </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="sidebar-item categories">
+                                    <div class="sidebar-heading">
+                                        <h2>Categories</h2>
+                                    </div>
+                                    <div class="content">
+                                        <ul>
+                                            <li><a href="#">- Nature Lifestyle</a></li>
+                                            <li><a href="#">- Awesome Layouts</a></li>
+                                            <li><a href="#">- Creative Ideas</a></li>
+                                            <li><a href="#">- Responsive Templates</a></li>
+                                            <li><a href="#">- HTML5 / CSS3 Templates</a></li>
+                                            <li><a href="#">- Creative &amp; Unique</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="sidebar-item tags">
+                                    <div class="sidebar-heading">
+                                        <h2>Tag Clouds</h2>
+                                    </div>
+                                    <div class="content">
+                                        <ul>
+                                            <li><a href="#">Lifestyle</a></li>
+                                            <li><a href="#">Creative</a></li>
+                                            <li><a href="#">HTML5</a></li>
+                                            <li><a href="#">Inspiration</a></li>
+                                            <li><a href="#">Motivation</a></li>
+                                            <li><a href="#">PSD</a></li>
+                                            <li><a href="#">Responsive</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-
-            </div>
-        </div>
-    </div>
-</div>
-
-    {#<table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ blog.id }}</td>
-            </tr>
-            <tr>
-                <th>Utilisateur</th>
-                <td>{{ blog.utilisateur }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ blog.titre }}</td>
-            </tr>
-            <tr>
-                <th>Contenue</th>
-                <td>{{ blog.contenue }}</td>
-            </tr>
-            <tr>
-                <th>Date_heure</th>
-                <td>{{ blog.dateHeure ? blog.dateHeure|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>#}
-
-    <a href="{{ path('blog_index') }}">back to list</a>
-
-    <a href="{{ path('blog_edit', {'id': blog.id}) }}">edit</a>
-
-    {{ include('blog/_delete_form.html.twig') }}
-
-    <br>
-    <br>
-
-
-    {#<table class="table" style="background-color: white" margin-bottom="100" >
-        <thead>
-        <tr>
-            <th>Utilisateur</th>
-            <th>Contenue</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        {% for commentaire in blog.commentaires %}
-            <tr>
-                <td>{{ commentaire.utilisateur }}</td>
-                <td>{{ commentaire.contenue }}</td>
-
-
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>#}
-
-
-        {#<div class="comment-user-avater">
-        <img src="assets/img/avaters/avatar1.png" alt="">
-    </div>
-    <div class="comment-text-body">
-        <h4>{{ commentaire.utilisateur }} <span class="comment-date">Aprl 26, 2020</span> <a href="#">reply</a></h4>
-        <p>{{ commentaire.contenue }}</p>
-    </div>#}
-
-        <div class="container mt-5">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-8">
-                    <div class="headings d-flex justify-content-between align-items-center mb-3">
-                        <h5>commentaires(6)</h5>
-                        <div class="buttons"> <span class="badge bg-white d-flex flex-row align-items-center"> <span class="text-primary">Comments "ON"</span>
-                        <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
-                    </span> </div>
                     </div>
-                    {% for commentaire in blog.commentaires %}
-                    <div class="card p-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">{{ commentaire.utilisateur }}</small> <small class="font-weight-bold">{{ commentaire.contenue }}</small></span> </div> <small>{{ commentaire.dateHeure ? commentaire.dateHeure|date('Y-m-d H:i:s') : '' }}</small>
-                        </div>
-                        <div class="action d-flex justify-content-between mt-2 align-items-center">
-                            <div class="reply px-4"> <small>Remove</small> <span class="dots"></span> <small>Reply</small> <span class="dots"></span> <small>Translate</small> </div>
-                            <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div>
-                        </div>
-                    </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
+    </section>
 
 
-    {%include "commentaire/_form.html.twig" %}
+
 
 
 
 {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/owl.css') }}">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/flex-slider.css') }}">
+    <link rel="stylesheet" href="{{ asset('Front/assets/css/templatemo-stand-blog.css') }}">
+    script
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('front/assets/js/custom.js') }}"></script>
+    <script src="{{ asset('front/assets/js/owl.js') }}"></script>
+    <script src="{{ asset('front/assets/js/slick.js') }}"></script>
+    <script src="{{ asset('front/assets/js/isotope.js') }}"></script>
+    <script src="{{ asset('front/assets/js/accordions.js') }}"></script>
+
+{% endblock %}
+
+
+
