@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Blog;
+use App\Entity\User;
 use App\Form\BlogType;
 use App\Repository\BlogRepository;
+use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,12 +46,13 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $blog->getImg();
+            $file = $form->get('img')->getData();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             try {
                 $file->move(
                     $this->getParameter('images_directory'),
                     $fileName
+
                 );
             } catch (FileException $e){
 
@@ -73,25 +76,31 @@ class BlogController extends AbstractController
     public function show(
         Blog $blog,
         request $request,
-        EntityManagerInterface $entitymanager
+        EntityManagerInterface $entitymanager,
     ): Response{
 
         $commentaire = new Commentaire();
-        $form = $this->createform(CommentaireType::class, $commentaire);
+        $form = $this->createform(CommentaireType::class, $commentaire );
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $blog->getId();
-            $commentaire->setBlogId($blog);
-            $entitymanager->persist($commentaire);
-            $entitymanager->flush();
-            //clearing form
-            unset($commentaire);
-            unset($form);
-             $commentaire= new Commentaire();
-             $form = $this->createForm(CommentaireType::class, $commentaire);
-        }
 
+            if(!$this->getUser()){
+                return $this->redirectToRoute('app_login');
+            }else{
+                $blog->getId();
+                $commentaire->setBlogId($blog);
+                $commentaire->setUserFK($this->getUser());
+                $entitymanager->persist($commentaire);
+                $entitymanager->flush();
+                //clearing form
+                unset($commentaire);
+                unset($form);
+                $commentaire= new Commentaire();
+                $form = $this->createForm(CommentaireType::class, $commentaire);
+            }
+
+        }
 
         return $this->render('blog/show.html.twig', [
             'blog' => $blog,
@@ -121,7 +130,7 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="blog_delete", methods={"POST"})
+     * @Route("/delete/{id}", name="blog_delete", methods={"POST"})
      */
     public function delete(Request $request, Blog $blog, EntityManagerInterface $entityManager): Response
     {

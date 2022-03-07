@@ -22,8 +22,6 @@ class CommentaireType extends AbstractType
 
             ])
 
-            ->add('utilisateur', TextType::class)
-
 
         ;
     }

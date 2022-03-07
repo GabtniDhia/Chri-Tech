@@ -66,7 +66,7 @@
                                                     <img src="assets/images/comment-author-01.jpg" alt="">
                                                 </div>
                                                 <div class="right-content">
-                                                    <h4>{{ commentaire.utilisateur }}<span>{{ commentaire.dateHeure ? commentaire.dateHeure|date('Y-m-d H:i:s') : '' }}</span></h4>
+                                                    <h4>{{ commentaire.userFK.nom }}<span>{{ commentaire.dateHeure ? commentaire.dateHeure|date('Y-m-d H:i:s') : '' }}</span></h4>
                                                     <p>{{ commentaire.contenue }}</p>
                                                 </div>
                                             </li>
