@@ -42,7 +42,7 @@
                                            value="{{ csrf_token('authenticate') }}">
                                 </div>
 
-                                <p class="small mb-5 pb-lg-2" style="font-size: medium"><a class="text-white-50" href="#!">Mot De Passe Oublié?</a></p>
+                                <p class="small mb-5 pb-lg-2" style="font-size: medium"><a class="text-white-50" href="{{ path('app_forgot_password_request') }}">Mot De Passe Oublié?</a></p>
 
                                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Connecter</button>
 

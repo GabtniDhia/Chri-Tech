@@ -9,9 +9,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+
+use App\Entity\User;
+use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
+use App\Security\UserAuthentificatorAuthenticator;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+
 class UserController extends AbstractController
 {
     private $emailVerifier;
@@ -21,13 +32,12 @@ class UserController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-
     /**
-     * @Route("/forgot", name="pass_forgot")
+     * @Route("/user", name="user")
      */
-    public function forgot(Request $request)
+    public function index(): Response
     {
-        
+        return $this->render('user/index.html.twig');
     }
 
     /**
