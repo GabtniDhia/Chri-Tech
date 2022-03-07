@@ -6,6 +6,7 @@ use App\Entity\Avis;
 
 use App\Entity\Recherche;
 use App\Entity\Rendezvous;
+use App\Entity\User;
 use App\Form\AvisType;
 use App\Form\RendezvousType;
 use App\Repository\AvisRepository;
@@ -96,7 +97,7 @@ class RendezvousController extends AbstractController
 
         $query = $em->createQuery(
             'SELECT n FROM App\Entity\Rendezvous n
-            ORDER BY n.service '
+            ORDER BY n.service Desc, n.telephonenum'
         );
 
         $rendezvous = $query->getResult();
@@ -168,10 +169,13 @@ class RendezvousController extends AbstractController
     */
     public function rendezvous(RendezvousRepository $rendezvousRepository)
     {
-        $rendezvous=$rendezvousRepository->findAll();
+        $user = $this->getUser();
+        $rendezvous=$rendezvousRepository->rdvs($user);
         $rdvs = [];
 
+
         foreach($rendezvous as $rendezvou){
+
             $rdvs[] = [
                 'id' => $rendezvou->getId(),
                 'title'=>$rendezvou->getTitre(),
@@ -181,6 +185,7 @@ class RendezvousController extends AbstractController
                 'description_rendezvous' => $rendezvou->getDescriptionRendezvous(),
                 'adressrend' => $rendezvou->getAdressrend(),
                 'telephonenum' => $rendezvou->getTelephonenum(),
+
             ];
         }
 

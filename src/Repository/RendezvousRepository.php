@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Rendezvous;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,15 @@ class RendezvousRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Rendezvous::class);
+    }
+
+    public function rdvs(User $user){
+        $id = $user->getId();
+        $query=$this->getEntityManager()->createQuery("
+            SELECT r FROM App\Entity\Rendezvous r WHERE r.client=:me 
+        ")
+            ->setParameter(':me',$id);
+        return $query->getResult();
     }
     public function search($term)
     {
