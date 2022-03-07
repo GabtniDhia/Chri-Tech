@@ -174,6 +174,7 @@ class RendezvousController extends AbstractController
         foreach($rendezvous as $rendezvou){
             $rdvs[] = [
                 'id' => $rendezvou->getId(),
+                'title'=>$rendezvou->getTitre(),
                 'titre' => $rendezvou->getTitre(),
                 'service' => $rendezvou->getService(),
                 'start' => $rendezvou->getDateRendezvous()->format('Y-m-d H:i:s'),
