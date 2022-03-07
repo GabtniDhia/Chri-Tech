@@ -30,8 +30,9 @@ class Rendezvous
     private $service;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      * @Assert\Type("\DateTime")
+     * @var string A "Y-m-d H:i:s" formatted value
      * @Assert\GreaterThan("today")
      */
     private $date_rendezvous;
@@ -64,6 +65,12 @@ class Rendezvous
      * @Assert\NotBlank
      */
     private $adressrend;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
 
     public function getId(): ?int
     {
@@ -153,8 +160,17 @@ class Rendezvous
 
         return $this;
     }
-    public function __toString() {
-        return $this->titre;
 
+    public function getClient(): ?user
+    {
+        return $this->client;
     }
+
+    public function setClient(?user $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
 }

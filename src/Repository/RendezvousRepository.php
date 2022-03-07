@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Rendezvous;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,6 +20,22 @@ class RendezvousRepository extends ServiceEntityRepository
         parent::__construct($registry, Rendezvous::class);
     }
 
+    public function rdvs(User $user){
+        $id = $user->getId();
+        $query=$this->getEntityManager()->createQuery("
+            SELECT r FROM App\Entity\Rendezvous r WHERE r.client=:me 
+        ")
+            ->setParameter(':me',$id);
+        return $query->getResult();
+    }
+    public function search($term)
+    {
+        return $this->createQueryBuilder('Rendezvous')
+            ->andWhere('Rendezvous.titre LIKE :titre')
+            ->setParameter('titre', '%'.$term.'%')
+            ->getQuery()
+            ->execute();
+    }
     // /**
     //  * @return Rendezvous[] Returns an array of Rendezvous objects
     //  */
@@ -47,4 +64,5 @@ class RendezvousRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

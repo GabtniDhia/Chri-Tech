@@ -2,7 +2,7 @@
 {% block title %} Espace Admin {% endblock %}
 {% block titre1 %} Voir Les Rendez Vous {% endblock %}
 {% block content %}
-    <h1>Liste des Specialistes</h1>
+    <h1>Liste des Rendez-vous</h1>
     <table class="table" align="center">
         <thead>
         <tr>
@@ -13,19 +13,21 @@
             <th>Description_rendezvous</th>
             <th>Telephonenum</th>
             <th>Adresse</th>
+            <th>Client_id</th>
 
         </tr>
         </thead>
         <tbody>
-        {% for rendezvou in rendezvouses %}
+        {% for rendezvou in rendezvous %}
             <tr>
 
                 <td>{{ rendezvou.titre }}</td>
                 <td>{{ rendezvou.service }}</td>
-                <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d') : '' }}</td>
+                <td>{{ rendezvou.dateRendezvous ? rendezvou.dateRendezvous|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ rendezvou.descriptionRendezvous }}</td>
                 <td>{{ rendezvou.telephonenum }}</td>
                 <td>{{ rendezvou.adressrend }}</td>
+                <td>{{ rendezvou.client.id }}</td>
 
             </tr>
         {% else %}
@@ -35,4 +37,12 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="card-body">
+
+        <a class="btn btn-primary" href="{{path('trirdv')}}">Tri par Services et n°tél</a>
+        <a class="btn btn-primary" href="{{path('trirdv2')}}">Tri par Date d'insèrtions</a>
+
+        <a class="btn btn-primary" href="{{path('statRendezvous')}}">Stat par type de Service</a>
+
+    </div>
 {% endblock %}

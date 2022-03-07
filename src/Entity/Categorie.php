@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategorieRepository::class)
@@ -19,13 +22,30 @@ class Categorie
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank(message="Entrez le nom du catégorie")
      */
     private $Nom_Cat;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank(message="Entrez le type")
      */
     private $Type_Cat;
+
+    /**
+     * @ORM\OneToMany (targetEntity=Produit::class, mappedBy="cat")
+     */
+    private $prod;
+
+
+
+
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+        $this->cle_prod = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -55,4 +75,31 @@ class Categorie
 
         return $this;
     }
+
+    public function getPcat(): ?Produit
+    {
+        return $this->pcat;
+    }
+
+    public function setPcat(?Produit $pcat): self
+    {
+        $this->pcat = $pcat;
+
+        return $this;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

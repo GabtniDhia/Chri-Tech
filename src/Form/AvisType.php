@@ -30,7 +30,8 @@ class AvisType extends AbstractType
                 'expanded' => 'oui',
             ] )
             ->add('description_service')
-            ->add('rendezvous')
+
+
         ;
     }
 

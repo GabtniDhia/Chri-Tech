@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block title %} Liste des produits{% endblock %}
 {% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
-{% block titre1 %}Register{% endblock %}
-{% block titre2 %}Ahla & Sahla{% endblock %}
+{% block titre1 %}Achat de Produit{% endblock %}
+{% block titre2 %}Produits{% endblock %}
 
 {% block content %}
 
@@ -13,24 +13,24 @@
             <div class="col-md-4">
                 <!-- bbb_deals -->
                 <div class="bbb_deals">
-                    <div class="ribbon ribbon-top-right"><span><small class="cross">x </small>3</span></div>
-                    <div class="bbb_deals_title"> Titre </div>
+                    <div class="ribbon ribbon-top-right"></div>
+                    <div class="bbb_deals_title">{{ produit.NomProd }}</div>
                     <div class="bbb_deals_slider_container">
                         <div class=" bbb_deals_item">
                             <div class="bbb_deals_image"><img src="{{ asset('uploads/images/' ~ produit.ImageProd) }}" alt=""
                                                               height="360px" width="240px"></div>
                             <div class="bbb_deals_content">
                                 <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
-                                    <div class="bbb_deals_item_category"><a href="#">Laptops</a></div>
+                                    <div class="bbb_deals_item_category"><a href="{{ path('produit_single' , { 'id': produit.Id}) }}">{{ produit.RefProd }}</a></div>
                                     <div class="bbb_deals_item_price_a ml-auto"><strike>₹30,000</strike></div>
                                 </div>
                                 <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
-                                    <div class="bbb_deals_item_name">Toshiba B77</div>
-                                    <div class="bbb_deals_item_price ml-auto">₹27,550</div>
+                                    <div class="bbb_deals_item_name">{{ produit.NomProd }}</div>
+                                    <div class="bbb_deals_item_price ml-auto">{{ produit.PrixUnitHTProd }}</div>
                                 </div>
                                 <div class="available">
                                     <div class="available_line d-flex flex-row justify-content-start">
-                                        <div class="available_title">Available: <span>6</span></div>
+                                        <div class="available_title">{{ produit.QteStockProd }}<span></span></div>
                                         <div class="sold_stars ml-auto"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
                                     </div>
                                     <div class="available_bar"><span style="width:17%"></span></div>

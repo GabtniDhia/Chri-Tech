@@ -1,0 +1,42 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+
+{% block content %}
+    <h1>Catégorie</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom_Cat</th>
+                <th>Type_Cat</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.id }}</td>
+                <td>{{ categorie.NomCat }}</td>
+                <td>{{ categorie.TypeCat }}</td>
+                <td>
+                    <a href="{{ path('categorie_show', {'id': categorie.id}) }}"><button type="button" class="btn btn-success">Afficher</button></a>
+                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}"><button type="button" class="btn btn-danger">Modifier</button></a>
+
+
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('categorie_new') }}"><button type="button" class="btn btn-primary">create new</button></a>
+
+{% endblock %}

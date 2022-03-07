@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -75,6 +77,21 @@ class Produit
      *@Assert\NotBlank(message="Entrez le prix TVA")
      */
     private $PrixTVA_Prod;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="prod")
+     */
+    private $cat;
+
+    public function __construct()
+    {
+        $this->cat = new ArrayCollection();
+    }
+
+
+
+
 
     public function getId(): ?int
     {
@@ -188,4 +205,51 @@ class Produit
 
         return $this;
     }
+
+
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCat(): Collection
+    {
+        return $this->cat;
+    }
+    /**
+     * @param mixed $prod
+     * @return Produit
+     */
+    public function setCat($cat)
+    {
+        $this->cat = $cat;
+        return $this;
+    }
+
+    public function addCat(Categorie $cat): self
+    {
+        if (!$this->cat->contains($cat)) {
+            $this->cat[] = $cat;
+            $cat->setPcat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCat(Categorie $cat): self
+    {
+        if ($this->cat->removeElement($cat)) {
+            // set the owning side to null (unless already changed)
+            if ($cat->getprod() === $this) {
+                $cat->setprod(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
+
+
 }

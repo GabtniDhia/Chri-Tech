@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class RendezvousType extends AbstractType
 {
@@ -20,8 +21,13 @@ class RendezvousType extends AbstractType
                     'Installation' => 'Installation',
                 ),
             ))
-            ->add('date_rendezvous')
-            ->add('description_rendezvous')
+            ->add('date_rendezvous',DateTimeType::class, [
+                'placeholder' => [
+                    'année' => 'Année', 'mois' => 'Mois', 'jour' => 'Jour',
+                    'heure' => 'Heure', 'minute' => 'Minute', 'seconde' => 'Seconde',
+                ],
+            ])
+            ->add('description_rendezvous' )
             ->add('adressrend')
 
             ->add('telephonenum')

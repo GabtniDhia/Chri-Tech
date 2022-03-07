@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+{% block titre1 %}Naviguez-vous{% endblock %}
+{% block titre2 %}Categorie{% endblock %}
+
+{% block content %}
+    <p>Hi</p>
+    {% for produit in produits %}
+        <p>{{ produit.NomProd}}</p>
+    {% endfor %}
+{% endblock %}

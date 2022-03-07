@@ -18,6 +18,8 @@ class CategorieType extends AbstractType
                 'choices'=> array(
                     'Pc portable'=> 'Pc portable',
                     'Pc bureau' => 'Pc bureau',
+                    'Pc bureau Pro' => 'Pc bureau Pro',
+
                 ),
             ))
         ;
