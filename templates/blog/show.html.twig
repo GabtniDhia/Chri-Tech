@@ -11,11 +11,10 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="all-blog-posts">
-                        <div class="row">
                             <div class="col-lg-12">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="assets/images/blog-post-02.jpg" alt="">
+                                        <img src="{{ asset('uploads/images/' ~ blog.img) }}" height="450" width="690" >
                                     </div>
                                     <div class="down-content">
                                         <span>Lifestyle</span>
@@ -47,7 +46,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{ path('blog_index') }}">back to list</a>
+
+                            <a href="{{ path("blog_index") }}"><button  type="button" class="btn btn-warning">Liste</button></a>
 
                             <a href="{{ path('blog_edit', {'id': blog.id}) }}">edit</a>
 
