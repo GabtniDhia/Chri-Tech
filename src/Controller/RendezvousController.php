@@ -31,14 +31,24 @@ class RendezvousController extends AbstractController
     * @Route("/rendezvous/Afficheback", name="rendezvous_back", methods={"GET"})
     */
 
-    public function AfficheBack(RendezvousRepository $rendezvousRepository): Response
+    public function AfficheBack(RendezvousRepository $rendezvousRepository,Request $request): Response
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'DELETE  FROM App\Entity\Rendezvous n
+             WHERE n.date_rendezvous < CURRENT_TIMESTAMP()'
+        );
+
+        $rendezvous = $query->getResult();
 
 
-        return $this->render('rendezvous/AfficheBack.html.twig', [
-            'rendezvous' => $rendezvousRepository->findAll(),
-        ]);
+        return $this->render('rendezvous/AfficheBack.html.twig',
+            array('rendezvous' => $rendezvousRepository->findAll()));
+
+
     }
+
     /**
      * @Route("/rendezvous/stats", name="statRendezvous")
      */
