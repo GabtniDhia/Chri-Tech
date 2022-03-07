@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : Dim 06 mars 2022 à 18:04
+-- Généré le : lun. 07 mars 2022 à 10:21
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.4.9
 
@@ -47,14 +47,23 @@ CREATE TABLE IF NOT EXISTS `article` (
 DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rendezvous_id` int(11) NOT NULL,
   `etat_service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `recommendation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description_service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rendezvous_id` int(11) NOT NULL,
   `date` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8F91ABF03345E0A3` (`rendezvous_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `avis`
+--
+
+INSERT INTO `avis` (`id`, `etat_service`, `recommendation`, `description_service`, `rendezvous_id`, `date`) VALUES
+(24, 'Excellent', 'oui', 'a', 2, '2022-03-01 11:52:58'),
+(26, 'Moyen', 'oui', 'a', 3, '2022-03-01 12:08:12'),
+(27, 'Catastrophique', 'non', 'x', 4, '2022-03-01 12:08:32');
 
 -- --------------------------------------------------------
 
@@ -102,7 +111,21 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `nom_cat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type_cat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id`, `nom_cat`, `type_cat`) VALUES
+(2, 'fff', 'Pc portable'),
+(4, 'zaezzz', 'Pc bureau Pro'),
+(5, 'zaezzzzzzz', 'Pc bureau Pro'),
+(6, 'jihiuh', 'Pc portable'),
+(7, 'jihiuh', 'Pc portable'),
+(8, 'ijjj', 'Pc portable'),
+(9, 'asus', 'Pc bureau Pro'),
+(10, 'Pc portable pro', 'Pc portable');
 
 -- --------------------------------------------------------
 
@@ -116,38 +139,17 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `numtel` int(11) NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `commandel_id` int(11) DEFAULT NULL,
+  `livraison_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `IDX_6EEAA67D838F852F` (`commandel_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `UNIQ_6EEAA67D8E54FB25` (`livraison_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `nom`, `numtel`, `email`, `commandel_id`) VALUES
-(1, 'Chritech', 23556779, 'ah@g.c', NULL),
-(7, 'yosraaa', 45321234, 'yaha@h.c', NULL),
-(9, 'hamdi', 24354679, 'mimi@gmail.com', NULL),
-(10, 'uu', 45678908, 'a@h.c', NULL),
-(11, 'uu', 45678908, 'a@h.c', NULL),
-(12, 'a', 65432321, 'ah@g.c', NULL),
-(14, 'aaaa', 45678765, 'aaa@g.c', NULL),
-(15, 'aeee', 76543543, 'aa@g.c', NULL),
-(16, 'aaaa', 56432345, 'hhh@g.c', NULL),
-(19, 'ghjf', 23456765, 'ss@g.c', NULL),
-(20, 'aaaa', 99999999, 'aaaaaaaa@g.c', NULL),
-(21, 'aaaa', 23456765, 'a@h.c', NULL),
-(22, 'aziz', 24200099, 'AZIZ@MIAL.J', NULL),
-(23, 'azizAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 24200099, 'aaaaaaaa@g.c', NULL),
-(28, 'vsdfgb', 98765765, 'aa@h.c', NULL),
-(29, 'taha', 24242424, 'taha@g.c', NULL),
-(30, 'hamdiZGINI', 12121212, 'hah@j.c', NULL),
-(31, 'tah', 23232323, 'taha@g.c', NULL),
-(32, 'tah', 23232323, 'taha@g.c', NULL),
-(33, 'yosra', 12345345, 'aaaaaaaa@g.c', NULL),
-(34, 'Achref', 21252871, 'achref@g.c', NULL),
-(35, 'yosra', 23456765, 'a@h.c', 15);
+INSERT INTO `commande` (`id`, `nom`, `numtel`, `email`, `livraison_id`) VALUES
+(1, 'Chritech', 23556779, 'ah@g.c', NULL);
 
 -- --------------------------------------------------------
 
@@ -205,17 +207,20 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20220212091749', '2022-02-12 09:18:06', 173),
-('DoctrineMigrations\\Version20220212092033', '2022-02-12 09:20:39', 21),
-('DoctrineMigrations\\Version20220212092745', '2022-02-12 09:27:51', 40),
-('DoctrineMigrations\\Version20220217191709', '2022-02-17 19:17:14', 158),
-('DoctrineMigrations\\Version20220222170824', NULL, NULL),
-('DoctrineMigrations\\Version20220222202240', NULL, NULL),
-('DoctrineMigrations\\Version20220222203228', NULL, NULL),
-('DoctrineMigrations\\Version20220222203528', NULL, NULL),
-('DoctrineMigrations\\Version20220222203540', NULL, NULL),
-('DoctrineMigrations\\Version20220222203814', NULL, NULL),
-('DoctrineMigrations\\Version20220222204532', NULL, NULL);
+('DoctrineMigrations\\Version20220216095839', '2022-02-16 10:03:27', 565),
+('DoctrineMigrations\\Version20220216103421', '2022-02-16 10:34:35', 370),
+('DoctrineMigrations\\Version20220216105820', '2022-02-16 10:58:36', 1148),
+('DoctrineMigrations\\Version20220216110006', '2022-02-16 11:00:13', 650),
+('DoctrineMigrations\\Version20220223233142', '2022-02-23 23:31:50', 8077),
+('DoctrineMigrations\\Version20220224110346', '2022-02-24 11:03:54', 3026),
+('DoctrineMigrations\\Version20220304094216', '2022-03-04 09:43:00', 3271),
+('DoctrineMigrations\\Version20220304094956', '2022-03-04 09:50:10', 807),
+('DoctrineMigrations\\Version20220304095622', '2022-03-04 09:56:32', 2409),
+('DoctrineMigrations\\Version20220304101213', '2022-03-04 10:12:40', 7039),
+('DoctrineMigrations\\Version20220304112637', '2022-03-04 11:28:38', 2835),
+('DoctrineMigrations\\Version20220306133744', '2022-03-06 13:38:01', 7078),
+('DoctrineMigrations\\Version20220306143343', '2022-03-06 14:34:18', 366),
+('DoctrineMigrations\\Version20220306150242', '2022-03-06 15:02:49', 2471);
 
 -- --------------------------------------------------------
 
@@ -230,25 +235,10 @@ CREATE TABLE IF NOT EXISTS `livraison` (
   `codepostal` int(11) NOT NULL,
   `ville` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `datelivraison` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `livraison`
---
-
-INSERT INTO `livraison` (`id`, `adresse`, `codepostal`, `ville`, `datelivraison`) VALUES
-(5, 'Manar2', 7654, 'Tunis', '2026-01-01'),
-(6, 'MANARaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 5665, 'tunis', '2027-01-01'),
-(7, 'iuhgfd', 1234, 'uygtfrt', '2026-01-01'),
-(8, 'aaa', 2345, 'aaa', '2026-01-01'),
-(9, 'bardo', 2424, 'bardo', '2023-01-01'),
-(10, 'hamdihajem', 1212, 'uygtfrt', '2027-01-01'),
-(11, 'MANAR2', 5665, 'tunis', '2025-01-01'),
-(12, 'MANAR2', 5665, 'tunis', '2025-01-01'),
-(13, 'haua', 5643, 'arsf', '2025-01-01'),
-(14, 'Menzah8', 1712, 'Tunis', '2026-01-01'),
-(15, 'MANARaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 5665, 'tunis', '2026-01-01');
+  `commande_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_A60C9F1F82EA2E54` (`commande_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -267,24 +257,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   PRIMARY KEY (`id`),
   KEY `IDX_DB021E96F624B39D` (`sender_id`),
   KEY `IDX_DB021E96E92F8F78` (`recipient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `messages`
---
-
-INSERT INTO `messages` (`id`, `sender_id`, `recipient_id`, `message`, `created_at`, `is_read`) VALUES
-(1, 8, 5, 'aZE', '2022-02-22 19:01:25', 0),
-(2, 8, 5, 'Waa sadiki famma 50net behin, haja behya aad', '2022-02-22 19:34:58', 1),
-(3, 8, 5, 'AzE', '2022-02-22 19:35:06', 1),
-(4, 8, 5, 'AZe', '2022-02-22 19:35:39', 1),
-(5, 8, 5, 'AZE', '2022-02-22 19:36:13', 0),
-(67, 5, 11, 'Ti chbik ?', '2022-03-01 16:09:24', 0),
-(68, 5, 11, 'Kartouchhhaa', '2022-03-01 16:09:49', 0),
-(69, 5, 11, 'mela le ?', '2022-03-01 16:10:01', 0),
-(71, 5, 8, '159', '2022-03-01 16:14:14', 0),
-(75, 5, 5, 'eazazeaze', '2022-03-01 16:41:48', 0),
-(76, 5, 9, 'Wesh Azmiii ?', '2022-03-01 16:50:31', 0);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -298,10 +271,20 @@ CREATE TABLE IF NOT EXISTS `offre` (
   `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` enum('standard','silver','gold','premium') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `prix` int(11) NOT NULL,
-  `points` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `offre`
+--
+
+INSERT INTO `offre` (`id`, `description`, `image`, `type`) VALUES
+(2, 'Casque', '028becf66dc56114a0e1860698ea0448.jpg', 'gold'),
+(3, 'Gaming Chair 700dt', 'f9d7099ba02999b5aec388399e22a5e1.jpg', 'premium'),
+(4, 'Asus KIT 300dt', '349aa737c5f17cbd5d1c8fc6785c8885.jpg', 'silver'),
+(5, 'Hello Kitty KIT 200', 'e57f572d42941602177a3e5ff0441843.png', 'silver'),
+(6, 'League of Legends KIT 250dt', '40bfe34e0fae4449fccc9f9e3d04049d.png', 'gold'),
+(7, '2 Razer Keyboards 150dt', '9e222477c20ea07be5a6081f12e66a14.jpg', 'gold');
 
 -- --------------------------------------------------------
 
@@ -326,25 +309,42 @@ CREATE TABLE IF NOT EXISTS `offre_produit` (
 
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ref_prod` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nom_prod` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descri_prod` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image_prod` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `detail_prod` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `prix_unit_ht_prod` double NOT NULL,
   `qte_stock_prod` int(11) DEFAULT NULL,
+  `image_prod` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `detail_prod` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `prix_ttc_prod` double NOT NULL,
   `prix_tva_prod` double NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `cat_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_29A5EC27E6ADA943` (`cat_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`id`, `ref_prod`, `nom_prod`, `descri_prod`, `image_prod`, `detail_prod`, `prix_unit_ht_prod`, `qte_stock_prod`, `prix_ttc_prod`, `prix_tva_prod`) VALUES
-(1, '123', '123', 'aze', '3a52daef43b0065a323bc29ce1100bf5.jpg', 'azeaze', 12, 1, 14, 14);
+INSERT INTO `produit` (`id`, `ref_prod`, `nom_prod`, `descri_prod`, `prix_unit_ht_prod`, `qte_stock_prod`, `image_prod`, `detail_prod`, `prix_ttc_prod`, `prix_tva_prod`, `cat_id`) VALUES
+(6, 'A78X-IIKJ', 'Pc Asus Raizen', 'xxxxxxxxxxxxxxxx', 50000, 3, '1947ad85ed58155984993d1b2131fa81.jpg', 'xxxxxxxxxxxxxx', 120.2, 0.22, NULL),
+(8, 'XZKI-JJZEK', 'Pc Hp Omen', 'xxxxxx', 1, 2, 'fbef63532b4a8f3b882e89c8a6d5e6b2.jpg', 'xxxxxxx', 1, 1, NULL),
+(9, 'ZK-8vvvkz', 'pc', 'ezaieaze', 100000, 2, 'a17462c10d471e4c38db841d882ee03b.png', 'jzjazk', 120.2, 0.2, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `recherche`
+--
+
+DROP TABLE IF EXISTS `recherche`;
+CREATE TABLE IF NOT EXISTS `recherche` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -354,17 +354,35 @@ INSERT INTO `produit` (`id`, `ref_prod`, `nom_prod`, `descri_prod`, `image_prod`
 
 DROP TABLE IF EXISTS `rendezvous`;
 CREATE TABLE IF NOT EXISTS `rendezvous` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `avis_id` int(11) DEFAULT NULL,
   `titre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_rendezvous` date NOT NULL,
+  `date_rendezvous` datetime NOT NULL,
   `description_rendezvous` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephonenum` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `adressrend` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_C09A9BA8197E709F` (`avis_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `rendezvous`
+--
+
+INSERT INTO `rendezvous` (`id`, `avis_id`, `titre`, `service`, `date_rendezvous`, `description_rendezvous`, `telephonenum`, `adressrend`) VALUES
+(2, 24, 'Camera  XIO-89', 'Installation', '2022-04-01 10:30:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '00000000', 'test'),
+(3, 26, 'Télévision Samsung 7Y-34', 'Reparation', '2022-03-05 11:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '12345678', 'test'),
+(4, 27, 'Ordinateur Centrale 608-XXL', 'Reparation', '2022-05-15 09:15:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '00000000', 'test'),
+(8, NULL, 'Alarme CC63ART', 'Installation', '2024-01-01 18:00:00', 'j\'ai acheter l\'alarme X4-xiaomi et je voudrais l\'installer.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maxim', '50000000', 'av Habib bourgiba Residdence les jasmin Bloc A appart 5'),
+(12, NULL, 'Test-Titre', 'Installation', '2023-01-01 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '00000000', 'test'),
+(13, NULL, 'Test23', 'Reparation', '2022-02-27 00:00:00', 'test', '00000000', 'test'),
+(14, NULL, 'rdv', 'Reparation', '2022-02-27 00:00:00', 'test test', '12345678', 'test'),
+(16, NULL, 'AZIZ', 'Installation', '2022-03-02 05:00:00', 'DS', '52447610', 'test'),
+(17, NULL, 'bb', 'Reparation', '2022-03-02 17:00:00', 'nn', '12345678', 'test'),
+(18, NULL, 'CHH', 'Installation', '2022-03-12 08:12:00', 'bonjour', '12345678', 'AAA'),
+(19, NULL, 'aaaa', 'Reparation', '2022-03-04 08:00:00', 'test test', '00000000', 'test'),
+(20, NULL, 'bay', 'Reparation', '2023-01-01 03:03:00', 'test', '12345678', 'bay');
 
 -- --------------------------------------------------------
 
@@ -374,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `rendezvous` (
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -382,20 +400,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `datecreation` date NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `user`
---
-
-INSERT INTO `user` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, `datecreation`, `is_verified`, `image`) VALUES
-(5, 'admin@gmail.com', '[\"ROLE_ADMIN\",\"ROLE_CLIENT\",\"ROLE_SPECIALISTE\"]', '$argon2id$v=19$m=65536,t=4,p=1$bkt1eWhYc05JaG5sa3RNRA$peEcYw9WwQ4HGI4hPyzjC8DSr6VtMesNLF/hMZKK2GI', 'S9onsliii', 'admin admin', '2017-01-01', 0, '0d4bd24e77aae928521a7a9f4196b866.png'),
-(8, 'dhia.gabtni@esprit.tn', '[]', '$argon2id$v=19$m=65536,t=4,p=1$R0VIMkJVSXp1Qi9UU0NaZQ$01Dmm6le7CErGeBWIRZ/6fICjsRXx5O0jn1EAKi4QiY', 'Sid Erjel', 'Gabtni', '2022-02-20', 1, 'c4635eb5212177eba1415d4f487eee89.jpg'),
-(9, 'Wehed@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$YjQyU1VhQS9wRnVidXJOdQ$d8S90C2j4Kd6UBdyY8n+fU20EzT2tjCHXYHJkjHgrfc', 'Ferchichi', 'mch3li', '2022-02-21', 0, '93975384056437fa81aab29b7f1c85d2.jpg'),
-(11, 'smoshy.com@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$Z3dyZ2VOT0pONmROWEtlSA$wzvEHRYpPUSGzDTBt3ka9hvJIkm+FN0tjxP0gV0Yaxk', 'Mohsen', 'mch3li', '2022-02-24', 0, '9bc8b535ada7438a16a78f7afa9c52bc.jpg');
 
 --
 -- Contraintes pour les tables déchargées
@@ -411,7 +419,7 @@ ALTER TABLE `avis`
 -- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD CONSTRAINT `FK_6EEAA67D838F852F` FOREIGN KEY (`commandel_id`) REFERENCES `livraison` (`id`);
+  ADD CONSTRAINT `FK_6EEAA67D8E54FB25` FOREIGN KEY (`livraison_id`) REFERENCES `livraison` (`id`);
 
 --
 -- Contraintes pour la table `commentaire`
@@ -427,6 +435,12 @@ ALTER TABLE `demande_spec`
   ADD CONSTRAINT `FK_A7AB65EB95A6EE59` FOREIGN KEY (`demandeur_id`) REFERENCES `user` (`id`);
 
 --
+-- Contraintes pour la table `livraison`
+--
+ALTER TABLE `livraison`
+  ADD CONSTRAINT `FK_A60C9F1F82EA2E54` FOREIGN KEY (`commande_id`) REFERENCES `commande` (`id`);
+
+--
 -- Contraintes pour la table `messages`
 --
 ALTER TABLE `messages`
@@ -439,6 +453,18 @@ ALTER TABLE `messages`
 ALTER TABLE `offre_produit`
   ADD CONSTRAINT `FK_857E9F074CC8505A` FOREIGN KEY (`offre_id`) REFERENCES `offre` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_857E9F07F347EFB` FOREIGN KEY (`produit_id`) REFERENCES `produit` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD CONSTRAINT `FK_29A5EC27E6ADA943` FOREIGN KEY (`cat_id`) REFERENCES `categorie` (`id`);
+
+--
+-- Contraintes pour la table `rendezvous`
+--
+ALTER TABLE `rendezvous`
+  ADD CONSTRAINT `FK_C09A9BA8197E709F` FOREIGN KEY (`avis_id`) REFERENCES `avis` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
