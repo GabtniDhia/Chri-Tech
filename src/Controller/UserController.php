@@ -8,22 +8,26 @@ use App\Form\ModifUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
-use App\Form\EditUserType;
 use Symfony\Component\HttpFoundation\Request;
-use App\Repository\UserRepository;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Serializer;
+use App\Security\EmailVerifier;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mime\Address;
 class UserController extends AbstractController
 {
+    private $emailVerifier;
+
+    public function __construct(EmailVerifier $emailVerifier)
+    {
+        $this->emailVerifier = $emailVerifier;
+    }
+
 
     /**
-     * @Route("/user", name="user")
+     * @Route("/forgot", name="pass_forgot")
      */
-    public function index(): Response
+    public function forgot(Request $request)
     {
-        return $this->render('user/index.html.twig');
+        
     }
 
     /**
@@ -32,7 +36,7 @@ class UserController extends AbstractController
     public function modif(Request $request){
         $user = $this->getUser();
         $form = $this->createForm(ModifUserType::class, $user);
-
+        $email = $this->getUser()->getEmail();
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -47,11 +51,26 @@ class UserController extends AbstractController
 
             }
             $user->setImage($fileName);
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            $this->addFlash('message', 'Profil Mis a Jour');
+            $data = $form->getData();
+            if ($data->getEmail() != $email){
+                $user->setIsVerified(false);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                    (new TemplatedEmail())
+                        ->from(new Address('chritechverify@gmail.com', 'Verify'))
+                        ->to($user->getEmail())
+                        ->subject('Please Confirm your Email')
+                        ->htmlTemplate('registration/confirmation_email.html.twig')
+                );
+                $this->addFlash('message', 'Profil Mis A jour , Veuillez Verifier Votre Nouveau Mail');
+        }else{
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                $this->addFlash('message', 'Profil Mis A jou');
+            }
             return $this->redirectToRoute('home');
         }
         return $this->render('user/editprofil.html.twig', [
