@@ -18,7 +18,14 @@ class RendezvousRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Rendezvous::class);
     }
-
+    public function search($term)
+    {
+        return $this->createQueryBuilder('Rendezvous')
+            ->andWhere('Rendezvous.titre LIKE :titre')
+            ->setParameter('titre', '%'.$term.'%')
+            ->getQuery()
+            ->execute();
+    }
     // /**
     //  * @return Rendezvous[] Returns an array of Rendezvous objects
     //  */
@@ -47,4 +54,5 @@ class RendezvousRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }
