@@ -13,6 +13,7 @@
             <th>Description_rendezvous</th>
             <th>Telephonenum</th>
             <th>Adresse</th>
+            <th>Client_id</th>
 
         </tr>
         </thead>
@@ -26,6 +27,7 @@
                 <td>{{ rendezvou.descriptionRendezvous }}</td>
                 <td>{{ rendezvou.telephonenum }}</td>
                 <td>{{ rendezvou.adressrend }}</td>
+                <td>{{ rendezvou.client.id }}</td>
 
             </tr>
         {% else %}

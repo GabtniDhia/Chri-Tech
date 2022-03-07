@@ -66,6 +66,12 @@ class Rendezvous
      */
     private $adressrend;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -151,6 +157,18 @@ class Rendezvous
     public function setAdressrend(string $adressrend): self
     {
         $this->adressrend = $adressrend;
+
+        return $this;
+    }
+
+    public function getClient(): ?user
+    {
+        return $this->client;
+    }
+
+    public function setClient(?user $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

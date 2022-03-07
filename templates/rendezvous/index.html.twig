@@ -126,7 +126,7 @@
 
 
                     {% for rendezvou in rendezvouses %}
-
+{% if rendezvou.client.id==app.user.id %}
 
             <div class="event">
                 <div class="event-left">
@@ -161,7 +161,7 @@
 
                 </div>
             </div>
-
+{% endif %}
         {% endfor %}
         {{ knp_pagination_render(rendezvouses) }}
 

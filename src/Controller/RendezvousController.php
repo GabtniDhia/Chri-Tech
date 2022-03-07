@@ -195,6 +195,7 @@ class RendezvousController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $rendezvou = new Rendezvous();
+        $rendezvou->setClient($this->getUser());
         $form = $this->createForm(RendezvousType::class, $rendezvou);
         $form->handleRequest($request);
 
