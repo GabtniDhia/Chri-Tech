@@ -1,12 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
-
-{% block body %}
-    <h1>Reset your password</h1>
-
-    {{ form_start(resetForm) }}
+{% block title %}Chri-Tech{% endblock %}
+{% block bg%} {{ asset('front/assets/img/pc.jpg') }}  {% endblock %}
+{% block titre1 %}Reinitialiser votre mot de Passe{% endblock %}
+{% block titre2 %}        {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }}
+<button class="btn btn-primary">Reinitialiser</button>
+{{ form_end(resetForm) }}
+
 {% endblock %}

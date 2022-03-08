@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('front/assets/img/chicon.png') }}">
     <!-- title -->
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>Chri-Tech</title>
 
 
     <!-- Modal Pop Up Message-->
@@ -220,7 +221,7 @@
                     <div class="main-menu-wrap">
                         <!-- logo -->
                         <div class="site-logo">
-                            <a href="index.html">
+                            <a href="{{ path('home') }}">
                                 <img src="{{ asset('front/assets/img/chri.png') }}" alt="">
                             </a>
                         </div>
@@ -387,13 +388,13 @@
                     <div class="footer-box pages">
                         <h2 class="widget-title">Nos Pages</h2>
                         <ul>
-                            <li><a href="index.html">Acceuil</a></li>
+                            <li><a href="{{ path('home') }}">Acceuil</a></li>
                             <li><a href="about.html">Produits</a></li>
                             <li><a href="services.html">Maintenance</a></li>
                             <li><a href="news.html">Blog</a></li>
                             <li><a href="contact.html">Nous Contacter</a></li>
                             <li><a href="contact.html">A Propos</a></li>
-                            <li><a href="contact.html">Specialiste</a></li>
+                            <li><a href="{{ path("specialiste") }}">Specialiste</a></li>
                         </ul>
                     </div>
                 </div>
