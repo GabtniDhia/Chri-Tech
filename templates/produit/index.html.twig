@@ -4,17 +4,103 @@
 {% block titre1 %}Achat de Produit{% endblock %}
 {% block titre2 %}Produits{% endblock %}
 
+
+
+
+
 {% block content %}
 
 
-    <div class="container mydiv">
+
+
+{#
+    {% for produit in produits %}
+        <div id="products" class="row view-group">
+
+            <div class="item col-xs-4 col-lg-4">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <img src="{{ asset('uploads/images/' ~ produit.ImageProd) }}" alt=""
+                             height="260px" width="370px">
+                    </div>
+                    <div class="caption card-body">
+                        <h4 class="group card-title inner list-group-item-heading">{{ produit.NomProd }}</h4>
+                        <p class="group inner list-group-item-text">
+                            {{ produit.DescriProd }}</p>
+                        <p class="group inner list-group-item-text">
+                            {{ produit.QteStockProd }}</p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    {{ produit.PrixUnitHTProd }}</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                <a class="btn btn-success" href="{{ path('produit_single' , { 'id': produit.Id}) }}">Voir details</a>
+                            </div>
+                            <div class="available_bar"><span style="width:17%"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+#}
+
+
+
+        <div class="container">
         <div class="row">
             {% for produit in produits %}
+            {#Single Product#}
+            <div class="col-md-4 col-sm-6">
+                <div class="product-grid2">
+                    <div class="product-image2"> <a href="#"> <img class="pic-1" src="{{ asset('uploads/images/' ~ produit.ImageProd) }}"></a>
+                        <ul class="social">
+                            <li><a href="{{ path('produit_single' , { 'id': produit.Id}) }}" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">{{ produit.NomProd }}</a></h3> <span class="price">{{ produit.PrixUnitHTProd }}DT</span>
+                    </div>
+                </div>
+            </div>
+            {#End Single Product#}
+            {% endfor %}
+            {{ knp_pagination_render(produits) }}
+
+        </div>
+
+    </div>
+
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+
+
+   {# <div class="container mydiv">
+        <div class="row">
+
             <div class="col-md-4">
                 <!-- bbb_deals -->
                 <div class="bbb_deals">
                     <div class="ribbon ribbon-top-right"></div>
-                    <div class="bbb_deals_title">{{ produit.NomProd }}</div>
+                    <div class="bbb_deals_title"></div>
                     <div class="bbb_deals_slider_container">
                         <div class=" bbb_deals_item">
                             <div class="bbb_deals_image"><img src="{{ asset('uploads/images/' ~ produit.ImageProd) }}" alt=""
@@ -22,10 +108,10 @@
                             <div class="bbb_deals_content">
                                 <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
                                     <div class="bbb_deals_item_category"><a href="{{ path('produit_single' , { 'id': produit.Id}) }}">{{ produit.RefProd }}</a></div>
-                                    <div class="bbb_deals_item_price_a ml-auto"><strike>₹30,000</strike></div>
+                                    <div class="bbb_deals_item_price_a ml-auto"><strike></strike></div>
                                 </div>
                                 <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
-                                    <div class="bbb_deals_item_name">{{ produit.NomProd }}</div>
+                                    <div class="bbb_deals_item_name"></div>
                                     <div class="bbb_deals_item_price ml-auto">{{ produit.PrixUnitHTProd }}</div>
                                 </div>
                                 <div class="available">
@@ -42,5 +128,21 @@
             </div>
             {% endfor %}
         </div>
-    </div>
+    </div>#}
 {% endblock %}
+
+
+{%  block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('front/assets/css/drop.css') }}">
+    <link rel="stylesheet" href="../../assets/vendor/hs-megamenu/src/hs.megamenu.css">
+
+
+
+
+{% endblock %}
+{%  block javascript %}
+<script src="../../assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+<script src="../../assets/js/components/hs.header.js"></script>
+{% endblock %}
+
+
