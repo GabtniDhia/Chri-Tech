@@ -43,12 +43,6 @@ class Commentaire
      */
     private $article_id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commentaires")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $userFK;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -118,17 +112,5 @@ class Commentaire
     {
         $this->commentaires = new ArrayCollection();
         $this->date_heure = new \DateTime('now');
-    }
-
-    public function getUserFK(): ?user
-    {
-        return $this->userFK;
-    }
-
-    public function setUserFK(?user $userFK): self
-    {
-        $this->userFK = $userFK;
-
-        return $this;
     }
 }

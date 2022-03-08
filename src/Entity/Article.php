@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\BlogRepository;
+use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=BlogRepository::class)
+ * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
-class Blog
+class Article
 {
     /**
      * @ORM\Id
@@ -24,34 +24,44 @@ class Blog
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ecrivez quelque chose")
      */
-    private $utilisateur;
+    private $entete;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Ecrivez quelque chose")
+     */
+    private $corp;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Ecrivez quelque chose")
      */
-    private $titre;
+    private $redacteur;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank(message="Ecrivez quelque chose")
+     * @ORM\Column(type="string", length=255 , nullable=true)
+     * @Assert\File(
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Only jpeg or png are allowed."
+     * )
+     *
      */
-    private $contenue;
+    private $image;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date_heure;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="blog_id")
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="article_id")
      */
     private $commentaires;
 
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
-        $this->date_heure = new \DateTime('now');
+        $this->date = new \DateTime('now');
     }
 
     public function getId(): ?int
@@ -59,50 +69,62 @@ class Blog
         return $this->id;
     }
 
-    public function getUtilisateur(): ?string
+    public function getEntete(): ?string
     {
-        return $this->utilisateur;
+        return $this->entete;
     }
 
-    public function setUtilisateur(string $utilisateur): self
+    public function setEntete(string $entete): self
     {
-        $this->utilisateur = $utilisateur;
+        $this->entete = $entete;
 
         return $this;
     }
 
-    public function getTitre(): ?string
+    public function getCorp(): ?string
     {
-        return $this->titre;
+        return $this->corp;
     }
 
-    public function setTitre(string $titre): self
+    public function setCorp(string $corp): self
     {
-        $this->titre = $titre;
+        $this->corp = $corp;
 
         return $this;
     }
 
-    public function getContenue(): ?string
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->contenue;
+        return $this->date;
     }
 
-    public function setContenue(?string $contenue): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->contenue = $contenue;
+        $this->date = $date;
 
         return $this;
     }
 
-    public function getDateHeure(): ?\DateTimeInterface
+    public function getRedacteur(): ?string
     {
-        return $this->date_heure;
+        return $this->redacteur;
     }
 
-    public function setDateHeure(\DateTimeInterface $date_heure): self
+    public function setRedacteur(string $redacteur): self
     {
-        $this->date_heure = $date_heure;
+        $this->redacteur = $redacteur;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage( $image)
+    {
+        $this->image = $image;
 
         return $this;
     }
@@ -119,7 +141,7 @@ class Blog
     {
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires[] = $commentaire;
-            $commentaire->setBlogId($this);
+            $commentaire->setArticleId($this);
         }
 
         return $this;
@@ -129,8 +151,8 @@ class Blog
     {
         if ($this->commentaires->removeElement($commentaire)) {
             // set the owning side to null (unless already changed)
-            if ($commentaire->getBlogId() === $this) {
-                $commentaire->setBlogId(null);
+            if ($commentaire->getArticleId() === $this) {
+                $commentaire->setArticleId(null);
             }
         }
 
@@ -140,6 +162,8 @@ class Blog
     public function __toString()
     {
         // TODO: Implement __toString() method.
-        return $this->getTitre();
+        return $this->getEntete();
     }
+
+
 }
