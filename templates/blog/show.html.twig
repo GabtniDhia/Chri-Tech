@@ -4,6 +4,10 @@
 
 {% block bg%} {{ asset('front/assets/img/depositphotos_76358235-stock-photo-desk-of-blogger.jpg') }}  {% endblock %}
 {% block titre1 %}BLOG{% endblock %}
+{% block head %}
+    <link href="{{ asset('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/assets/css/emoji.css') }}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 
     <section class="blog-posts grid-system">
@@ -17,8 +21,7 @@
                                         <img src="{{ asset('uploads/images/' ~ blog.img) }}" height="450" width="690" >
                                     </div>
                                     <div class="down-content">
-                                        <span>Lifestyle</span>
-                                        <a><h4>{{ blog.titre }}</h4></a>
+                                        <span>{{ blog.titre }}</span>
                                         <ul class="post-info">
                                             <li><a href="#">{{ blog.utilisateur }}</a></li>
                                             <li><a href="#">{{ blog.dateHeure ? blog.dateHeure|date('Y-m-d H:i:s') : '' }}</a></li>
@@ -177,16 +180,42 @@
     <link rel="stylesheet" href="{{ asset('Front/assets/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('Front/assets/css/flex-slider.css') }}">
     <link rel="stylesheet" href="{{ asset('Front/assets/css/templatemo-stand-blog.css') }}">
-    script
+
+
+
+
+
 {% endblock %}
 
 {% block javascripts %}
+<script>
 
+    $(function() {
+        // Initializes and creates emoji set from sprite sheet
+        window.emojiPicker = new EmojiPicker({
+            emojiable_selector: '[data-emojiable=true]',
+            assetsPath: "{{ asset('front/assets/img') }}",
+            popupButtonClasses: 'fa fa-smile-o'
+        });
+        // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+        // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+        // It can be called as many times as necessary; previously converted input fields will not be converted again
+        window.emojiPicker.discover();
+    });
+
+</script>
     <script src="{{ asset('front/assets/js/custom.js') }}"></script>
     <script src="{{ asset('front/assets/js/owl.js') }}"></script>
     <script src="{{ asset('front/assets/js/slick.js') }}"></script>
     <script src="{{ asset('front/assets/js/isotope.js') }}"></script>
     <script src="{{ asset('front/assets/js/accordions.js') }}"></script>
+
+    <!-- ** Don't forget to Add jQuery here ** -->
+    <script src="{{ asset('front/assets/js/config.js') }}"></script>
+    <script src="{{ asset('front/assets/js/util.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.emojiarea.js') }}"></script>
+    <script src="{{ asset('front/assets/js/emoji-picker.js') }}"></script>
+
 
 {% endblock %}
 

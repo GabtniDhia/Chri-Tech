@@ -21,12 +21,11 @@
                                     <img src="{{ asset('uploads/images/' ~ blog.img) }}" height="200" width="330">
                                 </div>
                                 <div class="down-content">
-                                    <span>Healthy</span>
-                                    <a href="{{ path('blog_show' , { 'id': blog.id }) }}"><h4>{{ blog.titre }}</h4></a>
+                                    <a href="{{ path('blog_show' , { 'id': blog.id }) }}"><span>{{ blog.titre }}</span></a>
                                     <ul class="post-info">
                                         <li><a href="#">{{ blog.utilisateur }}</a></li>
                                         <li><a href="#">{{ blog.dateHeure ? blog.dateHeure|date('Y-m-d H:i:s') : '' }}</a></li>
-                                        <li><a href="#">36 Comments</a></li>
+                                        <li><a href="#">{{ blog.commentaires |length}} réponses</a></li>
                                     </ul>
                                     <p>{{ blog.contenue }}</p>
                                     <div class="post-options">
