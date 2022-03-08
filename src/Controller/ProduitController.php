@@ -7,10 +7,12 @@ use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/produit")
@@ -20,10 +22,17 @@ class ProduitController extends AbstractController
     /**
      * @Route("/", name="produit_index", methods={"GET"})
      */
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(ProduitRepository $produitRepository,PaginatorInterface $paginator,Request $request): Response
     {
+        $produit=$produitRepository->findAll();
+        $produitRepository= $paginator->paginate(
+            $produit,
+            $request->query->getInt('page',1),
+           3
+        );
+
         return $this->render('produit/index.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produits' => $produitRepository,
         ]);
     }
 
@@ -142,4 +151,5 @@ class ProduitController extends AbstractController
 
         ]);
     }
+
 }

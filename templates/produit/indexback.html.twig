@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
 {% for produit in produit %}
     <table>
     <tbody>
@@ -34,7 +35,7 @@
     </tr>
     <tr>
         <th>ImageProd</th>
-        <td>src="{{ asset('uploads/images/' ~ produit.ImageProd) }}" alt=""
+        <td><img src="{{ asset('uploads/images/' ~ produit.ImageProd) }}" alt=""
             height="360px" width="240px">
         </td>
     </tr>

@@ -91,18 +91,12 @@ class User implements UserInterface
      */
     private $received;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="userFK")
-     */
-    private $commentaires;
-
 
 
     public function __construct()
     {
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
-        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -314,36 +308,6 @@ class User implements UserInterface
     public function setIdcarte(?CarteFidelite $idcarte): self
     {
         $this->idcarte = $idcarte;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
-
-    public function addCommentaire(Commentaire $commentaire): self
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires[] = $commentaire;
-            $commentaire->setUserFK($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaire(Commentaire $commentaire): self
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getUserFK() === $this) {
-                $commentaire->setUserFK(null);
-            }
-        }
 
         return $this;
     }
