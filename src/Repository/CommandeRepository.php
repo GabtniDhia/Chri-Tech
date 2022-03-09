@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Commande;
-use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,14 +17,6 @@ class CommandeRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Commande::class);
-    }
-    public function cmnds(User $user){
-        $id = $user->getId();
-        $query=$this->getEntityManager()->createQuery("
-            SELECT m FROM App\Entity\Commande m WHERE m.user=:me 
-        ")
-            ->setParameter(':me',$id);
-        return $query->getResult();
     }
 
     // /**

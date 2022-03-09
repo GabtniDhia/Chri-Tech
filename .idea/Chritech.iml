@@ -143,16 +143,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/dompdf/dompdf" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/gregwar/captcha-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/gregwar/captcha" />
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-      <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/qr-code" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/qr-code-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/bacon/bacon-qr-code" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/installer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/dasprid/enum" />
-=======
->>>>>>> Stashed changes
       <excludeFolder url="file://$MODULE_DIR$/vendor/cmen/google-charts-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-paginator-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-components" />
@@ -168,10 +158,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/markbaker/matrix" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfonycasts/reset-password-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/snipe/banbuilder" />
-<<<<<<< Updated upstream
-=======
->>>>>>> 7ff8e2b131f524251b57cfd1c0500fa3f250d33f
->>>>>>> Stashed changes
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -34,9 +34,8 @@
                                             <p>{{ form_widget(form.ville) }}</p>
                                             <p>{{ form_errors(form.datelivraison) }}</p>
                                             <p>{{ form_widget(form.datelivraison) }}</p>
-                                            <p>{{ form_errors(form.heurelivraison) }}</p>
-                                            <p>{{ form_widget(form.heurelivraison) }}</p>
-
+                                            <p>{{ form_widget(form.commande) }}</p>
+                                            <p>{{ form_errors(form.commande) }}</p>
                                             {{ include('livraison/_form.html.twig', {'button_label': 'Modifier'}) }}
                                             {{ include('livraison/supp.html.twig' , {'button_label': 'Annuler'}) }}
                                             <a href="{{ path('livraison_index', {'id': livraison.id}) }}">Voir la livraison</a>

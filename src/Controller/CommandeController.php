@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Form\CommandeType;
 use App\Form\LivraisonType;
 use App\Repository\CommandeRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +19,6 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use Symfony\Component\Mime\Address;
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 
 /**
 * @Route("/commande")
@@ -49,9 +45,9 @@ class CommandeController extends AbstractController
      */
     public function mine(CommandeRepository $commandeRepository): Response
     {
-        $user = $this->getUser();
+
         return $this->render('commande/mine.html.twig', [
-            'commandes' => $commandeRepository->cmnds($user),
+            'commandes' => $commandeRepository->findAll(),
         ]);
     }
 
@@ -71,13 +67,9 @@ class CommandeController extends AbstractController
         $forma->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $forma->isSubmitted() && $forma->isValid()) {
-            $commande->setUser($this->getUser());
             $entityManager->persist($commande);
             $entityManager->persist($livraison);
             $entityManager->flush();
-
-            if ($livraison->getAdresse())
-            {$adresseGps = str_replace("","+",$livraison->getAdresse());}
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('chritechverify@gmail.com', 'Verify'))
@@ -85,8 +77,7 @@ class CommandeController extends AbstractController
                     ->subject('Chritech: Confirmation de votre achat!')
                     ->htmlTemplate('commande/livraisonmail.html.twig')
             );
-            return $this->redirectToRoute('commande_show', ['id'=>$commande->getId()], Response::HTTP_SEE_OTHER);
-
+            return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('commande/new.html.twig', [
@@ -129,8 +120,7 @@ class CommandeController extends AbstractController
 
             $entityManager->flush();
 
-
-            return $this->redirectToRoute('commande_show', ['id'=>$commande->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('commande_mine', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('commande/edit.html.twig', [
@@ -183,7 +173,4 @@ class CommandeController extends AbstractController
 
         return $this->redirectToRoute('commande_index', [], Response::HTTP_SEE_OTHER);
     }
-
-
-
 }

@@ -49,100 +49,33 @@
 
         </div>
     </div>
-<div class="container">
-    <div class="card">
-        <div class="card-img-top" align="center"><iframe src="https://maps.google.com/maps?&q= {{ livraison.adresse }}&output=embed"></iframe></div>
+    <h3 style="color: cadetblue" >Cliquez sur le lien ci-dessous si vous souhaitez gérer votre livraison</h3>
+    <a href="{{ path('livraison_edit', {'id': livraison.id}) }}">Cliquez ici!</a>
+    <table class="table">
 
-        <div class="card-body" >
-            <h5 class="card-title" align="center">Details de la livraison:</h5>
-                <p class="card-text" align="center">{{ livraison.adresse }}</p>
-            <p class="card-text" align="center">{{ livraison.codepostal }}</p>
-            <p class="card-text" align="center">{{ livraison.ville }}</p>
-            <p class="card-text" align="center">{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</p>
-            <p class="card-text" align="center">{{ livraison.heurelivraison ? livraison.heurelivraison|date('H:i:s') : '' }}</p>
-            <p class="card-text" align="center">   <span class="badge badge-warning">Pending</span></p>
-           <div align="center"><a  href="{{ path('livraison_edit', {'id': livraison.id}) }}"><button type="button" class="btn btn-dark">Modifier votre livraison</button></a>
-          <input type="button" class="btn btn-dark"  value="Retour vers la commande" onclick="history.back()"></div>
-
-
-
-            <script>
-
-                // Set the date we're counting down to
-
-
-                let countDownDate = new Date();
-                countDownDate.setFullYear({{ livraison.datelivraison|date("Y") }})
-                countDownDate.setUTCMonth({{ livraison.datelivraison|date("m") }}-1)
-                countDownDate.setUTCDate({{ livraison.datelivraison|date("d") }})
-                countDownDate.setHours({{ livraison.heurelivraison|date("H") }})
-                countDownDate.setMinutes({{ livraison.heurelivraison|date("i") }})
-                countDownDate.setSeconds({{ livraison.heurelivraison|date("s") }})
-
-                // Update the count down every 1 second
-                var x = setInterval(function() {
-
-                    // Get today's date and time
-                    var now = new Date();
-                    console.log(now)
-
-                    // Find the distance between now and the count down date
-                    var distance = countDownDate - now;
-
-                    // Time calculations for days, hours, minutes and seconds
-                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    // Output the result in an element with id="demo"
-
-                    document.getElementById("day").innerHTML = days ;
-                    document.getElementById("hour").innerHTML = hours ;
-                    document.getElementById("minute").innerHTML = minutes ;
-                    document.getElementById("second").innerHTML = seconds ;
-
-                    // If the count down is over, write some text
-                    if (distance < 0) {
-                        clearInterval(x);
-                        document.getElementById("demo").innerHTML = "EXPIRED";
-                    }
-                }, 1000);
-            </script>
-            <br><br>
-            <hr>
-
-
-<div align="center">
-
-            <p>Vous trouverez ci-dessous combien de temps il vous reste afin de recevoir votre commande:</p>
-            <p style=" text-align: center;font-size: 60px;margin-top: 0px;" id="demo"></p>
-            <ul class="countdown">
-
-                <span class="brd-rd50 yellow-bg wow bounceIn" data-wow-delay="0.2s">
-                    <span id="day" class="days"></span>
-                    <p class="days_ref">Jours restants</p>
-                </span>
-                <span class="brd-rd50 yellow-bg wow bounceIn" data-wow-delay="0.4s">
-                    <span id="hour" class="hours"></span>
-                    <p class="hours_ref">Heures restantes</p>
-                </span>
-                    <span class="brd-rd50 yellow-bg wow bounceIn" data-wow-delay="0.5s">
-                    <span id="minute" class="minutes"></span>
-                    <p class="minutes_ref">Minutes restantes</p>
-                </span>
-                        <span class="brd-rd50 yellow-bg wow bounceIn" data-wow-delay="0.6s">
-                    <span id="second" class="seconds"></span>
-                    <p class="seconds_ref">Secondes restantes</p>
-                </span>
-            </ul>
-
-</div>
-            <hr>
-        </div>
-    </div>
-</div>
-
-
+        <tbody>
+        <tr>
+            <th>Identifiant</th>
+            <td>{{ livraison.id }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ livraison.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Code postal</th>
+            <td>{{ livraison.codepostal }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ livraison.ville }}</td>
+        </tr>
+        <tr>
+            <th>Date de livraison</th>
+            <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('livraison_minel') }}">Voir l'historique des livraisons</a>
 
 {% endblock %}

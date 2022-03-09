@@ -7,14 +7,10 @@ use App\Form\LivraisonType;
 use App\Repository\CommandeRepository;
 use App\Repository\LivraisonRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Endroid\QrCode\QrCode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Endroid\QrCode\Builder\BuilderInterface;
-use Endroid\QrCodeBundle\Response\QrCodeResponse;
-
 
 /**
  * @Route("/livraison")
@@ -27,7 +23,6 @@ class LivraisonController extends AbstractController
      */
     public function affiche(Livraison $livraison): Response
     {
-
         return $this->render('livraison/affiche.html.twig', [
             'livraison' => $livraison,
         ]);
@@ -97,8 +92,7 @@ class LivraisonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-
-            return $this->redirectToRoute('livraison_show', ['id'=>$livraison->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('livraison_minel', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('livraison/edit.html.twig', [
@@ -148,14 +142,5 @@ class LivraisonController extends AbstractController
         }
 
         return $this->redirectToRoute('livraison_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-    public function __construct(BuilderInterface $customQrCodeBuilder)
-    {
-        $result = $customQrCodeBuilder
-            ->size(400)
-            ->margin(20)
-            ->build();
-
     }
 }

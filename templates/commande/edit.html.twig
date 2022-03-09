@@ -40,8 +40,7 @@
                                             <p>{{ form_widget(form.email) }}</p>
                                             {{ include('commande/_form.html.twig', {'button_label': 'Modifier'}) }}
                                             {{ include('commande/_delete_form.html.twig' , {'button_label': 'Annuler'}) }}
-
-                                            <a href="{{ path('commande_show', {'id': commande.id}) }}"><button type="button" class="btn btn-dark">Afficher votre commande</button></a>
+                                            <a href="{{ path('commande_show', {'id': commande.id}) }}">Afficher ma commande</a>
 
                                         </div>
                                     </div>

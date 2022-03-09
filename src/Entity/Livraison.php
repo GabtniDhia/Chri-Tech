@@ -56,11 +56,6 @@ class Livraison
      */
     private $commandes;
 
-    /**
-     * @ORM\Column(type="time")
-     */
-    private $heurelivraison;
-
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
@@ -147,18 +142,6 @@ class Livraison
                 $commande->setCommandel(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getHeurelivraison(): ?\DateTimeInterface
-    {
-        return $this->heurelivraison;
-    }
-
-    public function setHeurelivraison(\DateTimeInterface $heurelivraison): self
-    {
-        $this->heurelivraison = $heurelivraison;
 
         return $this;
     }
