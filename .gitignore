@@ -24,3 +24,5 @@
 ###< symfony/web-server-bundle ###
 
 migrations/Version20220304095622.php
+config/packages/endroid_qr_code.yaml
+config/routes/endroid_qr_code.yaml
