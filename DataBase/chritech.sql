@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 07 mars 2022 à 17:48
+-- Généré le : mer. 09 mars 2022 à 14:26
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.2
 
@@ -56,8 +56,10 @@ CREATE TABLE `avis` (
 --
 
 INSERT INTO `avis` (`id`, `etat_service`, `recommendation`, `description_service`, `rendezvous_id`, `date`) VALUES
-(27, 'Catastrophique', 'non', 'x', 4, '2022-03-01 12:08:32'),
-(28, 'Mauvais', 'non', 'test apres integration', 8, '2022-03-07 11:53:35');
+(28, 'Mauvais', 'non', 'test apres integration', 8, '2022-03-07 11:53:35'),
+(34, 'Excellent', 'oui', 'TEST', 26, '2022-03-09 14:07:09'),
+(38, 'Excellent', 'non', 'ines', 29, '2022-03-09 14:21:16'),
+(40, 'Excellent', 'non', 'bbbb', 30, '2022-03-09 14:25:38');
 
 -- --------------------------------------------------------
 
@@ -340,11 +342,12 @@ CREATE TABLE `rendezvous` (
 --
 
 INSERT INTO `rendezvous` (`id`, `avis_id`, `titre`, `service`, `date_rendezvous`, `description_rendezvous`, `telephonenum`, `adressrend`, `client_id`) VALUES
-(4, 27, 'Ordinateur Centrale 608-XXL', 'Reparation', '2022-05-15 09:15:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '00000000', 'test', 0),
 (8, 28, 'Alarme CC63ART', 'Installation', '2024-01-01 18:00:00', 'j\'ai acheter l\'alarme X4-xiaomi et je voudrais l\'installer.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maxim', '50000000', 'av Habib bourgiba Residdence les jasmin Bloc A appart 5', 0),
 (12, NULL, 'Test-Titre', 'Installation', '2023-01-01 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '00000000', 'test', 0),
 (18, NULL, 'CHH', 'Installation', '2022-03-12 08:12:00', 'bonjour', '12345678', 'AAA', 0),
-(19, NULL, 'Test apres integrations', 'Reparation', '2022-03-08 08:00:00', 'test test', '00000000', 'test', 0);
+(24, NULL, 'A-45XTM', 'Installation', '2022-03-10 19:14:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '52447610', 'test', 2),
+(25, NULL, 'TRE-6759', 'Reparation', '2022-03-13 16:17:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '52447610', 'test', 2),
+(26, 34, 'TEST-556E', 'Reparation', '2022-04-18 17:18:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor ut nisl sit amet tempus. Donec quis pretium lacus. Nunc venenatis pretium quam, ac bibendum dolor ullamcorper ut. Aenean maximus pulvinar erat sit amet vestibulum. Sed aliquam odio null', '24399846', 'test', 2);
 
 -- --------------------------------------------------------
 
@@ -369,7 +372,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, `datecreation`, `is_verified`, `image`) VALUES
-(1, 'admin@GMAIL.COM', '[\"ROLE_ADMIN\"]', '$argon2id$v=19$m=65536,t=4,p=1$VzV2TXpjR29Cd3M4emRTQQ$+iIix8UZNx/uGiL67cqqAOA76hKroL89rGw6k7bSmxE', 'Adminaaaaaa', 'Adminaaa', '2022-03-07', 0, '40e4d8e018a77ec7c4c9b6b0810f8723.png');
+(1, 'admin@GMAIL.COM', '[\"ROLE_ADMIN\"]', '$argon2id$v=19$m=65536,t=4,p=1$VzV2TXpjR29Cd3M4emRTQQ$+iIix8UZNx/uGiL67cqqAOA76hKroL89rGw6k7bSmxE', 'Adminaaaaaa', 'Adminaaa', '2022-03-07', 0, '40e4d8e018a77ec7c4c9b6b0810f8723.png'),
+(2, 'azizjamoussi23@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$TFNvMHQ3aGx2YVJKOFQvaQ$c1LzClHkWdk7Z834Aoi66S1jHnuQLCWRe+/Dlo5qLQ0', 'azizaziz', 'jamoussiiiiii', '2022-03-09', 0, 'e6506c9d64d4dc38a718c630bd7d7b00.jpg');
 
 --
 -- Index pour les tables déchargées
@@ -503,7 +507,7 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT pour la table `avis`
 --
 ALTER TABLE `avis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT pour la table `blog`
@@ -575,23 +579,17 @@ ALTER TABLE `recherche`
 -- AUTO_INCREMENT pour la table `rendezvous`
 --
 ALTER TABLE `rendezvous`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
 --
-
---
--- Contraintes pour la table `avis`
---
-ALTER TABLE `avis`
-  ADD CONSTRAINT `FK_8F91ABF03345E0A3` FOREIGN KEY (`rendezvous_id`) REFERENCES `rendezvous` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `commande`

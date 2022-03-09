@@ -11,12 +11,15 @@ use App\Form\AvisType;
 use App\Form\RendezvousType;
 use App\Repository\AvisRepository;
 use App\Repository\RendezvousRepository;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Knp\Component\Pager\PaginatorInterface;
@@ -28,8 +31,8 @@ use Dompdf\Options;
 class RendezvousController extends AbstractController
 {
     /**
-    * @Route("/rendezvous/Afficheback", name="rendezvous_back", methods={"GET"})
-    */
+     * @Route("/rendezvous/Afficheback", name="rendezvous_back", methods={"GET"})
+     */
 
     public function AfficheBack(RendezvousRepository $rendezvousRepository,Request $request): Response
     {
@@ -107,7 +110,7 @@ class RendezvousController extends AbstractController
 
         $query = $em->createQuery(
             'SELECT n FROM App\Entity\Rendezvous n
-            ORDER BY n.service Desc, n.telephonenum'
+            ORDER BY n.service Desc, n.telephonenum  , n.client'
         );
 
         $rendezvous = $query->getResult();
@@ -150,24 +153,24 @@ class RendezvousController extends AbstractController
     {
         $rendezvous=new Recherche();
         $form=$this->createFormBuilder($rendezvous)
-        ->add('titre',TextType::class,array('attr'=>array('class'=>'form')))
-        ->getForm();
+            ->add('titre',TextType::class,array('attr'=>array('class'=>'form')))
+            ->getForm();
 
         $form->handleRequest($request);
-       if($form->isSubmitted() && $form->isValid())
-       {
-         $term=$rendezvous->getTitre();
-          $allrendezvous = $rendezvousRepository->search($term);
-       }
-       else
-       {
-        $allrendezvous = $rendezvousRepository->findAll();
-       }
-     $rendezvousRepository= $paginator->paginate(
-    $allrendezvous,
-    $request->query->getInt('page',1),
-     5
-     );
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $term=$rendezvous->getTitre();
+            $allrendezvous = $rendezvousRepository->search($term);
+        }
+        else
+        {
+            $allrendezvous = $rendezvousRepository->findAll();
+        }
+        $rendezvousRepository= $paginator->paginate(
+            $allrendezvous,
+            $request->query->getInt('page',1),
+            5
+        );
         return $this->render('rendezvous/index.html.twig', [
             'rendezvouses' => $rendezvousRepository,
             'form' => $form->createView()
@@ -175,8 +178,8 @@ class RendezvousController extends AbstractController
     }
 
     /**
-    * @Route("/rendezvous/calendar", name="rendezvous_calendar")
-    */
+     * @Route("/rendezvous/calendar", name="rendezvous_calendar")
+     */
     public function rendezvous(RendezvousRepository $rendezvousRepository)
     {
         $user = $this->getUser();
@@ -301,6 +304,60 @@ class RendezvousController extends AbstractController
 
         return $this->redirectToRoute('rendezvous_index', [], Response::HTTP_SEE_OTHER);
     }
+    /**
+     * @Route("/Rendezvous/excel", name="excel", methods={"GET"})
+     */
+    public function excel()
+    {
+        $spreadsheet = new Spreadsheet();
 
+        /* @var $sheet \PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet */
+        // on définie les en têtes de nos enregistrements
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1','ID')
+            ->setCellValue('B1','Titre')
+            ->setCellValue('C1','Service')
+            ->setCellValue('D1','Date du rendez-vous')
+            ->setCellValue('E1','Description du rendez-vous')
+            ->setCellValue('F1','Numero de telephone ')
+            ->setCellValue('G1','Adresse due Rendez-vous ')
+
+        ;
+        // on récupère toutes les personnes ou on fait une fonction personnalisée à la place du findAll
+        $em = $this->getdoctrine()->getManager();
+        $avis = $em->getRepository(Rendezvous :: class)->findAll();
+        // on place le curseur dans la 2ème position pour ne pas écraser les entêtes ...<br>
+        $aux = 2;
+        foreach ($avis as $row)
+            // donc pour chaque personne trouvée dans la base de données il met les valeurs au dessous des entêtes
+        {
+            $sheet->setSheetState(0)
+                ->setCellValue('A'.$aux, $row->getId())
+                ->setCellValue('B'.$aux, $row->getTitre())
+                ->setCellValue('C'.$aux, $row->getService())
+                ->setCellValue('D'.$aux, $row->getDateRendezvous())
+                ->setCellValue('E'.$aux, $row->getDescriptionRendezvous())
+                ->setCellValue('F'.$aux, $row->getTelephonenum())
+                ->setCellValue('G'.$aux, $row->getAdressrend())
+
+            ;
+            //aux au début était 2 lorsqu'on écrit on l'incrémente pour ne pas écraser à chaque fois
+            $aux++;
+        };
+        $sheet->setTitle("La liste des rendez-vous");
+
+        // Create your Office 2007 Excel (XLSX Format)
+        $writer = new Xlsx($spreadsheet);
+
+        // Create a Temporary file in the system
+        $fileName = 'liste des rendez vous.xlsx';
+        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+
+        // Create the excel file in the tmp directory of the system
+        $writer->save($temp_file);
+
+        // Return the excel file as an attachment
+        return $this->file($temp_file, $fileName, ResponseHeaderBag::DISPOSITION_INLINE);
+    }
 
 }
