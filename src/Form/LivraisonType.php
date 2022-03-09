@@ -29,6 +29,7 @@ class LivraisonType extends AbstractType
                 ]
             ])
             ->add('datelivraison')
+            ->add('heurelivraison')
 
         ;
     }
