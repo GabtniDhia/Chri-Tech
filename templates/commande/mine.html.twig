@@ -8,6 +8,7 @@
 
 {% endblock %}
 {% block content %}
+
     <h1>Liste de commandes en cours</h1>
     <table class="table">
         <thead>
@@ -37,8 +38,15 @@
                 <td colspan="5">Pas de commandes enregistrées.</td>
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
-      <a href="{{ path('commande_new') }}">Passer une nouvelle commande/</a>
+    {% if commandes | length > 3 %}
+    <p>Vous Avez Passer {{ commandes|length }} Commande(s) Vous avez une Reduction</p>
+    {% else %}
+    <p>Vous Aurez une reduction sur votre 4eme Commande</p>
+    {% endif %}
+    <a href="{{ path('commande_new') }}">Passer une nouvelle commande/</a>
     <a href="{{ path('livraison_minel') }}">Consulter la liste de livraisons</a>
+
 {% endblock %}

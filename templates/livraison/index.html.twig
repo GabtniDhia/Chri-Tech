@@ -12,6 +12,7 @@
             <th>Code postal</th>
             <th>Ville</th>
             <th>Date de livraison</th>
+            <th>Horaire de livraison</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ livraison.codepostal }}</td>
                 <td>{{ livraison.ville }}</td>
                 <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</td>
+                <td>{{ livraison.heurelivraison ? livraison.datelivraison|date('H-i-s') : '' }}</td>
                 <td>
                     <a href="{{ path('livraison_affiche', {'id': livraison.id}) }}">Afficher/</a>
                     <a href="{{ path('livraison_modifier', {'id': livraison.id}) }}">Modifier la livraison</a>

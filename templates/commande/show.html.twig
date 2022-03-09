@@ -8,31 +8,101 @@
 {% endblock %}
 {% block content %}
 
+    <div class="list-section pt-80 pb-80">
+        <div class="container">
 
-    <h3 style="color: cadetblue" >Cliquez sur le lien ci-dessous si vous souhaitez gérer votre commande</h3>
-    <a href="{{ path('commande_edit', {'id': commande.id}) }}">Cliquez ici!</a>
-    <table class="table">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="list-box d-flex align-items-center">
+                        <div class="list-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div class="content">
+                            <h3>Livraison gratuite</h3>
+                            <p>à partir de trois produits achetés.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="list-box d-flex align-items-center">
+                        <div class="list-icon">
+                            <i class="fas fa-phone-volume"></i>
+                        </div>
+                        <div class="content">
+                            <h3>24/7 SAV</h3>
+                            <p>Beneficiez de notre SAV</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="list-box d-flex justify-content-start align-items-center">
+                        <div class="list-icon">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <div class="content">
+                            <h3>Remboursement</h3>
+                            <p>Valable 3jours aprés la reception de produit!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title" align="center">Details de la commande:</h5>
+                <p class="card-text" align="center">{{ commande.nom }}</p>
+                <p class="card-text" align="center">{{ commande.numtel }}</p>
+                <p class="card-text" align="center"><small class="text-muted">{{ commande.email }}</small></p>
+
+                <p class="card-text" align="center"><small class="text-muted"> <span class="badge badge-warning">Pending</span></small></p>
+<div align="center"><a href="{{ path('commande_edit', {'id': commande.id}) }}"><button type="button" class="btn btn-dark">Modifier votre commande</button></a>
+    <a href="{{ path('livraison_show', {'id': commande.commandel.id}) }}"><button type="button" class="btn btn-dark">Consulter livraison</button></a>
+
+
+</div>
+
+
+        </div>
+    </div>
+</div>
+    {#<table class="table table-light">
+        <thead>
+        <tr>
+            <th scope="col" style="width: 8%;">#</th>
+            <th scope="col">Client</th>
+            <th scope="col">Numero de telephone</th>
+            <th scope="col">Adresse e-mail</th>
+            <th scope="col">Etat</th>
+        </tr>
+        </thead>
         <tbody>
-            <tr>
-                <th>Identifiant</th>
-                <td>{{ commande.id }}</td>
-            </tr>
-            <tr>
-                <th>Client</th>
-                <td>{{ commande.nom }}</td>
-            </tr>
-            <tr>
-                <th>Numéro de telephone</th>
-                <td>{{ commande.numtel }}</td>
-            </tr>
-            <tr>
-                <th>Adresse e-mail</th>
-                <td>{{ commande.email }}</td>
-            </tr>
+
+
+        <tr>
+            <th scope="row">
+        <span class="btn btn-sm btn-icon btn-soft-secondary rounded-circle mr-2">
+          <span class="btn-icon__inner font-weight-medium">{{ commande.id }}</span>
+        </span>
+            </th>
+
+            <td class="align-middle text-primary">{{ commande.nom }}</td>
+
+            <td class="align-middle text-secondary">{{ commande.numtel }}</td>
+            <td class="align-middle text-secondary">{{ commande.email }}</td>
+            <td class="align-middle">
+                <span class="badge badge-warning">Pending</span>
+            </td>
+        </tr>
         </tbody>
     </table>
+    <a href="{{ path('commande_edit', {'id': commande.id}) }}"><button type="button" class="btn btn-dark">Modifier votre commande</button></a>
+    <a href="{{ path('livraison_show', {'id': commande.commandel.id}) }}"><button type="button" class="btn btn-dark">Consulter livraison</button></a>
+    #}
 
-    <a href="{{ path('commande_mine') }}">Voir l'historique des commandes</a>
+
 
 
 

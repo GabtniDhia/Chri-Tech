@@ -7,7 +7,8 @@
 
 
 
-    <a href="{{ path('livraison_modifier', {'id': livraison.id}) }}">Cliquez ici!</a>
+
+
     <table class="table">
 
         <tbody>
@@ -31,8 +32,20 @@
             <th>Date de livraison</th>
             <td>{{ livraison.datelivraison ? livraison.datelivraison|date('Y-m-d') : '' }}</td>
         </tr>
+        <tr>
+            <th>Horaire de livraison</th>
+            <td>{{ livraison.heurelivraison ? livraison.datelivraison|date('H-i-s') : '' }}</td>
+        </tr>
+
+
+        <tr>
+            <th>CodeQR</th>
+            <td><img id="qrcode" src="{{ qr_code_path(livraison.adresse) }}" /></td>
+        </tr>
+
         </tbody>
     </table>
+    <a href="{{ path('livraison_modifier', {'id': livraison.id}) }}">Cliquez ici!</a>
     <a href="{{ path('livraison_index') }}">Voir l'historique des livraisons</a>
 
 {% endblock %}
