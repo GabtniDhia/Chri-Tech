@@ -18,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
 use App\Repository\CommentaireRepository;
-use Snipe\BanBuilder\CensorWords;
 
 
 
@@ -90,10 +89,6 @@ class BlogController extends AbstractController
                 return $this->redirectToRoute('app_login');
             }else{
                 $blog->getId();
-                $censor = new CensorWords;
-                $data = $form->getData();
-                $string = $censor->censorString($data->getContenue());
-                $commentaire->setContenue($string['clean']);
                 $commentaire->setBlogId($blog);
                 $commentaire->setUserFK($this->getUser());
                 $entitymanager->persist($commentaire);

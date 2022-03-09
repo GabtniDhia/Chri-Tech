@@ -18,6 +18,10 @@ class Commentaire
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $utilisateur;
 
     /**
      * @ORM\Column(type="text")
@@ -44,7 +48,17 @@ class Commentaire
         return $this->id;
     }
 
+    public function getUtilisateur(): ?string
+    {
+        return $this->utilisateur;
+    }
 
+    public function setUtilisateur(string $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
 
     public function getContenue(): ?string
     {

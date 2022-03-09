@@ -1,12 +1,11 @@
 {% block content %}
 
 
-    <head>
-    <div class="container mt-5">
-        <div class="form-group" data-emojiable="true">
-            <div class="form-label mt-4"  ><link href="{{ asset('Front/assets/css/emoji.css') }}" rel="stylesheet"></div>
-            {{ form_start(form) }}
 
+    <div class="container mt-5">
+        <div class="form-group">
+            <div class="form-label mt-4"></div>
+            {{ form_start(form) }}
             {{ form_widget(form) }}
             <br>
             <button class="btn">{{ button_label|default('Save') }}</button>
@@ -14,9 +13,6 @@
 
         </div>
     </div>
-
-
-    </head>
 
 
 {% endblock %}

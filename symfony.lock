@@ -273,9 +273,6 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "snipe/banbuilder": {
-        "version": "dev-master"
-    },
     "symfony/asset": {
         "version": "v4.4.37"
     },

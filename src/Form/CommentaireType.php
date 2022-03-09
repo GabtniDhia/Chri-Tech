@@ -17,8 +17,7 @@ class CommentaireType extends AbstractType
         $builder
             ->add('contenue', TextareaType::class ,[
                 'attr' => [
-                    'placeholder'=> 'Exprimez-vous...',
-                    'data-emojiable' => 'true'
+                    'placeholder'=> 'Exprimez-vous...'
                 ]
 
             ])
