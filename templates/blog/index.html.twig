@@ -18,16 +18,25 @@
                         <div class="col-lg-12">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                    <img src="{{ asset('uploads/images/' ~ blog.img) }}" height="200" width="330">
+                                    <img  height="200" width="330">
                                 </div>
                                 <div class="down-content">
-                                    <span>Healthy</span>
-                                    <a href="{{ path('blog_show' , { 'id': blog.id }) }}"><h4>{{ blog.titre }}</h4></a>
+                                    <a href="{{ path('blog_show' , { 'id': blog.id }) }}"><span>{{ blog.titre }}</span></a>
                                     <ul class="post-info">
                                         <li><a href="#">{{ blog.utilisateur }}</a></li>
                                         <li><a href="#">{{ blog.dateHeure ? blog.dateHeure|date('Y-m-d H:i:s') : '' }}</a></li>
-                                        <li><a href="#">36 Comments</a></li>
+                                        <li><a href="#">{{ blog.commentaires |length}} réponses</a></li>
+
                                     </ul>
+                                    <a href="{{ path('blog_like', {'id': blog.id}) }}" class="btn btn-link js-like">
+                                    {% if app.user and blog.isLikedByUser(app.user) %}
+                                        <i class="fas fa-thumbs-up"></i>
+                                    {% else %}
+                                    <i class="far fa-thumbs-up"></i>
+                                    {% endif %}
+                                    <span class="js-likes">{{ blog.likes | length }}</span>
+                                    <span class="js-label">j'aime</span>
+                                    </a>
                                     <p>{{ blog.contenue }}</p>
                                     <div class="post-options">
                                         <div class="row">
@@ -154,11 +163,43 @@ script
 
 {% block javascripts %}
 
-    <script src="{{ asset('front/assets/js/custom.js') }}"</script>
-    <script src="{{ asset('front/assets/js/owl.js') }}"</script>
-    <script src="{{ asset('front/assets/js/slick.js') }}"</script>
-    <script src="{{ asset('front/assets/js/isotope.js') }}"</script>
-    <script src="{{ asset('front/assets/js/accordions.js') }}"</script>
+    <script src="{{ asset('front/assets/js/custom.js') }}"></script>
+    <script src="{{ asset('front/assets/js/owl.js') }}"></script>
+    <script src="{{ asset('front/assets/js/slick.js') }}"></script>
+    <script src="{{ asset('front/assets/js/isotope.js') }}"></script>
+    <script src="{{ asset('front/assets/js/accordions.js') }}"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function onClickBtnLike(event){
+            event.preventDefault();
+
+            const url = this.href;
+            const spanCount = this.querySelector('span.js-likes');
+            const icone = this.querySelector('i');
+
+            axios.get(url).then(function (response) {
+                spanCount.textContent = response.data.likes;
+
+                if (icone.classList.contains('fas')) {
+                    icone.classList.replace('fas', 'far');
+                } else {
+
+                icone.classList.replace('far', 'fas');
+            }
+            }).catch(function (error) {
+                if(error.response.status === 403) {
+                    window.alert("connectez-vous !!!")
+                }
+            });
+
+        }
+
+
+        document.querySelectorAll('a.js-like').forEach(function (link){
+            link.addEventListener('click', onClickBtnLike);
+        })
+    </script>
 
 {% endblock %}
 

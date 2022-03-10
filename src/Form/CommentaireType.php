@@ -5,10 +5,13 @@ namespace App\Form;
 use App\Entity\Commentaire;
 use Doctrine\DBAL\Types\DateTimeType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class CommentaireType extends AbstractType
 {
@@ -17,10 +20,12 @@ class CommentaireType extends AbstractType
         $builder
             ->add('contenue', TextareaType::class ,[
                 'attr' => [
-                    'placeholder'=> 'Exprimez-vous...'
+                    'placeholder'=> 'Exprimez-vous...',
+                    'data-emojiable' => 'true'
                 ]
-
             ])
+            ->add('button', SubmitType::class)
+
 
 
         ;

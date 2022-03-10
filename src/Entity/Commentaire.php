@@ -18,10 +18,6 @@ class Commentaire
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $utilisateur;
 
     /**
      * @ORM\Column(type="text")
@@ -43,22 +39,19 @@ class Commentaire
      */
     private $article_id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commentaires")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $userFK;
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUtilisateur(): ?string
-    {
-        return $this->utilisateur;
-    }
 
-    public function setUtilisateur(string $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
 
     public function getContenue(): ?string
     {
@@ -112,5 +105,17 @@ class Commentaire
     {
         $this->commentaires = new ArrayCollection();
         $this->date_heure = new \DateTime('now');
+    }
+
+    public function getUserFK(): ?user
+    {
+        return $this->userFK;
+    }
+
+    public function setUserFK(?user $userFK): self
+    {
+        $this->userFK = $userFK;
+
+        return $this;
     }
 }
