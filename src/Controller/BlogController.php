@@ -4,16 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Blog;
-use App\Entity\Postlike;
 use App\Entity\User;
 use App\Form\BlogType;
 use App\Repository\BlogRepository;
-use App\Repository\PostlikeRepository;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\DateTimeType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
 use App\Repository\CommentaireRepository;
-use Snipe\BanBuilder\CensorWords;
 
 
 
@@ -94,10 +89,6 @@ class BlogController extends AbstractController
                 return $this->redirectToRoute('app_login');
             }else{
                 $blog->getId();
-                $censor = new CensorWords;
-                $data = $form->getData();
-                $string = $censor->censorString($data->getContenue());
-                $commentaire->setContenue($string['clean']);
                 $commentaire->setBlogId($blog);
                 $commentaire->setUserFK($this->getUser());
                 $entitymanager->persist($commentaire);
@@ -158,56 +149,4 @@ class BlogController extends AbstractController
         $form = $this->createFormBuilder(new Blog()); //nul besoin de set la date grâce au constructeur
         // ...
     }
-
-
-    /**
-     * Permet de liker un blog
-     *
-     * @Route ("/{id}/like", name="blog_like", methods={"GET", "POST"})
-     *
-     * @param Blog $blog
-     * @param EntityManagerInterface $manager
-     * @param PostlikeRepository $likerepo
-     * @return Response
-     */
-    public function like(blog $blogL, EntityManagerInterface $manager, PostlikeRepository $likerepo) :
-    Response {
-        $userL = $this->getUser();
-
-        if(!$userL) return $this->json([
-            'code' => 403,
-            'message' => "unauthorized"
-        ], 403);
-
-        if($blogL->isLikedByUser($userL)) {
-            $like = $likerepo->findOneBy([
-                'blogL' => $blogL,
-                'userL' => $userL
-            ]);
-
-            $manager->remove($like);
-            $manager->flush();
-
-            return $this->json([
-                'code' => 200,
-                'message' => 'like supprimé',
-                'likes' => $likerepo->count(['blogL' => $blogL])
-            ], 200);
-        }
-
-        $like = new postlike();
-        $like->setBlogL($blogL)
-             ->setUserL($userL);
-
-        $manager->persist($like);
-        $manager->flush();
-
-        return $this->json([
-            'code' => 200,
-            'message' => 'ca marche bien',
-            'likes' => $likerepo->count(['blogL' => $blogL])
-        ], 200);
-    }
-
-
 }

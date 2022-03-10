@@ -1,11 +1,18 @@
 {% block content %}
-        {{ form_start(form) }}
 
-        <div class="form-group" >
-            <div class="form-label mt-4" >
-                {{ form_errors(form) }}
-                <a class="btn">{{ button_label|default('Save') }}</a>
-            </div>
+
+
+    <div class="container mt-5">
+        <div class="form-group">
+            <div class="form-label mt-4"></div>
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <br>
+            <button class="btn">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+
         </div>
-    {{ form_end(form) }}
+    </div>
+
+
 {% endblock %}

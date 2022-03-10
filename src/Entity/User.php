@@ -91,60 +91,17 @@ class User implements UserInterface
      */
     private $received;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="userFK")
-     */
-    private $commentaires;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Postlike::class, mappedBy="userL")
-     */
-    private $likes;
-
 
 
     public function __construct()
     {
         $this->sent = new ArrayCollection();
         $this->received = new ArrayCollection();
-        $this->commentaires = new ArrayCollection();
-        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getCommentaires(): Collection
-    {
-        return $this->commentaires;
-    }
-
-    public function addCommentaire(Commentaire $commentaire): self
-    {
-        if (!$this->commentaires->contains($commentaire)) {
-            $this->commentaires[] = $commentaire;
-            $commentaire->setUserFK($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommentaire(Commentaire $commentaire): self
-    {
-        if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($commentaire->getUserFK() === $this) {
-                $commentaire->setUserFK(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -351,36 +308,6 @@ class User implements UserInterface
     public function setIdcarte(?CarteFidelite $idcarte): self
     {
         $this->idcarte = $idcarte;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Postlike>
-     */
-    public function getLikes(): Collection
-    {
-        return $this->likes;
-    }
-
-    public function addLike(Postlike $like): self
-    {
-        if (!$this->likes->contains($like)) {
-            $this->likes[] = $like;
-            $like->setUserL($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLike(Postlike $like): self
-    {
-        if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getUserL() === $this) {
-                $like->setUserL(null);
-            }
-        }
 
         return $this;
     }
