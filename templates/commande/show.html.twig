@@ -49,25 +49,28 @@
 
         </div>
     </div>
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title" align="center">Details de la commande:</h5>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <hr>
+                <h3 class="card-title" align="center">Details de la commande:</h3>
+                <hr>
                 <p class="card-text" align="center">{{ commande.nom }}</p>
                 <p class="card-text" align="center">{{ commande.numtel }}</p>
                 <p class="card-text" align="center"><small class="text-muted">{{ commande.email }}</small></p>
 
                 <p class="card-text" align="center"><small class="text-muted"> <span class="badge badge-warning">Pending</span></small></p>
-<div align="center"><a href="{{ path('commande_edit', {'id': commande.id}) }}"><button type="button" class="btn btn-dark">Modifier votre commande</button></a>
-    <a href="{{ path('livraison_show', {'id': commande.commandel.id}) }}"><button type="button" class="btn btn-dark">Consulter livraison</button></a>
+                <hr>
+                <div align="center"><a href="{{ path('commande_edit', {'id': commande.id}) }}"><button type="button" class="btn btn-dark">Modifier votre commande</button></a>
+                    <a href="{{ path('livraison_show', {'id': commande.commandel.id}) }}"><button type="button" class="btn btn-dark">Consulter la livraison</button></a>
+                    <a href="{{ path('commande_mine') }}"><button type="button" class="btn btn-dark">Consulter l'historique des commandes</button></a>
 
+                </div>
+                <hr>
 
-</div>
-
-
+            </div>
         </div>
     </div>
-</div>
     {#<table class="table table-light">
         <thead>
         <tr>
