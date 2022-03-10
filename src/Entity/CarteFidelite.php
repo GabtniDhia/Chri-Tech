@@ -45,7 +45,9 @@ class CarteFidelite
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private $tel;
+
+   
 
     public function getId(): ?int
     {
@@ -112,15 +114,17 @@ class CarteFidelite
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getTel(): ?string
     {
-        return $this->image;
+        return $this->tel;
     }
 
-    public function setImage(string $image): self
+    public function setTel(string $tel): self
     {
-        $this->image = $image;
+        $this->tel = $tel;
 
         return $this;
     }
+
+   
 }

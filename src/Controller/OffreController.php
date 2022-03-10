@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CarteFidelite;
 use App\Entity\Offre;
 use App\Form\Offre1Type;
 use App\Form\OffreType;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
+
 
 /**
  * @Route("/offre")
@@ -21,10 +24,17 @@ class OffreController extends AbstractController
     /**
      * @Route("/", name="offre_index", methods={"GET"})
      */
-    public function index(OffreRepository $offreRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
+        $donnees = $this->getDoctrine()->getRepository(Offre::class)->findAll();
+
+        $offre = $paginator->paginate(
+            $donnees, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            3 // Nombre de résultats par page
+        );
         return $this->render('offre/index.html.twig', [
-            'offres' => $offreRepository->findAll(),
+            'offres' => $offre,
         ]);
     }
 
@@ -66,10 +76,41 @@ class OffreController extends AbstractController
     /**
      * @Route("/{id}", name="offre_show", methods={"GET"})
      */
-    public function show(Offre $offre): Response
+    public function show(Request $request,Offre $offre, EntityManagerInterface $entityManager, OffreRepository $offreRepository): Response
     {
+
+        
+        $form = $this->createForm(OffreType::class, $offre);
+        $form->handleRequest($request);
+        $user = $this->getUser();
+        $carte = $this->getDoctrine()->getRepository(CarteFidelite::class)->find($user->getIdcarte());
+
+        $pts = $offre->getPoints();
+        $old = $carte->getNbPoints() ;    
+        $whida = $offreRepository->find(1);
+
+        /** @var ClickableInterface $button  */
+        $button = $form->get("submit");
+
+
+        
+            
+           $carte->setNbPoints($old+$pts) ;
+           if ($carte->getNbPoints() >= 100 && $carte->getNbPoints() < 500 ){
+            $carte->setType(1) ;
+           }elseif ($carte->getNbPoints() >= 500 && $carte->getNbPoints() < 1000) {
+            $carte->setType(2) ;
+           }elseif ($carte->getNbPoints() >= 1000) {
+            $carte->setType(3) ;
+           }
+           $entityManager->persist($carte);
+           $entityManager->flush();
+
+           
+        
         return $this->render('offre/show.html.twig', [
-            'offre' => $offre,
+            'offre' => $offre,'form' => $form->createView(),
+            'whida' => $whida
         ]);
     }
 
@@ -105,5 +146,12 @@ class OffreController extends AbstractController
         }
 
         return $this->redirectToRoute('offre_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+
+    public function __toString()
+    {
+        return $this->type;
     }
 }

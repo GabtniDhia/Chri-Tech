@@ -3,7 +3,8 @@
 {% block title %} Chritech {% endblock %}
 {% block bg%} {{ asset('front/assets/img/yellow.jpg') }}  {% endblock %}
 {% block titre1 %}{% endblock %}
-{% block titre2 %}Les offres{% endblock %}
+{% block titre2 %}Les offres  <p style="color : white"id="demo"></p>{% endblock %}
+
 {% block content %}
     <div class="row">
         {% for offre in offres %}
@@ -15,6 +16,10 @@
 						
 							<p class="excerpt">{{ offre.prix }} DT</p>
                             <p class="excerpt">{{ offre.points }} Points</p>
+                            <tr> This offer is for </tr><b class="excerpt">{{ offre.type }} </b>
+                            
+                           
+                            <br> </br> 
 							<a href="{{ path('offre_show', {'id': offre.id}) }}" class="read-more-btn">Click here to see the offer <i class="fas fa-angle-right"></i></a>
 						</div>
 					</div>
@@ -24,6 +29,8 @@
                 <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
+            {{ knp_pagination_render(offres) }}
+
         </tbody>
     </div>
 

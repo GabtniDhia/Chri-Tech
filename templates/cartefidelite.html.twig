@@ -4,11 +4,12 @@
 {% block titre1 %}Devenez membre et activez votre carte{% endblock %}
 {% block titre2 %} 
 <div class="flexbox">
-  <button type="button" class="btn btn-warning-s"><a href="{{ path('cartes')}}">Appliquer pour une carte de fidelité</a></div>
+  <button type="button" class="btn btn-warning-s" class="btn"><a href="{{ path('cartes')}}" style="color: white">Appliquer pour une carte de fidelité</a></button>
+  </div>
   <div class="main">
-    <div class="flexbox-row">
-      <button type="button" class="btn btn-warning" > <a href="{{ path('offre_index')}}">Voir les offres</button>
-    </div>
+    
+      <button style="align: center" type="button" class="btn btn-warning" > <a href="{{ path('offre_index')}}"style="color: white">Voir les offres</button>
+    
   </div>
 </div>
 <style>
@@ -43,20 +44,27 @@
 }
 
 .btn btn-warning {
-  border-radius: 5px;
-  font-size: 20px;
-  font-family: 'Source Sans Pro', sans-serif;
-  padding-right: 25px ;
-  padding-left: 45px;
-
-
+  background-color: #E1AD01;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
 }
-.btn btn-warning-s {
-  border-radius: 5px;
-  font-size: 17px;
-  font-family: 'Source Sans Pro', sans-serif;
-  padding: 20px 18px;
+.btn  {
+  background-color: #E1AD01;
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
 }
+
 </style>
 
 {% endblock %}
+

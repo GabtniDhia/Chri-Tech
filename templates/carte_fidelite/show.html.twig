@@ -13,8 +13,12 @@
         <tbody>
             
             <tr>
+            <style>
+    th { color: #FFFFFF; }
+    td { color: #FFFFFF; }
+  </style>
                 <th>Nombre des Points</th>
-                <td>{{ carte_fidelite.NbPoints }}</td>
+                <td "text-color=white">{{ carte_fidelite.NbPoints }}</td>
             </tr>
             <tr>
                 <th>Date de Creation</th>
@@ -24,11 +28,22 @@
                 <th>Date d'expiration</th>
                 <td>{{ carte_fidelite.DateExpiration ? carte_fidelite.DateExpiration|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>Type de carte</th>
+                {% if carte_fidelite.type == 0 %}
+                <td>Standard</td>
+                    {% elseif carte_fidelite.type == 1 %}
+                <td>Silver</td>
+                   {% elseif carte_fidelite.type == 2 %}
+                <td>Gold</td>
+                   {% elseif carte_fidelite.type == 3 %}
+                <td>Premium</td>
+                {% endif %}
+            </tr>
             
         </tbody>
     </table>
-<button type="button" class="btn btn-warning" > <a href="{{ path('offre_index')}}">Voir les offres</button>
-    
-
+<button type="button" class="btn btn-warning" > <a href="{{ path('offre_index')}}"style="color: white">Voir les offres</button>
+<button type="button" class="btn btn-warning" > <a href="{{ path('pdf_res', { 'id': carte_fidelite.id }) }}" style="color: white">Voir carte en PDF</button>  
    
 {% endblock %}

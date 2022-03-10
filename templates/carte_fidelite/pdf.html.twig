@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+<h1> Salutations! {{app.user.nom}}, voici votre carte.</h1>
+{% if carte.type == 0 %}
+  <img src="https://i.ibb.co/wY5byvy/0front.png" style="width:80%">
+    <img  src="https://i.ibb.co/cFs6DVf/0back.png" style="width:80%">
+    <h2> Tout d'abord, félicitations pour votre nouvelle carte et bienvenue dans la famille ChriTech, 
+    c'est votre carte standard, vous pouvez l'améliorer en achetant nos nouvelles offres hebdomadaires
+    pour gagner des points, plus vous avez de points, plus vous avez de chances de passer au niveau 
+    suivant de la carte qui est "Silver", chaque rang supérieur a plus et de meilleures offres que 
+    le précédent. </h2>
+{% elseif carte.type == 1 %}
+             <img src="https://i.ibb.co/pr80kvp/1front.png" style="width:80%">
+               <img  src="https://i.ibb.co/WHRCLc6/1back.png" style="width:80%">
+                <h2> Bravo pour avoir débloqué la carte "Silver", maintenant vous allez profiter 
+                de plus d'offres qu'avant, continuez à acheter nos offres pour gagner plus de points 
+                pour débloquer la carte "Gold". </h2>
+{% elseif carte.type == 2 %}
+             <img src="https://i.ibb.co/njWc8dL/2front.png" style="width:80%">
+               <img src="https://i.ibb.co/MhC5JCH/2back.png" style="width:80%">
+               <h2> Bravo ! Vous avez maintenant la carte "Gold", vous êtes presque un membre "Premium" 
+               continuez et nous espérons que vous y arriverez bientôt, mais pour l'instant profitez de 
+               nos offres "Gold". </h2>
+{% elseif carte.type == 3 %}
+             <img src="https://i.ibb.co/8dGN0dB/3front.png" style="width:80%">
+               <img src="https://i.ibb.co/VL6YtQS/3back.png" style="width:80%">
+               <h2> Wow! vous l'avez fait! vous êtes maintenant un membre Premium dans ChriTech, 
+               profitez de nos offres exclusives spécialement faites pour ce rang, et félicitations toute 
+               la famille ChriTech vous remercie pour votre fidélité, Mabrouk!</h2>
+{% endif %}
+
+</html>
+<style>
+

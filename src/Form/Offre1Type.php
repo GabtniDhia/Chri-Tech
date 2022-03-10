@@ -8,6 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class Offre1Type extends AbstractType
 {
@@ -18,14 +20,20 @@ class Offre1Type extends AbstractType
         ->add('image')
           ->add('type', ChoiceType::class, [
                 'choices'  => [
-                    'Standard',
-                    'Silver',
-                    'Gold',
-                    'Premium',
+                    'Standard' => '0' ,
+                    'Silver' => '1',
+                    'Gold' => '2', 
+                    'Premium' => '3',
                 ],
             ])
             ->add('prix')
             ->add('points')
+            ->add('time', DateType::class, [
+                'widget' => 'choice',
+                'input'  => 'datetime'])
+            ->add('date', DateTimeType::class, [
+                'widget' => 'choice',
+                'input'  => 'datetime'])
     ;
     }
 

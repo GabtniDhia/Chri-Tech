@@ -43,7 +43,7 @@ class Offre
     private $IDProd;
 
     /**
-     * @ORM\Column(name="type", type="string", columnDefinition="enum('standard', 'silver' ,'gold', 'premium')")
+     * @ORM\Column(name="type", type="string", columnDefinition="enum('Standard', 'Silver' ,'Gold', 'Premium')")
      */
     private $type;
 
@@ -57,9 +57,27 @@ class Offre
      */
     private $points;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $time;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Produit::class, inversedBy="offp")
+     */
+    private $prodoff;
+
+    
+
     public function __construct()
     {
         $this->IDProd = new ArrayCollection();
+        $this->prodoff = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -150,4 +168,54 @@ class Offre
 
         return $this;
     }
+
+    public function getTime(): ?\DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    public function setTime(\DateTimeInterface $time): self
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, produit>
+     */
+    public function getProdoff(): Collection
+    {
+        return $this->prodoff;
+    }
+
+    public function addProdoff(produit $prodoff): self
+    {
+        if (!$this->prodoff->contains($prodoff)) {
+            $this->prodoff[] = $prodoff;
+        }
+
+        return $this;
+    }
+
+    public function removeProdoff(produit $prodoff): self
+    {
+        $this->prodoff->removeElement($prodoff);
+
+        return $this;
+    }
+
+   
 }

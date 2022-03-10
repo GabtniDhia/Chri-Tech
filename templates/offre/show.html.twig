@@ -1,34 +1,146 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Offre{% endblock %}
+{% block title %} Chritech {% endblock %}
+{% block bg%} {{ asset('front/assets/img/bgg.png') }}  {% endblock %}
+{% block titre1 %}{{offre.description}}{% endblock %}
+{% block titre2 %} 
+{% block modal %}
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Les Produits Dans {{ offre.description }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% for produits in whida.prodoff %}
+          <h4> {{ produits.NomProd  }}</h4>
+        {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
 
-{% block body %}
-    <h1>Offre</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ offre.id }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ offre.description }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ offre.image }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ offre.type }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('offre_index') }}">back to list</a>
+ <div class="row">
+ <div class="col-md-6">
+					<div class="single-latest-news">
+						<a href="{{path('carte_fidelite_new')}}"><div class="latest-news-bg"><img  src="{{ asset('uploads/images/' ~ offre.image) }}"></img></div></a>
+						<div class="news-text-box">
+							<h3><a href="single-news.html">{{offre.description}}</a></h3>
+                {{ form_start(form) }}
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Afficher Les Produits
+</button>
+                {{ form_end(form) }}
+						
+						</div>
+					</div>
+				</div>
 
-    <a href="{{ path('offre_edit', {'id': offre.id}) }}">edit</a>
+<div class="row">
+<div id="clockdiv">
+  <div>
+    <span class="days" id="day"></span>
+    <div class="smalltext">Days</div>
+  </div>
+  <div>
+    <span class="hours" id="hour"></span>
+    <div class="smalltext">Hours</div>
+  </div>
+  <div>
+    <span class="minutes" id="minute"></span>
+    <div class="smalltext">Minutes</div>
+  </div>
+  <div>
+    <span class="seconds" id="second"></span>
+    <div class="smalltext">Seconds</div>
+  </div>
+</div>
+  
+<p id="demo"></p>
 
-    {{ include('offre/_delete_form.html.twig') }}
+</div>
+
+
+
+<style>
+h1{
+  color: #396;
+  font-weight: 50;
+  font-size: 20px;
+  margin: 40px 0px 20px;
+}
+ #clockdiv{
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 50;
+    text-align: center;
+  font-size: 20px;
+}
+#clockdiv > div{
+    padding: 5px;
+    border-radius: 1px;
+    background: #FFDB58;
+    display: inline-block;
+}
+#clockdiv div > span{
+    padding: 15px;
+    border-radius: 1px;
+    background: #FFDB58;
+    display: inline-block;
+}
+smalltext{
+    padding-top: 5px;
+    font-size: 16px;
+}
+</style>
+						    
+
+<script>
+
+
+                            let countDownDate = new Date();
+                            countDownDate.setFullYear({{ offre.date|date("Y") }})
+                            countDownDate.setUTCMonth({{ offre.date|date("m") }}-1)
+                            countDownDate.setUTCDate({{ offre.date|date("d") }})
+                            countDownDate.setHours({{ offre.date|date("H") }})
+                            countDownDate.setMinutes({{ offre.date|date("i") }})
+                            countDownDate.setSeconds({{ offre.date|date("s") }})
+
+                            var x = setInterval(function() {
+
+                                var now = new Date();
+                                console.log(now)
+                                console.log(countDownDate)
+
+                                var distance = countDownDate - now;
+
+                                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+                                document.getElementById("day").innerHTML = days ;
+                                document.getElementById("hour").innerHTML = hours ;
+                                document.getElementById("minute").innerHTML = minutes ;
+                                document.getElementById("second").innerHTML = seconds ;
+
+                                if (distance < 0) {
+                                    clearInterval(x);
+                                    document.getElementById("demo").innerHTML = "EXPIRED";
+                                }
+                            }, 1000);
+                        </script>
+
 {% endblock %}

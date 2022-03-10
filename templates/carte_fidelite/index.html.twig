@@ -1,41 +1,67 @@
 {% extends 'base.html.twig' %}
+{% block title %} Félicitations {% endblock %}
+{% block bg%} {{ asset('front/assets/img/bgg.png') }}  {% endblock %}
+{% block titre1 %}Félicitations{% endblock %}
+{% block titre2 %} 
 
-{% block title %}CarteFidelite index{% endblock %}
+ <h2> Vous allez recevoir un SMS dans quelques secondes, Mabrouk!</h2>
+ <button type="button" class="btn btn-warning" > <a href="{{ path('offre_index')}}"style="color: white">Voir les offres</button>
 
-{% block body %}
-    <h1>CarteFidelite index</h1>
+<style>
+.flexbox {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  width: 100%
+}
+.flexbox .main {
+  flex: 1;
+  position: relative
+}
+.flexbox .header,
+.flexbox .footer {
+  padding: 1em
+}
+.flexbox-row {
+  display: flex;
+  position:absolute;
+  height: 100%;
+  width: 100%
+}
+.flexbox-row .first,
+.flexbox-row .second,
+.flexbox-row .third {
+  padding: 1em;
+}
+.flexbox-row .second {
+  flex: 1;
+}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>NbPoints</th>
-                <th>DateCreation</th>
-                <th>DateExpiration</th>
-                <th>IdUser</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for carte_fidelite in carte_fidelites %}
-            <tr>
-                <td>{{ carte_fidelite.id }}</td>
-                <td>{{ carte_fidelite.NbPoints }}</td>
-                <td>{{ carte_fidelite.DateCreation ? carte_fidelite.DateCreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ carte_fidelite.DateExpiration ? carte_fidelite.DateExpiration|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ carte_fidelite.IdUser }}</td>
-                <td>
-                    <a href="{{ path('carte_fidelite_show', {'id': carte_fidelite.id}) }}">show</a>
-                    <a href="{{ path('carte_fidelite_edit', {'id': carte_fidelite.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+.btn btn-warning {
+  background-color: #E1AD01;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+}
+.btn  {
+  background-color: #E1AD01;
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+}
+h2 {
+  
+  color: white;
+}
+</style>
 
-    <a href="{{ path('carte_fidelite_new') }}">Create new</a>
 {% endblock %}
